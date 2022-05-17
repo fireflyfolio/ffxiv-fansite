@@ -1,0 +1,12 @@
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile /home/lbfamily/private/.htpasswd
+Require valid-user
+
+Options -Indexes
+
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{QUERY_STRING} ^$
+RewriteRule ^(.+)$ /?redirect=$1 [L]

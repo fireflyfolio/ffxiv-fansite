@@ -1,0 +1,50 @@
+[
+  {
+    "cover": "01.jpg",
+    "title": "Exemple de vidéo",
+    "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+    "duration": "2:24"
+  },
+  {
+    "cover": "02.jpg",
+    "title": "Exemple de vidéo",
+    "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+    "duration": "2:24"
+  },
+  {
+    "cover": "03.jpg",
+    "title": "Exemple de vidéo",
+    "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+    "duration": "2:24"
+  },
+  {
+    "cover": "04.jpg",
+    "title": "Exemple de vidéo",
+    "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+    "duration": "2:24"
+  },
+  {
+    "cover": "05.jpg",
+    "title": "Exemple de vidéo",
+    "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+    "duration": "2:24"
+  },
+  {
+    "cover": "06.jpg",
+    "title": "Exemple de vidéo",
+    "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+    "duration": "2:24"
+  },
+  {
+    "cover": "07.jpg",
+    "title": "Exemple de vidéo",
+    "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+    "duration": "2:24"
+  },
+  {
+    "cover": "08.jpg",
+    "title": "Exemple de vidéo",
+    "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+    "duration": "2:24"
+  }
+]

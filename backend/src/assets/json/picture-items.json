@@ -1,0 +1,15 @@
+{
+  "folder": "samples",
+  "elements": [
+    {
+      "id": "471fe432-3bfa-4bf9-8d27-89e70d67b316",
+      "is_active": true,
+      "cover": "01.jpg",
+      "title": "Exemple d'images",
+      "body": null,
+      "url": null,
+      "typed_metadata": [],
+      "customized_metadata": []
+    }
+  ]
+}

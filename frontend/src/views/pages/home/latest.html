@@ -1,0 +1,9 @@
+<h3>Les derniers contenus</h3>
+<ul class="latest">
+  {% for item in items %}
+  <li><a href="/{{ item.attributes.type }}/{{ item.attributes.id }}">{{ item.attributes.title }}</a></li>
+  {% endfor %}
+</ul>
+<div class="center">
+  <a class="archive" href="/archive">Voir plus</a>
+</div>

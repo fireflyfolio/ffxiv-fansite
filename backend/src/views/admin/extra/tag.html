@@ -1,0 +1,26 @@
+<form class="pure-form" id="content-tag">
+  <fieldset>
+    <div class="frame">
+      <table class="pure-table pure-table-horizontal">
+        <tbody>
+          {% for i in [1,2,3,4,5,6,7,8] %}
+          <tr>
+            <td class="w-90">
+              <a href="#" title="Editer">Tag</a>
+            </td>
+            <td class="element-option">
+              <a href="#" class="pure-menu-link delete" title="Supprimer" data-type="tag" data-id="{{ i }}"><i
+                  class="icon icon-delete"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+
+  <div class="center">
+    <input type="text" placeholder="Tag" />
+    <button class="pure-button pure-button-primary">Valider</button>
+  </div>
+</form>

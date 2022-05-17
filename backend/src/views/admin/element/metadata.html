@@ -1,0 +1,60 @@
+<form class="pure-form pure-form-stacked" id="content-metadata">
+  <fieldset>
+    <div class="frame">
+      <table class="pure-table pure-table-horizontal">
+        <tbody>
+          {% for meta in content.attributes.items.metadata %}
+          <tr>
+            <td>
+              <input type="text" placeholder="Clé" class="pure-input-1" name="key" value="{{ meta.key }}"
+                data-id="{{ meta.id }}" />
+            </td>
+            <td>
+              <input type="text" placeholder="Libellé" class="pure-input-1" name="label" value="{{ meta.label }}"
+                data-id="{{ meta.id }}" />
+            </td>
+            <td>
+              <select class="pure-input-1" name="type" data-id="{{ meta.id }}">
+                <option value="string" {{ "selected" if meta.type=="string" }}>String</option>
+                <option value="number" {{ "selected" if meta.type=="number" }}>Number</option>
+                <option value="boolean" {{ "selected" if meta.type=="boolean" }}>Boolean</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" placeholder="Valeur par défaut" class="pure-input-1" name="default"
+                value="{{ meta.default }}" data-id="{{ meta.id }}" />
+            </td>
+            <td>
+              <input type="checkbox" title="Activer" name="is_active" {{ "checked" if meta.is_active }}
+                data-id="{{ meta.id }}" />
+            </td>
+            <td class="element-option">
+              <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                  <a href="#" class="pure-menu-link"><i class="icon icon-menu"></i></a>
+                  <ul class="pure-menu-children">
+                    <li class="pure-menu-item">
+                      <a href="#" class="pure-menu-link move-up" data-id="{{ meta.id }}">Monter</a>
+                    </li>
+                    <li class="pure-menu-item">
+                      <a href="#" class="pure-menu-link move-down" data-id="{{ meta.id }}">Descendre</a>
+                    </li>
+                    <li class="pure-menu-item">
+                      <a href="#" class="pure-menu-link delete" data-type="metadata"
+                        data-id="{{ meta.id }}">Supprimer</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+
+  <div class="center">
+    <button class="pure-button add">Ajouter</button>
+  </div>
+</form>

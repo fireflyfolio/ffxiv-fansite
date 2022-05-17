@@ -1,0 +1,21 @@
+#welcome {
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+#latest {
+  max-width: 100%;
+  padding: 20px;
+  color: #000;
+  background-color: #eee;
+  border: solid 1px #ccc;
+}
+
+#latest a {
+  color: #000;
+}
+
+#latest li {
+  border-bottom: solid 1px #ccc;
+  padding: 1em 0;
+}

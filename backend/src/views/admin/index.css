@@ -1,0 +1,35 @@
+.admin {
+  border-top: solid 1px #888;
+  border-bottom: solid 1px #888;
+  margin-bottom: 4em;
+}
+
+#admin .frame {
+  height: 600px;
+  overflow: auto;
+  margin-bottom: 1em;
+}
+
+#admin .fieldset {
+  border: solid 1px #555 !important;
+  padding: 0.1em 1em 1em 1em !important;
+  margin-bottom: 1em !important;
+}
+
+#admin .element-option {
+  text-align: right;
+}
+
+#admin .pure-menu-link {
+  color: #888;
+}
+
+#admin .panel {
+  border-right: solid 1px #888;
+}
+
+@media (max-width: 768px) {
+  #admin .panel {
+    border-right: none;
+  }
+}

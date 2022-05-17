@@ -1,0 +1,6 @@
+<h3><a class="summary" href="#top">Sommaire</a></h3>
+<ul>
+  {% for item in items %}
+  <li><a class="anchor" href="#{{ item.data.anchor }}">{{ item.data.text }}</a></li>
+  {% endfor %}
+</ul>

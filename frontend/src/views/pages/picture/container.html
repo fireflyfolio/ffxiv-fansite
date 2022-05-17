@@ -1,0 +1,7 @@
+{% for element in items.elements %}
+{% if element.is_active %}
+<a class="item" data-lightbox="image" href="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}"
+  data-title="{{ element.title }}">
+  <img class="lazy" data-src="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}" /></a>
+{% endif %}
+{% endfor %}

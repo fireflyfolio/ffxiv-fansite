@@ -1,2 +1,2 @@
-# fireflyfolio-ffxiv
-My Personal FFXIV Fansite
+# ffxiv-fansite
+My FFXIV Fansite

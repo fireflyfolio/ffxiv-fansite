@@ -1,0 +1,36 @@
+<form class="pure-form pure-form-stacked" id="content-edit">
+  <fieldset>
+    <label>Type</label>
+    <select class="pure-input-1" name="type">
+      <option value="1" {{ "selected" if content.attributes.type==1 }}>Article</option>
+      <option value="5" {{ "selected" if content.attributes.type==5 }}>Vidéo</option>
+      <option value="2" {{ "selected" if content.attributes.type==2 }}>Collection</option>
+      <option value="4" {{ "selected" if content.attributes.type==4 }}>Musique</option>
+      <option value="3" {{ "selected" if content.attributes.type==3 }}>Image</option>
+      <option value="0" {{ "selected" if content.attributes.type==0 }}>Statique</option>
+    </select>
+
+    <label>Statut</label>
+    <select class="pure-input-1" name="status">
+      <option value="0" {{ "selected" if content.attributes.status==0 }}>Brouillon</option>
+      <option value="1" {{ "selected" if content.attributes.status==1 }}>Publié</option>
+      <option value="2" {{ "selected" if content.attributes.status==2 }}>Protégé</option>
+      <option value="3" {{ "selected" if content.attributes.status==3 }}>Privé</option>
+    </select>
+
+    <label>Titre</label>
+    <input class="pure-input-1" type="text" placeholder="Titre" name="title" value="{{ content.attributes.title }}" />
+
+    <label>Couverture</label>
+    <input class="pure-input-1" type="text" placeholder="Couverture" name="cover"
+      value="{{ content.attributes.cover }}" />
+
+    <label>Résumé</label>
+    <textarea class="pure-input-1" placeholder="Résumé" rows="10"
+      name="summary">{{ content.attributes.summary }}</textarea>
+  </fieldset>
+
+  <div class="center">
+    <button type="button" class="pure-button pure-button-primary submit">Valider</button>
+  </div>
+</form>

@@ -1,0 +1,22 @@
+#summary {
+  max-width: 100%;
+  padding: 20px;
+}
+
+.editor {
+  color: #000;
+  background-color: #fff;
+}
+
+.editor a {
+  color: #000;
+}
+
+#link {
+  max-width: 100%;
+  padding: 20px;
+}
+
+#editorjs {
+  padding: 20px;
+}

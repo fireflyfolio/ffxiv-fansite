@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <div class="header">
+    <div class="preview">
+      <img src="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}">
+    </div>
+  </div>
+  <div class="meta">
+    <div>Titre : {{ element.title }}</div>
+
+    {% for meta in element.customized_metadata %}
+    {% if isMetaRefActive(items.metadata, meta) %}
+    <div>{{ meta.label }} : {{ meta.value }}</div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div id="editorjs" class="editor"></div>
+</div>

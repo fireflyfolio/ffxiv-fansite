@@ -1,0 +1,14 @@
+<div class="block">
+  <a id="archive-{{ section.type_label }}"></a>
+  <h2>{{ section.name }} ({{ items.models | length }})</h2>
+  <ul>
+    {% for item in items %}
+    <li><a class="ba" href="/{{ item.attributes.type }}/{{ item.attributes.id }}">{{ item.attributes.title }}</a></li>
+    {% endfor %}
+  </ul>
+  <ul class="pagination">
+    <li><a class="ba" href="#">&lt;</a></li>
+    <li><a class="ba" href="#">1</a></li>
+    <li><a class="ba" href="#">&gt;</a></li>
+  </ul>
+</div>

@@ -1,0 +1,19 @@
+/* grid */
+.pure-g>div {
+  box-sizing: border-box;
+}
+
+/* button */
+.pure-button {
+  margin-bottom: 0.5em;
+}
+
+/* menu */
+.pure-menu-link {
+  color: #ccc;
+  cursor: pointer;
+}
+
+.pure-menu-link:hover {
+  background-color: transparent;
+}

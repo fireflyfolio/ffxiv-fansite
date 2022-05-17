@@ -1,0 +1,9 @@
+/* hide anchor */
+.ce-header[contenteditable=false]::after {
+  content: '' !important;
+}
+
+/* editorjs */
+#editorjs {
+  padding-top: 5em;
+}

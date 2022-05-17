@@ -1,0 +1,61 @@
+<form class="pure-form pure-form-stacked" id="content-element-edit">
+  <fieldset class="fieldset">
+    <legend>Propriétés communes</legend>
+
+    <label>Statut</label>
+    <select class="pure-input-1" name="is_active" data-type="boolean" data-meta-type="core">
+      <option value="false">Inactif</option>
+      <option value="true" {{ "selected" if element.is_active }}>Actif</option>
+    </select>
+
+    <label>Couverture</label>
+    <input class="pure-input-1" type="text" placeholder="Couverture" name="cover" value="{{ element.cover }}"
+      data-type="string" data-meta-type="core" />
+
+    <label>Titre</label>
+    <input class="pure-input-1" type="text" placeholder="Titre" name="title" value="{{ element.title }}"
+      data-type="string" data-meta-type="core" />
+
+    <label>Source</label>
+    <input class="pure-input-1" type="text" placeholder="Source" name="url" value="{{ element.url }}" data-type="string"
+      data-meta-type="core" />
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend>Propriétés typées</legend>
+
+    {% for meta in element.typed_metadata %}
+    <label>{{ meta.label }}</label>
+    <input class="pure-input-1" type="text" placeholder="{{ meta.label }}" name="{{ meta.key }}"
+      value="{{ meta.value if meta.value else meta.default }}" data-type="{{ meta.type }}" data-meta-type="typed"
+      data-id="{{ meta.id }}" />
+    {% endfor %}
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend>Propriétés personnalisées</legend>
+
+    {% for meta in element.customized_metadata %}
+    <label for="{{meta.id}}">{{ meta.label }}</label>
+    {% if meta.type == "boolean" %}
+    <select class="pure-input-1" name="{{ meta.key }}" data-type="{{ meta.type }}" data-meta-type="customized"
+      data-id="{{ meta.id }}">
+      <option value="false">Inactif</option>
+      <option value="true" {{ "selected" if meta.value }}>Actif</option>
+    </select>
+    {% elif meta.type == "number" %} <input class="pure-input-1" type="number" placeholder="{{ meta.label }}"
+      name="{{ meta.key }}" value="{{ meta.value if meta.value else meta.default }}" data-type="{{ meta.type }}"
+      data-meta-type="customized" data-id="{{ meta.id }}" />
+    {% else %}
+    <input class="pure-input-1" type="text" placeholder="{{ meta.label }}" name="{{ meta.key }}"
+      value="{{ meta.value if meta.value else meta.default }}" data-type="{{ meta.type }}" data-meta-type="customized"
+      data-id="{{ meta.id }}" />
+    {% endif %}
+    {% endfor %}
+  </fieldset>
+
+  <div class="center">
+    <button class="pure-button cancel">Annuler</button>
+    <button class="pure-button pure-button-primary submit">Valider</button>
+  </div>
+</form>

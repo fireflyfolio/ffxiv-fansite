@@ -1,0 +1,53 @@
+#audio .layout {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  grid-auto-rows: minmax(350px, auto);
+  margin: 20px;
+}
+
+@media (max-width: 1280px) {
+  #audio .layout {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  #audio .layout {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #audio .layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 568px) {
+  #audio .layout {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+#audio .layout .item {
+  background-color: #fff;
+}
+
+#audio .layout .item .preview {
+  overflow: hidden;
+  height: 320px;
+}
+
+#audio .layout .item .preview img {
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+  height: 100%;
+}
+
+#audio .layout .item .meta {
+  padding: 10px;
+  color: #000;
+}

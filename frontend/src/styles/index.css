@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+@import '../../node_modules/purecss/build/pure.css';
+@import '../../node_modules/purecss/build/grids-responsive.css';
+
+@import './utils.css';
+@import './pure.css';
+@import './libs.css';
+@import './style.css';
+
+@import '../views/pages/home/index.css';
+@import '../views/pages/archive/index.css';
+@import '../views/pages/article/index.css';
+@import '../views/pages/audio/index.css';
+@import '../views/pages/data/index.css';
+@import '../views/pages/picture/index.css';
+@import '../views/pages/video/index.css';
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+html,
+body {
+  background-color: #333;
+  color: #fff;
+  line-height: 1.5em;
+  letter-spacing: 0.11em;
+  font-size: 1em;
+}
+
+header {
+  text-align: center;
+  top: auto;
+  margin: 3em auto;
+}
+
+footer {
+  text-align: center;
+  margin: 4em;
+}
+
+ul {
+  padding: 0;
+  line-height: 1.5em;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.11em;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+  padding: 0;
+  margin: 0;
+  line-height: 1.1em;
+}
+
+h1 {
+  text-align: center;
+  padding: 0 20px 40px 20px;
+}
+
+legend {
+  color: #ccc !important;
+  border: none !important;
+}

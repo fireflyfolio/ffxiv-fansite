@@ -1,0 +1,44 @@
+<form class="pure-form pure-form-stacked" id="content-extra">
+  <fieldset class="fieldset">
+    <legend>Drapeaux</legend>
+
+    <label for="focus" class="pure-checkbox">
+      <input type="checkbox" id="focus" name="is_focus" {{ "checked" if content.attributes.is_focus }} /> Mise en avant
+    </label>
+
+    <label for="pin" class="pure-checkbox">
+      <input type="checkbox" id="pin" name="is_pin" {{ "checked" if content.attributes.is_pin }} /> Epinglé
+    </label>
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend>Accès</legend>
+    <input type="password" placeholder="Mot de passe" name="password" />
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend>Metadonnées</legend>
+
+    <label for="pin" class="pure-checkbox">
+      Identifiant : {{ content.attributes.id }}
+    </label>
+
+    <label for="pin" class="pure-checkbox">
+      Date de création : {{ format(content.attributes.creation_date) }}
+    </label>
+
+    <label for="pin" class="pure-checkbox">
+      Date de mise à jour : {{ format(content.attributes.update_date) }}
+    </label>
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend>Zone de danger</legend>
+
+    <a class="delete" data-type="content" data-id="{{ content.attributes.id }}">Supprimer ce contenu</a>
+  </fieldset>
+
+  <div class="center">
+    <button type="button" class="pure-button pure-button-primary submit">Valider</button>
+  </div>
+</form>

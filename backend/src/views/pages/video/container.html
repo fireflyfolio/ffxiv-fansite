@@ -1,0 +1,17 @@
+{% for element in items.elements %}
+{% if element.is_active %}
+<div class="item">
+  <div class="preview">
+    <a class="mb" href="{{ element.url }}"><img class="lazy"
+        data-src="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}" /></a>
+  </div>
+  <div class="meta">
+    <div>Titre : {{ element.title }}</div>
+
+    {% for meta in element.typed_metadata %}
+    <div>{{ meta.label }} : {{ meta.value }}</div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endfor %}

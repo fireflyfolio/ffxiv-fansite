@@ -1,0 +1,45 @@
+<form class="pure-form pure-form-stacked" id="content-element">
+  <fieldset>
+    <div class="frame">
+      <table class="pure-table pure-table-horizontal">
+        <tbody>
+          {% for element in content.attributes.items.elements %}
+          <tr>
+            <td class="w-90"><a class="edit" title="Editer" data-id="{{ element.id }}">
+                {{ element.title if element.title else element.id }}</a></td>
+            <td class="element-option">
+              <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                  <a href="#" class="pure-menu-link"><i class="icon icon-menu"></i></a>
+                  <ul class="pure-menu-children">
+                    <li class="pure-menu-item">
+                      <a href="#" class="pure-menu-link move-up" data-id="{{ element.id }}">Monter</a>
+                    </li>
+                    <li class="pure-menu-item">
+                      <a href="#" class="pure-menu-link move-down" data-id="{{ element.id }}">Descendre</a>
+                    </li>
+                    <li class="pure-menu-item">
+                      <a href="#" class="pure-menu-link move-top" data-id="{{ element.id }}">Début</a>
+                    </li>
+                    <li class="pure-menu-item">
+                      <a href="#" class="pure-menu-link move-bottom" data-id="{{ element.id }}">Fin</a>
+                    </li>
+                    <li class="pure-menu-item">
+                      <a href="#" class="pure-menu-link delete" data-type="element"
+                        data-id="{{ element.id }}">Supprimer</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+
+  <div class="center">
+    <button class="pure-button add">Ajouter</button>
+  </div>
+</form>

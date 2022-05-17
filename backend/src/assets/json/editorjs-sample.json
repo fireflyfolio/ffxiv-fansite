@@ -1,0 +1,58 @@
+{
+  "files": [
+    {
+      "id": "8baa389b-b4c9-4dec-acb0-e26f0eae821d",
+      "name": "aelycia_deforbryel.jpg",
+      "type": "image/png",
+      "size": 55446
+    },
+    {
+      "id": "25da50e0-173b-4f9e-a882-f0c69355fafc",
+      "name": "aelycia_deforbryel_crop.jpg",
+      "type": "image/png",
+      "size": 89009
+    },
+    {
+      "id": "086fa094-0d20-486d-80ec-e1cfe1dc4317",
+      "name": "avatar.jpg",
+      "type": "image/png",
+      "size": 3640
+    }
+  ],
+  "metadata": [
+    {
+      "id": "631fa7dd-b735-42d9-a3a3-331aba9eb213",
+      "key": "price",
+      "label": "Prix",
+      "type": "number",
+      "default": "0",
+      "is_active": true
+    },
+    {
+      "id": "4b259883-8ad8-42c9-8779-4812c3fc304d",
+      "key": "editor",
+      "label": "Editeur",
+      "type": "string",
+      "default": "",
+      "is_active": true
+    },
+    {
+      "id": "7581f831-e066-47e8-9b89-94f293f6ee73",
+      "key": "collection",
+      "label": "Collection",
+      "type": "string",
+      "default": "",
+      "is_active": true
+    },
+    {
+      "id": "a73ea13f-fa37-4fea-818f-1714e793ee9a",
+      "key": "is_sold",
+      "label": "Vendu",
+      "type": "boolean",
+      "default": "false",
+      "is_active": true
+    }
+  ],
+  "folder": "58a9dfe1d60a0a4025b39989be96c4f6b74dded8c4a7bff37afc1d33b57cc475",
+  "elements": []
+}

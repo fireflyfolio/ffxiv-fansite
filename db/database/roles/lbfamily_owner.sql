@@ -1,0 +1,10 @@
+-- Role: lbfamily_owner
+-- DROP ROLE lbfamily_owner;
+
+CREATE ROLE lbfamily_owner WITH
+  NOLOGIN
+  NOSUPERUSER
+  INHERIT
+  NOCREATEDB
+  NOCREATEROLE
+  NOREPLICATION;

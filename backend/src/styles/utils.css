@@ -1,0 +1,54 @@
+.sticky {
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+.inline {
+  display: inline-block !important;
+}
+
+.center {
+  text-align: center;
+}
+
+.clear {
+  clear: both;
+}
+
+.l-box {
+  padding: 1em;
+}
+
+.border {
+  border: solid 1px #888;
+}
+
+.r-border {
+  border-right: solid 1px #888;
+}
+
+.m-t-5 {
+  margin-top: 5em !important;
+}
+
+.m-b-1 {
+  margin-bottom: 1em;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-50 {
+  width: 50%;
+}

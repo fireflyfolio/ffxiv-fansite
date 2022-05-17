@@ -1,0 +1,484 @@
+[
+  {
+    "id": "471fe432-3bfa-4bf9-8d27-89e70d67b316",
+    "cover": "01.jpg",
+    "title": "Exemple de collection",
+    "metadata": {
+      "author": "Naoki Yoshida",
+      "year": 1978
+    },
+    "body": {
+      "time": 1649771567076,
+      "blocks": [
+        {
+          "id": "-6jzp_mAoT",
+          "type": "header",
+          "data": {
+            "text": "Editor.js",
+            "level": 2,
+            "anchor": "a0"
+          }
+        },
+        {
+          "id": "HPbV-o9yNo",
+          "type": "paragraph",
+          "data": {
+            "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text."
+          }
+        },
+        {
+          "id": "wUQB8cib3G",
+          "type": "header",
+          "data": {
+            "text": "Key features",
+            "level": 3,
+            "anchor": "a1"
+          }
+        },
+        {
+          "id": "Zpw1RGrxZJ",
+          "type": "list",
+          "data": {
+            "style": "unordered",
+            "items": [
+              "It is a block-styled editor",
+              "It returns clean data output in JSON",
+              "Designed to be extendable and pluggable with a simple API"
+            ]
+          }
+        },
+        {
+          "id": "Tsqu6SCI3i",
+          "type": "header",
+          "data": {
+            "text": "What does it mean «block-styled editor»",
+            "level": 3,
+            "anchor": "a2"
+          }
+        },
+        {
+          "id": "BIlcKOLqiO",
+          "type": "paragraph",
+          "data": {
+            "text": "Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class=\"cdx-marker\">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor's Core."
+          }
+        },
+        {
+          "id": "sCVTCTrTdW",
+          "type": "paragraph",
+          "data": {
+            "text": "There are dozens of <a href=\"https://github.com/editor-js\">ready-to-use Blocks</a> and the <a href=\"https://editorjs.io/creating-a-block-tool\">simple API</a> for creation any Block you need. For example, you can implement Blocks for Tweets, Instagram posts, surveys and polls, CTA-buttons and even games."
+          }
+        },
+        {
+          "id": "hq6UqOEXb3",
+          "type": "header",
+          "data": {
+            "text": "What does it mean clean data output",
+            "level": 3,
+            "anchor": "a3"
+          }
+        },
+        {
+          "id": "8YR6g_uDzr",
+          "type": "paragraph",
+          "data": {
+            "text": "Classic WYSIWYG-editors produce raw HTML-markup with both content data and content appearance. On the contrary, Editor.js outputs JSON object with data of each Block. You can see an example below"
+          }
+        },
+        {
+          "id": "ItSu_rekPn",
+          "type": "paragraph",
+          "data": {
+            "text": "Given data can be used as you want: render with HTML for <code class=\"inline-code\">Web clients</code>, render natively for <code class=\"inline-code\">mobile apps</code>, create markup for <code class=\"inline-code\">Facebook Instant Articles</code> or <code class=\"inline-code\">Google AMP</code>, generate an <code class=\"inline-code\">audio version</code> and so on."
+          }
+        },
+        {
+          "id": "7pLDikcR0o",
+          "type": "paragraph",
+          "data": {
+            "text": "Clean data is useful to sanitize, validate and process on the backend."
+          }
+        },
+        {
+          "id": "Prznv-ySQ0",
+          "type": "delimiter",
+          "data": {}
+        },
+        {
+          "id": "-v3FRy9WqO",
+          "type": "paragraph",
+          "data": {
+            "text": "We have been working on this project more than three years. Several large media projects help us to test and debug the Editor, to make it's core more stable. At the same time we significantly improved the API. Now, it can be used to create any plugin for any task. Hope you enjoy. 😏"
+          }
+        },
+        {
+          "id": "udaxb2dDM3",
+          "type": "image",
+          "data": {
+            "file": {
+              "url": "https://codex.so/public/app/img/external/codex2x.png"
+            },
+            "caption": "",
+            "withBorder": false,
+            "stretched": false,
+            "withBackground": false
+          }
+        }
+      ],
+      "version": "2.23.1"
+    }
+  },
+  {
+    "id": "4eeda115-eff4-4e2b-a5c0-fb6d38afc72b",
+    "cover": "02.jpg",
+    "title": "Exemple de collection 2",
+    "metadata": {
+      "author": "Naoki Yoshida 2",
+      "year": 1978
+    },
+    "body": {
+      "time": 1649771567076,
+      "blocks": [
+        {
+          "id": "-6jzp_mAoT",
+          "type": "header",
+          "data": {
+            "text": "Editor.js",
+            "level": 2,
+            "anchor": "a0"
+          }
+        },
+        {
+          "id": "HPbV-o9yNo",
+          "type": "paragraph",
+          "data": {
+            "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text."
+          }
+        },
+        {
+          "id": "udaxb2dDM3",
+          "type": "image",
+          "data": {
+            "file": {
+              "url": "https://codex.so/public/app/img/external/codex2x.png"
+            },
+            "caption": "",
+            "withBorder": false,
+            "stretched": false,
+            "withBackground": false
+          }
+        }
+      ],
+      "version": "2.23.1"
+    }
+  },
+  {
+    "id": "c68f758a-a510-43ed-aa4f-07d50b5d10d0",
+    "cover": "03.jpg",
+    "title": "Exemple de collection 3",
+    "metadata": {
+      "author": "Naoki Yoshida 3",
+      "year": 1978
+    },
+    "body": {
+      "time": 1649771567076,
+      "blocks": [
+        {
+          "id": "-6jzp_mAoT",
+          "type": "header",
+          "data": {
+            "text": "Editor.js",
+            "level": 2,
+            "anchor": "a0"
+          }
+        },
+        {
+          "id": "HPbV-o9yNo",
+          "type": "paragraph",
+          "data": {
+            "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text."
+          }
+        },
+        {
+          "id": "wUQB8cib3G",
+          "type": "header",
+          "data": {
+            "text": "Key features",
+            "level": 3,
+            "anchor": "a1"
+          }
+        },
+        {
+          "id": "Zpw1RGrxZJ",
+          "type": "list",
+          "data": {
+            "style": "unordered",
+            "items": [
+              "It is a block-styled editor",
+              "It returns clean data output in JSON",
+              "Designed to be extendable and pluggable with a simple API"
+            ]
+          }
+        },
+        {
+          "id": "Tsqu6SCI3i",
+          "type": "header",
+          "data": {
+            "text": "What does it mean «block-styled editor»",
+            "level": 3,
+            "anchor": "a2"
+          }
+        },
+        {
+          "id": "BIlcKOLqiO",
+          "type": "paragraph",
+          "data": {
+            "text": "Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class=\"cdx-marker\">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor's Core."
+          }
+        },
+        {
+          "id": "sCVTCTrTdW",
+          "type": "paragraph",
+          "data": {
+            "text": "There are dozens of <a href=\"https://github.com/editor-js\">ready-to-use Blocks</a> and the <a href=\"https://editorjs.io/creating-a-block-tool\">simple API</a> for creation any Block you need. For example, you can implement Blocks for Tweets, Instagram posts, surveys and polls, CTA-buttons and even games."
+          }
+        }
+      ],
+      "version": "2.23.1"
+    }
+  },
+  {
+    "id": "4e661128-895b-4461-af43-68853662878b",
+    "cover": "04.jpg",
+    "title": "Exemple de collection 4",
+    "metadata": {
+      "author": "Naoki Yoshida 4",
+      "year": 1978
+    },
+    "body": {
+      "time": 1649771567076,
+      "blocks": [
+        {
+          "id": "-6jzp_mAoT",
+          "type": "header",
+          "data": {
+            "text": "Editor.js",
+            "level": 2,
+            "anchor": "a0"
+          }
+        },
+        {
+          "id": "HPbV-o9yNo",
+          "type": "paragraph",
+          "data": {
+            "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text."
+          }
+        },
+        {
+          "id": "wUQB8cib3G",
+          "type": "header",
+          "data": {
+            "text": "Key features",
+            "level": 3,
+            "anchor": "a1"
+          }
+        },
+        {
+          "id": "Zpw1RGrxZJ",
+          "type": "list",
+          "data": {
+            "style": "unordered",
+            "items": [
+              "It is a block-styled editor",
+              "It returns clean data output in JSON",
+              "Designed to be extendable and pluggable with a simple API"
+            ]
+          }
+        },
+        {
+          "id": "Tsqu6SCI3i",
+          "type": "header",
+          "data": {
+            "text": "What does it mean «block-styled editor»",
+            "level": 3,
+            "anchor": "a2"
+          }
+        },
+        {
+          "id": "BIlcKOLqiO",
+          "type": "paragraph",
+          "data": {
+            "text": "Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class=\"cdx-marker\">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor's Core."
+          }
+        },
+        {
+          "id": "sCVTCTrTdW",
+          "type": "paragraph",
+          "data": {
+            "text": "There are dozens of <a href=\"https://github.com/editor-js\">ready-to-use Blocks</a> and the <a href=\"https://editorjs.io/creating-a-block-tool\">simple API</a> for creation any Block you need. For example, you can implement Blocks for Tweets, Instagram posts, surveys and polls, CTA-buttons and even games."
+          }
+        },
+        {
+          "id": "hq6UqOEXb3",
+          "type": "header",
+          "data": {
+            "text": "What does it mean clean data output",
+            "level": 3,
+            "anchor": "a3"
+          }
+        },
+        {
+          "id": "8YR6g_uDzr",
+          "type": "paragraph",
+          "data": {
+            "text": "Classic WYSIWYG-editors produce raw HTML-markup with both content data and content appearance. On the contrary, Editor.js outputs JSON object with data of each Block. You can see an example below"
+          }
+        },
+        {
+          "id": "ItSu_rekPn",
+          "type": "paragraph",
+          "data": {
+            "text": "Given data can be used as you want: render with HTML for <code class=\"inline-code\">Web clients</code>, render natively for <code class=\"inline-code\">mobile apps</code>, create markup for <code class=\"inline-code\">Facebook Instant Articles</code> or <code class=\"inline-code\">Google AMP</code>, generate an <code class=\"inline-code\">audio version</code> and so on."
+          }
+        },
+        {
+          "id": "7pLDikcR0o",
+          "type": "paragraph",
+          "data": {
+            "text": "Clean data is useful to sanitize, validate and process on the backend."
+          }
+        },
+        {
+          "id": "Prznv-ySQ0",
+          "type": "delimiter",
+          "data": {}
+        },
+        {
+          "id": "-v3FRy9WqO",
+          "type": "paragraph",
+          "data": {
+            "text": "We have been working on this project more than three years. Several large media projects help us to test and debug the Editor, to make it's core more stable. At the same time we significantly improved the API. Now, it can be used to create any plugin for any task. Hope you enjoy. 😏"
+          }
+        },
+        {
+          "id": "udaxb2dDM3",
+          "type": "image",
+          "data": {
+            "file": {
+              "url": "https://codex.so/public/app/img/external/codex2x.png"
+            },
+            "caption": "",
+            "withBorder": false,
+            "stretched": false,
+            "withBackground": false
+          }
+        }
+      ],
+      "version": "2.23.1"
+    }
+  },
+  {
+    "id": "e3717546-e479-4e45-b60d-cee3a990be89",
+    "cover": "05.jpg",
+    "title": "Exemple de collection 5",
+    "metadata": {
+      "author": "Naoki Yoshida 5",
+      "year": 1978
+    },
+    "body": {}
+  },
+  {
+    "id": "6343477c-aca3-407f-abba-44d6bf84adad",
+    "cover": "06.jpg",
+    "title": "Exemple de collection 6",
+    "metadata": {
+      "author": "Naoki Yoshida 6",
+      "year": 1978
+    },
+    "body": {
+      "time": 1649771567076,
+      "blocks": [
+        {
+          "id": "-6jzp_mAoT",
+          "type": "header",
+          "data": {
+            "text": "Editor.js",
+            "level": 2,
+            "anchor": "a0"
+          }
+        },
+        {
+          "id": "HPbV-o9yNo",
+          "type": "paragraph",
+          "data": {
+            "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text."
+          }
+        },
+        {
+          "id": "wUQB8cib3G",
+          "type": "header",
+          "data": {
+            "text": "Key features",
+            "level": 3,
+            "anchor": "a1"
+          }
+        },
+        {
+          "id": "Zpw1RGrxZJ",
+          "type": "list",
+          "data": {
+            "style": "unordered",
+            "items": [
+              "It is a block-styled editor",
+              "It returns clean data output in JSON",
+              "Designed to be extendable and pluggable with a simple API"
+            ]
+          }
+        }
+      ],
+      "version": "2.23.1"
+    }
+  },
+  {
+    "id": "d968f089-2f3e-4877-a141-8066a0b5cab8",
+    "cover": "07.jpg",
+    "title": "Exemple de collection 7",
+    "metadata": {
+      "author": "Naoki Yoshida 7",
+      "year": 1978
+    },
+    "body": {
+      "time": 1649771567076,
+      "blocks": [
+        {
+          "id": "-6jzp_mAoT",
+          "type": "header",
+          "data": {
+            "text": "Editor.js",
+            "level": 2,
+            "anchor": "a0"
+          }
+        },
+        {
+          "id": "HPbV-o9yNo",
+          "type": "paragraph",
+          "data": {
+            "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text."
+          }
+        }
+      ],
+      "version": "2.23.1"
+    }
+  },
+  {
+    "id": "71c2d021-71c7-4a92-900f-b1c365c741d4",
+    "cover": "08.jpg",
+    "title": "Exemple de collection 8",
+    "metadata": {
+      "author": "Naoki Yoshida 8",
+      "year": 1978
+    },
+    "body": {}
+  }
+]

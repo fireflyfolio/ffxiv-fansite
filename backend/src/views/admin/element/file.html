@@ -1,0 +1,35 @@
+<form class="pure-form" id="content-file">
+  <fieldset>
+    <div class="frame">
+      <table class="pure-table pure-table-horizontal">
+        <tbody>
+          {% for file in content.attributes.items.files %}
+          <tr>
+            <td class="w-70">
+              <a href="{{ server }}/static/contents/{{ content.attributes.items.folder }}/{{ file.name }}"
+                target="_blank" class="Voir">{{ file.name }}</a>
+            </td>
+            <td class="element-option">
+              <a href="#" class="pure-menu-link copy" title="Copier" data-id="{{ file.id }}"><i
+                  class="icon icon-copy"></i></a>
+            </td>
+            <td class="element-option">
+              <a href="#" class="pure-menu-link delete" title="Supprimer" data-type="file" data-id="{{ file.id }}"><i
+                  class="icon icon-delete"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+
+  <div class="center">
+    <input type="file" name="file" multiple />
+    <label for="generate-elements" class="pure-checkbox">
+      <input type="checkbox" id="generate-elements" name="generate_elements" checked /> Générer automatiquement les
+      éléments
+    </label>
+    <button class="pure-button upload">Transférer</button>
+  </div>
+</form>

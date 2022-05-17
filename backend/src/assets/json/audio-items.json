@@ -1,0 +1,32 @@
+{
+  "folder": "samples",
+  "elements": [
+    {
+      "id": "471fe432-3bfa-4bf9-8d27-89e70d67b316",
+      "is_active": true,
+      "cover": "01.jpg",
+      "title": "Exemple de musiques",
+      "body": null,
+      "url": "https://www.youtube.com/watch?v=pVUiAhWTaEM",
+      "typed_metadata": [
+        {
+          "id": "f8a41a4a-c5a0-42a6-9b68-cd6ee1f69aac",
+          "key": "author",
+          "label": "Auteur",
+          "type": "string",
+          "default": "",
+          "value": "Masayoshi Soken"
+        },
+        {
+          "id": "c4a42096-54d8-417f-8a8b-d23a3703b974",
+          "key": "year",
+          "label": "Année",
+          "type": "string",
+          "default": "0:00",
+          "value": "2:24"
+        }
+      ],
+      "customized_metadata": []
+    }
+  ]
+}

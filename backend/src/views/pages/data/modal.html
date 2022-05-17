@@ -1,0 +1,23 @@
+<div class="wrapper" id="modal-data-wrapper">
+  <div class="header">
+    <div class="preview">
+      <img src="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}">
+    </div>
+  </div>
+  <div class="meta">
+    <a class="close" href="#">FERMER</a>
+    <div>Titre : {{ element.title }}</div>
+
+    {% for meta in element.customized_metadata %}
+    {% if isMetaRefActive(items.metadata, meta) %}
+    <div>{{ meta.label }} : {{ meta.value }}</div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div id="editorjs" class="editor"></div>
+
+  <div class="l-box center">
+    <button class="pure-button cancel">Fermer</button>
+    <button class="pure-button pure-button-primary submit">Valider</button>
+  </div>
+</div>
