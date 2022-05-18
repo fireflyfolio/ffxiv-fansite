@@ -1,6 +1,6 @@
 export default {
   api: {
-    server: 'http://localhost:3000',
+    server: 'http://localhost:4000',
     contents: '/v1/contents',
     backend: {
       contents: '/v1/backend/contents',

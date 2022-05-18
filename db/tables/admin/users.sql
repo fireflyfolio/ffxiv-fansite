@@ -1,8 +1,8 @@
--- Table: lbfamily.users
+-- Table: admin.users
 
--- DROP TABLE IF EXISTS lbfamily.users;
+-- DROP TABLE IF EXISTS admin.users;
 
-CREATE TABLE IF NOT EXISTS lbfamily.users
+CREATE TABLE IF NOT EXISTS admin.users
 (
     id integer NOT NULL,
     username character varying(200) COLLATE pg_catalog."default" NOT NULL,
@@ -16,17 +16,17 @@ CREATE TABLE IF NOT EXISTS lbfamily.users
 
 TABLESPACE lbfamily;
 
-ALTER TABLE IF EXISTS lbfamily.users
+ALTER TABLE IF EXISTS admin.users
     OWNER to lbfamily_owner;
 
-GRANT ALL ON TABLE lbfamily.users TO lbfamily_api;
+GRANT ALL ON TABLE admin.users TO lbfamily_api;
 
-GRANT ALL ON TABLE lbfamily.users TO lbfamily_owner;
+GRANT ALL ON TABLE admin.users TO lbfamily_owner;
 -- Index: idx_sites_username
 
--- DROP INDEX IF EXISTS lbfamily.idx_sites_username;
+-- DROP INDEX IF EXISTS admin.idx_sites_username;
 
 CREATE INDEX IF NOT EXISTS idx_sites_username
-    ON lbfamily.users USING btree
+    ON admin.users USING btree
     (username COLLATE pg_catalog."default" ASC NULLS LAST)
     TABLESPACE lbfamily;

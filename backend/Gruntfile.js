@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             transform: [
               ['browserify-replace', {
                 replace: [
-                  { from: /http:\/\/localhost:3000/ig, to: 'https://api.fireflyfolio.com' }
+                  { from: /http:\/\/localhost:4000/ig, to: 'https://api.littlebigfamily.com' }
                 ]
               }]
             ]

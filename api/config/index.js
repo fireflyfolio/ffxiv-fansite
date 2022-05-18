@@ -1,7 +1,7 @@
 module.exports = {
   server: {
-    port: process.env.PORT || 3000,
-    appName: 'FireflyFolio API',
+    port: process.env.PORT || 4000,
+    appName: 'LittleBigFamily API',
     appVersion: '1.0.0',
   },
   db: {

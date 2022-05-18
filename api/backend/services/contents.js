@@ -28,7 +28,7 @@ async function fetchAll (params) {
   }
 
   // Define clauses
-  let sql = `SELECT id, title, type FROM lbfamily.contents
+  let sql = `SELECT id, title, type FROM public.contents
     WHERE type <> 0 ${type} ${order} ${limit}`;
 
   try {
@@ -47,7 +47,7 @@ async function fetch (params) {
   try {
     const sql = `SELECT id, status, type, creation_date, update_date,
         title, summary, body, is_focus, is_pin, password, cover, items
-      FROM lbfamily.contents WHERE id = $1`;
+      FROM public.contents WHERE id = $1`;
     const values = [params.id];
     const result = await pool.query(sql, values);
 
@@ -63,7 +63,7 @@ async function create () {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `INSERT INTO lbfamily.contents (status, type, title) VALUES ($1, $2, $3) RETURNING id`;
+    const sql = `INSERT INTO public.contents (status, type, title) VALUES ($1, $2, $3) RETURNING id`;
     const values = [CONTENT_STATUS_DRAFT, CONTENT_TYPE_ARTICLE, 'New title'];
     const result = await pool.query(sql, values);
 
@@ -92,7 +92,7 @@ async function update (data) {
   }
 
   try {
-    const sql = `UPDATE lbfamily.contents SET
+    const sql = `UPDATE public.contents SET
         status = $2, type = $3, title = $4, summary = $5,
         cover = $6, is_focus = $7, is_pin = $8,
         body = $9, items = $10, ${password}
@@ -114,7 +114,7 @@ async function remove (data) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `DELETE FROM lbfamily.contents WHERE id = $1`;
+    const sql = `DELETE FROM public.contents WHERE id = $1`;
     const values = [data.id];
     const result = await pool.query(sql, values);
 
@@ -133,8 +133,8 @@ async function fetchRelations (params) {
 
   try {
     const sql = `SELECT r.relation_id AS id, r.position, r.status, c.type, c.title
-      FROM lbfamily.contents_relations r
-      LEFT JOIN lbfamily.contents c ON c.id = r.relation_id
+      FROM public.contents_relations r
+      LEFT JOIN public.contents c ON c.id = r.relation_id
       WHERE r.content_id = $1
       ORDER BY r.position ASC`;
     const values = [params.id];
@@ -152,7 +152,7 @@ async function createRelations (params) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `INSERT INTO lbfamily.contents_relations (content_id, relation_id, position, status) VALUES ($1, $2, $3, $4)`;
+    const sql = `INSERT INTO public.contents_relations (content_id, relation_id, position, status) VALUES ($1, $2, $3, $4)`;
     const values = [params.id, params.relation_id, params.position, params.status];
     const result = await pool.query(sql, values);
 
@@ -168,7 +168,7 @@ async function updateRelations (params) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `UPDATE lbfamily.contents_relations SET position = $3, status = $4 WHERE content_id = $1 AND relation_id = $2`;
+    const sql = `UPDATE public.contents_relations SET position = $3, status = $4 WHERE content_id = $1 AND relation_id = $2`;
     const values = [params.id, params.rid, params.position, params.status];
     const result = await pool.query(sql, values);
 
@@ -185,7 +185,7 @@ async function removeRelations (params) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `DELETE FROM lbfamily.contents_relations WHERE content_id = $1 AND relation_id = $2`;
+    const sql = `DELETE FROM public.contents_relations WHERE content_id = $1 AND relation_id = $2`;
     const values = [params.id, params.rid];
     const result = await pool.query(sql, values);
 
@@ -202,7 +202,7 @@ async function removeRelationsByContent (params) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `DELETE FROM lbfamily.contents_relations WHERE content_id = $1 OR relation_id = $1`;
+    const sql = `DELETE FROM public.contents_relations WHERE content_id = $1 OR relation_id = $1`;
     const values = [params.id];
     const result = await pool.query(sql, values);
 
@@ -221,8 +221,8 @@ async function fetchTags (params) {
 
   try {
     const sql = `SELECT t.id, t.label, t.total
-      FROM lbfamily.contents_tags c
-      LEFT JOIN lbfamily.tags t ON t.id = c.tag_id
+      FROM public.contents_tags c
+      LEFT JOIN public.tags t ON t.id = c.tag_id
       WHERE c.content_id = $1
       ORDER BY t.total DESC, t.label ASC`;
     const values = [params.id];
@@ -240,7 +240,7 @@ async function createTags (params) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `INSERT INTO lbfamily.tags (label, total) VALUES ($1, 1) RETURNING id`;
+    const sql = `INSERT INTO public.tags (label, total) VALUES ($1, 1) RETURNING id`;
     const values = [params.label];
     const result = await pool.query(sql, values);
 
@@ -256,7 +256,7 @@ async function updateTags (params) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `UPDATE lbfamily.tags SET label = $2, total = $3 WHERE id = $1`;
+    const sql = `UPDATE public.tags SET label = $2, total = $3 WHERE id = $1`;
     const values = [params.tid, params.label, params.total];
     const result = await pool.query(sql, values);
 
@@ -273,7 +273,7 @@ async function removeTags (params) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `DELETE FROM lbfamily.tags WHERE id = $1`;
+    const sql = `DELETE FROM public.tags WHERE id = $1`;
     const values = [params.tid];
     const result = await pool.query(sql, values);
 
@@ -290,7 +290,7 @@ async function fetchTagById (id) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `SELECT * FROM lbfamily.tags WHERE id = $1`;
+    const sql = `SELECT * FROM public.tags WHERE id = $1`;
     const values = [id];
     const result = await pool.query(sql, values);
 
@@ -306,7 +306,7 @@ async function fetchTagByLabel (label) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `SELECT * FROM lbfamily.tags WHERE label LIKE $1`;
+    const sql = `SELECT * FROM public.tags WHERE label LIKE $1`;
     const values = [label];
     const result = await pool.query(sql, values);
 
@@ -322,7 +322,7 @@ async function fetchTagByContent (id, tid) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `SELECT * FROM lbfamily.contents_tags WHERE content_id = $1 AND tag_id = $2`;
+    const sql = `SELECT * FROM public.contents_tags WHERE content_id = $1 AND tag_id = $2`;
     const values = [id, tid];
     const result = await pool.query(sql, values);
 
@@ -338,7 +338,7 @@ async function createTagByContent (id, tid) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `INSERT INTO lbfamily.contents_tags (content_id, tag_id) VALUES ($1, $2) RETURNING tag_id`;
+    const sql = `INSERT INTO public.contents_tags (content_id, tag_id) VALUES ($1, $2) RETURNING tag_id`;
     const values = [id, tid];
     const result = await pool.query(sql, values);
 
@@ -355,7 +355,7 @@ async function removeTagFromContent (id, tid) {
   const pool = new Pool(config.db);
 
   try {
-    const sql = `DELETE FROM lbfamily.contents_tags WHERE content_id = $1 AND tag_id = $2`;
+    const sql = `DELETE FROM public.contents_tags WHERE content_id = $1 AND tag_id = $2`;
     const values = [id, tid];
     const result = await pool.query(sql, values);
 

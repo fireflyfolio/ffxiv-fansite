@@ -27,7 +27,7 @@ async function fetchAll (params) {
   }
 
   // Define clauses
-  let sql = `SELECT id, title, type FROM lbfamily.contents
+  let sql = `SELECT id, title, type FROM public.contents
     WHERE status = 1 AND type <> 0 ${type} ${order} ${limit}`;
 
   try {
@@ -45,7 +45,7 @@ async function fetch (params) {
 
   try {
     const sql = `SELECT id, title, summary, body, items, cover
-      FROM lbfamily.contents WHERE status = 1 AND id = $1`;
+      FROM public.contents WHERE status = 1 AND id = $1`;
     const values = [params.id];
     const result = await pool.query(sql, values);
 
@@ -63,8 +63,8 @@ async function fetchRelations (params) {
 
   try {
     const sql = `SELECT r.relation_id AS id, c.type, c.title
-      FROM lbfamily.contents_relations r
-      LEFT JOIN lbfamily.contents c ON c.id = r.relation_id
+      FROM public.contents_relations r
+      LEFT JOIN public.contents c ON c.id = r.relation_id
       WHERE c.status = 1 AND r.content_id = $1
       ORDER BY r.position ASC`;
     const values = [params.id];
