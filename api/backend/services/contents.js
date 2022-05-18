@@ -368,9 +368,26 @@ async function removeTagFromContent (id, tid) {
   }
 }
 
+async function removeTagsFromContent (params) {
+  const pool = new Pool(config.db);
+
+  try {
+    const sql = `DELETE FROM public.contents_tags WHERE content_id = $1`;
+    const values = [params.id];
+    const result = await pool.query(sql, values);
+
+    return { rowCount: result.rowCount };
+  } catch (e) {
+    console.error(e)
+    throw new InternalError(dbMessage.DB_ERROR);
+  } finally {
+    pool.end();
+  }
+}
+
 module.exports = {
   fetchAll, fetch, create, update, remove,
   fetchRelations, createRelations, updateRelations, removeRelations, removeRelationsByContent,
   fetchTags, createTags, updateTags, removeTags,
-  fetchTagById, fetchTagByLabel, fetchTagByContent, createTagByContent, removeTagFromContent,
+  fetchTagById, fetchTagByLabel, fetchTagByContent, createTagByContent, removeTagFromContent, removeTagsFromContent,
 };

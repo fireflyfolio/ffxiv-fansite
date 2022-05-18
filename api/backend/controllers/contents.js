@@ -148,7 +148,8 @@ async function remove (ctx) {
   // Remove relations
   await service.removeRelationsByContent(value);
 
-  // @todo: remove/update tags
+  // Remove/update tags
+  await service.removeTagsFromContent(value);
 
   const res2 = await service.remove(value);
 
