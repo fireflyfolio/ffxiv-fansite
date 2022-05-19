@@ -191,6 +191,9 @@ async function createFiles (ctx) {
     await fs.mkdir(path.join(__dirname, folder));
   } catch (e) { }
 
+  if (!Array.isArray(ctx.request.files.upload))
+    ctx.request.files.upload = [ctx.request.files.upload];
+
   for (let file of ctx.request.files.upload) {
     try {
       const target = path.join(__dirname, folder + file.name);
@@ -215,7 +218,7 @@ async function createFiles (ctx) {
 
   // Generate elements
   if (value.generate_elements) {
-    for (let file of res.items.files) {
+    for (let file of ctx.request.files.upload) {
       let item = {
         id: uuidv4(),
         is_active: true,
