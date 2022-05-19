@@ -1,5 +1,6 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
+import Toastr from 'toastr';
 
 import Config from '../../config';
 import Router from '../../router';
@@ -15,7 +16,7 @@ import ElementFileView from './element/file';
 import TagView from './extra/tag';
 import RelationView from './extra/relation';
 import ModalView from './modal';
-import { handleFetchModel } from '../../utils/auth';
+import { handleFetchModel, handleSaveModel } from '../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
@@ -44,6 +45,7 @@ export default Backbone.View.extend({
     this.listenTo(this.router.dispatcher, 'content:relation:update', () => this.hideDeleteModal());
     this.listenTo(this.router.dispatcher, 'content:tag:update', () => this.hideDeleteModal());
     this.listenTo(this.router.dispatcher, 'content:element:edit:cancel', () => this._cancelElementEdition());
+    this.listenTo(this.router.dispatcher, 'content:editor:update', (data) => this._saveContentBody(data));
   },
 
   render: function () {
@@ -141,6 +143,11 @@ export default Backbone.View.extend({
 
     this.$(`#tab-element-1`).hide();
     this.$(`#tab-element-1-edit`).show();
+  },
+
+  _saveContentBody: function (data) {
+    this.content.set({ body: data });
+    handleSaveModel(this.content, () => Toastr.success('Le texte a été sauvegardé avec succès.'));
   },
 
   _cancelElementEdition: function () {

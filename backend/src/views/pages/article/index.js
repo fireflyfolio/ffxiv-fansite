@@ -88,11 +88,11 @@ export default Backbone.View.extend({
   onSubmitClick: function (e) {
     e.preventDefault();
 
-    this.editor.save().then((data) => {
-      this.content.set({ body: data });
-      this.router.dispatcher.trigger('content:editor:update');
-      handleSaveModel(this.content, () => Toastr.success('Le texte a été sauvegardé avec succès.'));
-    })
+    this.editor.save()
+      .then((data) => {
+        this.content.set({ body: data });
+        this.router.dispatcher.trigger('content:editor:update', data);
+      })
       .catch((e) => Toastr.error('Erreur de sauvegarde du texte.'));
   }
 });

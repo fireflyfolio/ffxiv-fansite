@@ -44,7 +44,7 @@ export default Backbone.Router.extend({
     this.dispatcher.on('content:relation:update');
     this.dispatcher.on('content:tag:update');
     this.dispatcher.on('content:file:delete', (id) => id);
-    this.dispatcher.on('content:editor:update');
+    this.dispatcher.on('content:editor:update', (body) => body);
 
     this.listenTo(this.dispatcher, 'content:update', (content) => {
       const id = content.get('id');
