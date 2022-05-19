@@ -56,9 +56,6 @@ export default Backbone.View.extend({
           delimiter: Delimiter,
         },
         data: this.content.get('body'),
-        onChange: (api, event) => {
-          editor.save().then((res) => console.log(res));
-        }
       });
 
       this.$el.html(this.template.render('pages/article/index.html', { item: this.content }));

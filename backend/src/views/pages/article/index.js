@@ -14,7 +14,7 @@ import NavView from '../../commons/nav';
 import MoreView from '../../commons/more';
 import SummaryView from './summary';
 import AdminView from '../../admin';
-import { handleFetchModel, handleSaveModel } from '../../../utils/auth';
+import { handleFetchModel } from '../../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
