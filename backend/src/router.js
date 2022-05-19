@@ -12,6 +12,7 @@ import AudioPage from './views/pages/audio';
 import DataPage from './views/pages/data';
 import PicturePage from './views/pages/picture';
 import VideoPage from './views/pages/video';
+import { CONTENT_TYPE_ARTICLE, CONTENT_TYPE_DATA, CONTENT_TYPE_PICTURE, CONTENT_TYPE_AUDIO, CONTENT_TYPE_VIDEO } from './config/constants';
 
 export default Backbone.Router.extend({
   routes: {
@@ -35,11 +36,37 @@ export default Backbone.Router.extend({
 
   initialize: function () {
     this.dispatcher.on('admin:show:toggle');
+    this.dispatcher.on('content:update', (content) => content);
     this.dispatcher.on('content:element:edit', (id) => id);
     this.dispatcher.on('content:element:edit:cancel');
     this.dispatcher.on('content:element:update', (items) => items);
     this.dispatcher.on('content:metadata:delete');
+    this.dispatcher.on('content:relation:update');
+    this.dispatcher.on('content:tag:update');
+    this.dispatcher.on('content:file:delete', (id) => id);
     this.dispatcher.on('content:editor:update');
+
+    this.listenTo(this.dispatcher, 'content:update', (content) => {
+      const id = content.get('id');
+
+      switch (content.get('type')) {
+        case CONTENT_TYPE_ARTICLE:
+          this.article(id);
+          break;
+        case CONTENT_TYPE_DATA:
+          this.data(id);
+          break;
+        case CONTENT_TYPE_PICTURE:
+          this.picture(id);
+          break;
+        case CONTENT_TYPE_AUDIO:
+          this.audio(id);
+          break;
+        case CONTENT_TYPE_VIDEO:
+          this.video(id);
+          break;
+      }
+    });
   },
 
   execute: function (callback, args, name) {
@@ -61,15 +88,15 @@ export default Backbone.Router.extend({
   },
 
   article: function (id) {
-    this._getViewInstance('article', ArticlePage, { id: id ?? 1 });
+    this._getViewInstance('article', ArticlePage, { id: id });
   },
 
   audio: function (id) {
-    this._getViewInstance('audio', AudioPage, { id: id ?? 4 });
+    this._getViewInstance('audio', AudioPage, { id: id });
   },
 
   data: function (id) {
-    this._getViewInstance('data', DataPage, { id: id ?? 5 });
+    this._getViewInstance('data', DataPage, { id: id });
   },
 
   home: function () {
@@ -77,11 +104,11 @@ export default Backbone.Router.extend({
   },
 
   picture: function (id) {
-    this._getViewInstance('picture', PicturePage, { id: id ?? 2 });
+    this._getViewInstance('picture', PicturePage, { id: id });
   },
 
   video: function (id) {
-    this._getViewInstance('video', VideoPage, { id: id ?? 3 });
+    this._getViewInstance('video', VideoPage, { id: id });
   },
 
   _getViewInstance: function (key, View, options = {}) {

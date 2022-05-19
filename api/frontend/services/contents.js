@@ -65,7 +65,7 @@ async function fetchRelations (params) {
     const sql = `SELECT r.relation_id AS id, c.type, c.title
       FROM public.contents_relations r
       LEFT JOIN public.contents c ON c.id = r.relation_id
-      WHERE c.status = 1 AND r.content_id = $1
+      WHERE r.status = 1 AND r.content_id = $1
       ORDER BY r.position ASC`;
     const values = [params.id];
     const result = await pool.query(sql, values);

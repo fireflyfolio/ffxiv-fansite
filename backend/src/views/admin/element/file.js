@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
 import Toastr from 'toastr';
+import _ from 'underscore';
 
 import Config from '../../../config';
 import Router from '../../../router';
@@ -18,6 +19,8 @@ export default Backbone.View.extend({
     this.content = options.content;
 
     this.router = Router.prototype.getInstance();
+
+    this.listenTo(this.router.dispatcher, 'content:file:delete', (id) => this._deleteFileLocally(id));
   },
 
   render: function () {
@@ -59,12 +62,21 @@ export default Backbone.View.extend({
       method: 'POST',
       body: formData,
       callback: (res) => {
-        // @todo: Reload the files tab, need to change the api create files response.
-        // @todo: If generate_elements then reload the content data and re-render the all content.
+        this.router.dispatcher.trigger('content:update', this.content);
         Toastr.success(`Les fichiers ont été transférés avec succès.`);
       },
     };
 
     handleFetch(options);
-  }
+  },
+
+  _deleteFileLocally: function (id) {
+    let items = this.content.get('items') ?? {};
+    items.files = items.files ?? [];
+
+    const index = _.findIndex(items.files, (i) => i.id === id);
+    items.files.splice(index, 1);
+
+    this.render();
+  },
 });

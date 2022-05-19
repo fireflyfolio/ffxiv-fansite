@@ -1,15 +1,20 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
+import Toastr from 'toastr';
 
 import Config from '../../../config';
 import Router from '../../../router';
-import { handleFetchModel } from '../../../utils/auth';
+import { handleFetch, handleFetchModel } from '../../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
 
   events: {
-    'click a.more': 'onClick',
+    'input #content-relation .status': 'onStatusInput',
+    'click #content-relation .more': 'onMoreClick',
+    'click #content-relation .move-up': 'onMoveUpClick',
+    'click #content-relation .move-down': 'onMoveDownClick',
+    'click #content-relation .submit': 'onSubmitClick',
   },
 
   initialize: function (options) {
@@ -17,19 +22,99 @@ export default Backbone.View.extend({
     this.relations = options.relations;
 
     this.router = Router.prototype.getInstance();
+
+    this.listenTo(this.router.dispatcher, 'content:relation:update', () => this.render());
   },
 
   render: function () {
     this.relations.url = Config.api.server + Config.api.backend.contents_relations.replace('{id}', this.content.get('id'));
 
-    const cb = () => this.$el.html(this.template.render('admin/extra/relation.html'));
+    const cb = () => {
+      this.relations.sort();
+      this.$el.html(this.template.render('admin/extra/relation.html', { relations: this.relations }));
+    };
+
     handleFetchModel(this.relations, cb);
 
     return this;
   },
 
-  onClick: function (e) {
+  onStatusInput: function (e) {
+    const element = e.currentTarget;
+    const id = element.attributes['data-id'].nodeValue;
+    const relation = this.relations.get(id);
+    relation.set({ status: element.checked ? 1 : 0 });
+
+    this._updateRelation(relation);
+  },
+
+  onMoreClick: function (e) {
     e.preventDefault();
     this.router.navigate(e.currentTarget.attributes.href.nodeValue, { trigger: true });
+  },
+
+  onMoveUpClick: function (e) {
+    e.preventDefault();
+
+    const element = e.currentTarget;
+    const id = element.attributes['data-id'].nodeValue;
+    const relation = this.relations.get(id);
+    const position = relation.get('position');
+
+    if (position < 0) return;
+
+    relation.set({ position: position - 1 });
+    this._updateRelation(relation);
+  },
+
+  onMoveDownClick: function (e) {
+    e.preventDefault();
+
+    const element = e.currentTarget;
+    const id = element.attributes['data-id'].nodeValue;
+    const relation = this.relations.get(id);
+    const position = relation.get('position');
+
+    if (position > this.relations.length) return;
+
+    relation.set({ position: position + 1 });
+    this._updateRelation(relation);
+  },
+
+  onSubmitClick: function (e) {
+    e.preventDefault();
+
+    const element = document.getElementById('relation-id');
+    const body = {
+      relation_id: Number(element.value),
+      position: this.relations.length,
+      status: 1
+    };
+
+    handleFetch({
+      url: Config.api.server + Config.api.backend.contents_relations.replace('{id}', this.content.get('id')),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify(body),
+      callback: () => this.router.dispatcher.trigger('content:relation:update'),
+    });
+  },
+
+  _updateRelation: function (relation) {
+    const body = {
+      position: relation.get('position'),
+      status: relation.get('status'),
+    };
+
+    handleFetch({
+      url: Config.api.server + Config.api.backend.contents_relations.replace('{id}', this.content.get('id')) + '/' + relation.get('id'),
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify(body),
+      callback: () => {
+        Toastr.success('La relation a été mise à jour avec succès.');
+        this.router.dispatcher.trigger('content:relation:update');
+      },
+    });
   },
 });

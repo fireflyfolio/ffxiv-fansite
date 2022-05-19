@@ -271,11 +271,12 @@ async function removeFiles (ctx) {
 
     try {
       await fs.unlink(target);
-      res.items.files = res.items.files.filter((file) => file.id !== value.fid);
       console.log(`File deleted: ${target}`);
     } catch (e) {
       console.error(e.message);
     }
+
+    res.items.files = res.items.files.filter((file) => file.id !== value.fid);
   }
 
   // Update content

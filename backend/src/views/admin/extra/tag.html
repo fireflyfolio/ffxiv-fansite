@@ -3,13 +3,14 @@
     <div class="frame">
       <table class="pure-table pure-table-horizontal">
         <tbody>
-          {% for i in [1,2,3,4,5,6,7,8] %}
+          {% for tag in tags %}
           <tr>
             <td class="w-90">
-              <a href="#" title="Editer">Tag</a>
+              <a class="edit" href="#" title="Editer" data-id="{{ tag.attributes.id }}">{{ tag.attributes.label }}</a>
             </td>
             <td class="element-option">
-              <a href="#" class="pure-menu-link delete" title="Supprimer" data-type="tag" data-id="{{ i }}"><i
+              <a href="#" class="pure-menu-link delete" title="Supprimer" data-type="tag"
+                data-id="{{ tag.attributes.id }}" data-title="{{ tag.attributes.label }}"><i
                   class="icon icon-delete"></i></a>
             </td>
           </tr>
@@ -20,7 +21,7 @@
   </fieldset>
 
   <div class="center">
-    <input type="text" placeholder="Tag" />
-    <button class="pure-button pure-button-primary">Valider</button>
+    <input type="text" placeholder="Tag" id="tag-label" />
+    <button class="pure-button pure-button-primary submit">Valider</button>
   </div>
 </form>

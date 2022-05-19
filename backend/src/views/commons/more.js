@@ -16,12 +16,14 @@ export default Backbone.View.extend({
     this.id = options.id;
 
     this.router = Router.prototype.getInstance();
-    this.contents = new RelationCollection();
+    this.relations = new RelationCollection();
+
+    this.listenTo(this.router.dispatcher, 'content:relation:update', () => this.render());
   },
 
   render: function () {
-    this.contents.url = Config.api.server + Config.api.contents + `/${this.id}/relations`;
-    this.contents.fetch().then(() => this.$el.html(this.template.render('commons/more.html', { items: this.contents })));
+    this.relations.url = Config.api.server + Config.api.contents + `/${this.id}/relations`;
+    this.relations.fetch().then(() => this.$el.html(this.template.render('commons/more.html', { relations: this.relations })));
 
     return this;
   },

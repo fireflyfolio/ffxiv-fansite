@@ -25,8 +25,9 @@ export default Backbone.View.extend({
   render: function (options) {
     this.id = options.id;
     this.type = options.type;
+    this.title = options.title;
 
-    this.$el.html(this.template.render('admin/modal.html', { id: this.id, type: this.type }));
+    this.$el.html(this.template.render('admin/modal.html', { id: this.id, type: this.type, title: this.title }));
 
     return this;
   },
@@ -61,8 +62,8 @@ export default Backbone.View.extend({
           method: 'DELETE',
           callback: () => {
             Toastr.success('Le fichier a été supprimé avec succès.');
-            this.router.dispatcher.trigger('content:element:update', items);
-          }
+            this.router.dispatcher.trigger('content:file:delete', this.id);
+          },
         });
         break;
 
@@ -76,9 +77,25 @@ export default Backbone.View.extend({
         break;
 
       case 'relation':
+        handleFetch({
+          url: Config.api.server + Config.api.backend.contents_relations.replace('{id}', this.content.id) + '/' + this.id,
+          method: 'DELETE',
+          callback: () => {
+            Toastr.success('La relation a été supprimée avec succès.');
+            this.router.dispatcher.trigger('content:relation:update');
+          },
+        });
         break;
 
       case 'tag':
+        handleFetch({
+          url: Config.api.server + Config.api.backend.contents_tags.replace('{id}', this.content.id) + '/' + this.id,
+          method: 'DELETE',
+          callback: () => {
+            Toastr.success('Le tag a été supprimé avec succès.');
+            this.router.dispatcher.trigger('content:tag:update');
+          },
+        });
         break;
     }
   }

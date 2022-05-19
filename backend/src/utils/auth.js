@@ -1,3 +1,4 @@
+import { options } from 'toastr';
 import Config from '../config';
 import Router from '../router';
 
@@ -76,7 +77,8 @@ function handleFetch (params) {
   const options = {
     method: params.method,
     headers: {
-      'Authorization': `Bearer ${router.session.get('accessToken')}`
+      'Authorization': `Bearer ${router.session.get('accessToken')}`,
+      ...params.headers
     }
   };
 

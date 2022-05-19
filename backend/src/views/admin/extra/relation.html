@@ -3,14 +3,16 @@
     <div class="frame">
       <table class="pure-table pure-table-horizontal">
         <tbody>
-          {% for i in [1,2,3,4,5,6,7,8] %}
+          {% for relation in relations %}
           <tr>
-            <td>#{{ i }}</td>
+            <td>#{{ relation.attributes.id }}</td>
             <td class="w-70">
-              <a class="more" href="/article/1" title="Voir">Titre du contenu</a>
+              <a class="more" href="/{{ relation.attributes.type }}/{{ relation.attributes.id }}" title="Voir">{{
+                relation.attributes.title }}</a>
             </td>
             <td>
-              <input type="checkbox" title="Activer" />
+              <input class="status" type="checkbox" title="Activer" name="status" {{ "checked" if
+                relation.attributes.status==1 }} data-id={{ relation.attributes.id }} />
             </td>
             <td class="element-option">
               <ul class="pure-menu-list">
@@ -18,13 +20,15 @@
                   <a href="#" class="pure-menu-link"><i class="icon icon-menu"></i></a>
                   <ul class="pure-menu-children">
                     <li class="pure-menu-item">
-                      <a href="#" class="pure-menu-link">Monter</a>
+                      <a href="#" class="pure-menu-link move-up" data-id={{ relation.attributes.id }}>Monter</a>
                     </li>
                     <li class="pure-menu-item">
-                      <a href="#" class="pure-menu-link">Descendre</a>
+                      <a href="#" class="pure-menu-link move-down" data-id={{ relation.attributes.id }}>Descendre</a>
                     </li>
                     <li class="pure-menu-item">
-                      <a href="#" class="pure-menu-link delete" data-type="relation" data-id="{{ i }}">Supprimer</a>
+                      <a href="#" class="pure-menu-link delete" data-type="relation"
+                        data-id="{{ relation.attributes.id }}"
+                        data-title="{{ relation.attributes.title }}">Supprimer</a>
                     </li>
                   </ul>
                 </li>
@@ -38,7 +42,7 @@
   </fieldset>
 
   <div class="center">
-    <input type="text" placeholder="Identifiant" />
-    <button class="pure-button pure-button-primary">Valider</button>
+    <input type="text" placeholder="Identifiant" id="relation-id" />
+    <button class="pure-button pure-button-primary submit">Valider</button>
   </div>
 </form>
