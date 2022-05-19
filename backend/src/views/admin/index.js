@@ -37,8 +37,12 @@ export default Backbone.View.extend({
     this.relations = new RelationCollection();
     this.tags = new TagCollection();
 
+    this.listenTo(this.router.dispatcher, 'admin:show:toggle', () => this.toggleAdminPanel());
     this.listenTo(this.router.dispatcher, 'content:element:update', () => this.hideDeleteModal());
     this.listenTo(this.router.dispatcher, 'content:metadata:delete', () => this.hideDeleteModal());
+    this.listenTo(this.router.dispatcher, 'content:file:delete', () => this.hideDeleteModal());
+    this.listenTo(this.router.dispatcher, 'content:relation:update', () => this.hideDeleteModal());
+    this.listenTo(this.router.dispatcher, 'content:tag:update', () => this.hideDeleteModal());
     this.listenTo(this.router.dispatcher, 'content:element:edit:cancel', () => this._cancelElementEdition());
   },
 
@@ -87,6 +91,10 @@ export default Backbone.View.extend({
     return this;
   },
 
+  toggleAdminPanel: function (e) {
+    this.$('#wrapper').toggle();
+  },
+
   onMenuClick: function (e) {
     e.preventDefault();
 
@@ -108,8 +116,9 @@ export default Backbone.View.extend({
 
     const id = e.currentTarget.attributes['data-id'].nodeValue;
     const type = e.currentTarget.attributes['data-type'].nodeValue;
+    const title = e.currentTarget.attributes['data-title'] ? e.currentTarget.attributes['data-title'].nodeValue : false;
 
-    this.$('#modal-data').append(this.modalView.render({ id: id, type: type }).el);
+    this.$('#modal-data').append(this.modalView.render({ id: id, type: type, title: title }).el);
 
     const modal = document.getElementById('modal-delete');
     modal.style.display = 'block';

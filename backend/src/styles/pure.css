@@ -43,11 +43,6 @@
   background-color: transparent;
 }
 
-.pure-menu-children {
-  left: -100% !important;
-  top: 0;
-}
-
 .pure-menu-selected a {
   color: #fff !important;
 }

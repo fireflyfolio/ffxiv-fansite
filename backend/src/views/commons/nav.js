@@ -13,6 +13,7 @@ export default Backbone.View.extend({
 
   events: {
     'click a.nav': 'onNavClick',
+    'click a.admin': 'onAdminClick',
     'click a.new': 'onNewClick',
   },
 
@@ -28,6 +29,11 @@ export default Backbone.View.extend({
   onNavClick: function (e) {
     e.preventDefault();
     this.router.navigate(e.currentTarget.attributes.href.nodeValue, { trigger: true });
+  },
+
+  onAdminClick: function (e) {
+    e.preventDefault();
+    this.router.dispatcher.trigger('admin:show:toggle');
   },
 
   onNewClick: function (e) {

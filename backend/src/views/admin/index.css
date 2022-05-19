@@ -1,4 +1,4 @@
-.admin {
+#admin #wrapper {
   border-top: solid 1px #888;
   border-bottom: solid 1px #888;
   margin-bottom: 4em;
@@ -33,4 +33,9 @@
     border-right: none;
     border-bottom: solid 1px #888;
   }
+}
+
+#admin .pure-menu-children {
+  left: -100% !important;
+  top: 0;
 }

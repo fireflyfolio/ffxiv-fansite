@@ -34,6 +34,7 @@ export default Backbone.Router.extend({
   },
 
   initialize: function () {
+    this.dispatcher.on('admin:show:toggle');
     this.dispatcher.on('content:element:edit', (id) => id);
     this.dispatcher.on('content:element:edit:cancel');
     this.dispatcher.on('content:element:update', (items) => items);
