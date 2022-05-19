@@ -31,5 +31,6 @@
 @media (max-width: 768px) {
   #admin .panel {
     border-right: none;
+    border-bottom: solid 1px #888;
   }
 }
