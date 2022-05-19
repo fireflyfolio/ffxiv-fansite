@@ -36,7 +36,7 @@ export default Backbone.View.extend({
     e.preventDefault();
     const cb = () => {
       Toastr.success('Le contenu a été mis à jour avec succès.');
-      this.router.dispatcher.trigger('content:element:update', this.content.items);
+      this.router.dispatcher.trigger('content:element:update', this.content.get('items'));
     };
     handleSaveModel(this.content, cb);
   },
