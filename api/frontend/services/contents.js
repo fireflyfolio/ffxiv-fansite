@@ -10,7 +10,7 @@ async function fetchAll (params) {
   const limit = `LIMIT ${params.limit} OFFSET ${params.offset}`;
 
   // Sort
-  let sort = 'creation_date';
+  let sort = 'update_date';
 
   switch (params.sort) {
     case 'title': sort = 'title';
@@ -27,7 +27,7 @@ async function fetchAll (params) {
   }
 
   // Define clauses
-  let sql = `SELECT id, title, type FROM public.contents
+  let sql = `SELECT id, title, type, update_date FROM public.contents
     WHERE status = 1 AND type <> 0 ${type} ${order} ${limit}`;
 
   try {

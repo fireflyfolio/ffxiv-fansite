@@ -8,7 +8,6 @@ import { handleFetchModel } from '../../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#welcome',
 
   initialize: function () {
     this.router = Router.prototype.getInstance();
@@ -16,9 +15,11 @@ export default Backbone.View.extend({
   },
 
   render: function () {
+    this.setElement('#welcome');
+
     this.content.url = Config.api.server + Config.api.backend.contents + Config.static.home.welcome;
 
-    const cb = () => this.$el.html(this.template.render('pages/home/welcome.html', { item: this.content }));
+    const cb = () => this.$el.html(this.template.render('pages/home/welcome.html', { content: this.content }));
     handleFetchModel(this.content, cb);
 
     return this;

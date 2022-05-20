@@ -15,15 +15,17 @@ export default Backbone.View.extend({
     'click #content-element-edit .cancel': 'onCancelClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
 
     this.listenTo(this.router.dispatcher, 'content:element:edit', (id) => this._loadElementById(id));
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#tab-element-1-edit');
+
+    this.content = options ? options.content || this.content : this.content;
+
     this.$el.html(this.template.render('admin/element/element-edit.html', { element: this.element }));
 
     return this;
@@ -66,7 +68,7 @@ export default Backbone.View.extend({
     const cb = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update', this.content.get('items'));
+      this.router.dispatcher.trigger('content:element:update');
       this.router.dispatcher.trigger('content:element:edit:cancel');
     };
     handleSaveModel(this.content, cb);

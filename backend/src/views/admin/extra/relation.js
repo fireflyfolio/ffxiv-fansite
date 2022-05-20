@@ -17,16 +17,18 @@ export default Backbone.View.extend({
     'click #content-relation .submit': 'onSubmitClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-    this.relations = options.relations;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
 
     this.listenTo(this.router.dispatcher, 'content:relation:update', () => this.render());
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#tab-extra-1');
+
+    this.content = options ? options.content || this.content : this.content;
+    this.relations = options ? options.relations || this.relations : this.relations;
+
     this.relations.url = Config.api.server + Config.api.backend.contents_relations.replace('{id}', this.content.get('id'));
 
     const cb = () => {

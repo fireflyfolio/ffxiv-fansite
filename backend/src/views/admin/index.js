@@ -21,8 +21,6 @@ import { handleFetchModel, handleSaveModel } from '../../utils/auth';
 export default Backbone.View.extend({
   template: Nunjucks,
 
-  el: '#admin',
-
   events: {
     'click a.tab-menu': 'onMenuClick',
     'click .delete': 'showDeleteModal',
@@ -30,13 +28,22 @@ export default Backbone.View.extend({
     'click #content-element .edit': 'onElementEditClick',
   },
 
-  initialize: function (options) {
-    this.id = options.id;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
+
     this.content = new ContentModel();
     this.relations = new RelationCollection();
     this.tags = new TagCollection();
+
+    this.contentView = new ContentView();
+    this.contentExtraView = new ContentExtraView();
+    this.elementtView = new ElementView();
+    this.elementEditView = new ElementEditView();
+    this.elementMetadataView = new ElementMetadataView();
+    this.elementFileView = new ElementFileView();
+    this.relationView = new RelationView();
+    this.tagView = new TagView();
+    this.modalView = new ModalView();
 
     this.listenTo(this.router.dispatcher, 'admin:show:toggle', () => this.toggleAdminPanel());
     this.listenTo(this.router.dispatcher, 'content:element:update', () => this.hideDeleteModal());
@@ -48,37 +55,24 @@ export default Backbone.View.extend({
     this.listenTo(this.router.dispatcher, 'content:editor:update', (data) => this._saveContentBody(data));
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#admin');
+
+    this.id = options ? options.id || this.id : this.id;
+
     this.content.url = Config.api.server + Config.api.backend.contents + '/' + this.id;
 
     const cb = () => {
       this.$el.html(this.template.render('admin/index.html'));
 
-      const contentView = new ContentView({ content: this.content });
-      this.$('#tab-content-1').append(contentView.render().el);
-
-      const contentExtraView = new ContentExtraView({ content: this.content });
-      this.$('#tab-content-2').append(contentExtraView.render().el);
-
-      const elementtView = new ElementView({ content: this.content });
-      this.$('#tab-element-1').append(elementtView.render().el);
-
-      const elementEditView = new ElementEditView({ content: this.content });
-      this.$('#tab-element-1-edit').append(elementEditView.render().el);
-
-      const elementMetadataView = new ElementMetadataView({ content: this.content });
-      this.$('#tab-element-2').append(elementMetadataView.render().el);
-
-      const elementFileView = new ElementFileView({ content: this.content });
-      this.$('#tab-element-3').append(elementFileView.render().el);
-
-      const relationView = new RelationView({ content: this.content, relations: this.relations });
-      this.$('#tab-extra-1').append(relationView.render().el);
-
-      const tagView = new TagView({ content: this.content, tags: this.tags });
-      this.$('#tab-extra-2').append(tagView.render().el);
-
-      this.modalView = new ModalView({ content: this.content, relations: this.relations, tags: this.tags });
+      this.$('#tab-content-1').append(this.contentView.render({ content: this.content }).el);
+      this.$('#tab-content-2').append(this.contentExtraView.render({ content: this.content }).el);
+      this.$('#tab-element-1').append(this.elementtView.render({ content: this.content }).el);
+      this.$('#tab-element-1-edit').append(this.elementEditView.render({ content: this.content }).el);
+      this.$('#tab-element-2').append(this.elementMetadataView.render({ content: this.content }).el);
+      this.$('#tab-element-3').append(this.elementFileView.render({ content: this.content }).el);
+      this.$('#tab-extra-1').append(this.relationView.render({ content: this.content, relations: this.relations }).el);
+      this.$('#tab-extra-2').append(this.tagView.render({ content: this.content, tags: this.tags }).el);
 
       this.$(`#tab-content-2`).hide();
       this.$(`#tab-element-1-edit`).hide();
@@ -120,7 +114,14 @@ export default Backbone.View.extend({
     const type = e.currentTarget.attributes['data-type'].nodeValue;
     const title = e.currentTarget.attributes['data-title'] ? e.currentTarget.attributes['data-title'].nodeValue : false;
 
-    this.$('#modal-data').append(this.modalView.render({ id: id, type: type, title: title }).el);
+    this.$('#modal-delete').append(this.modalView.render({
+      content: this.content,
+      relations: this.relations,
+      tags: this.tags,
+      id: id,
+      type: type,
+      title: title,
+    }).el);
 
     const modal = document.getElementById('modal-delete');
     modal.style.display = 'block';

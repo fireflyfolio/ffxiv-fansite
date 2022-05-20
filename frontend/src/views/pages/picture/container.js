@@ -7,22 +7,24 @@ import Config from '../../../config';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#container',
 
   lazyLoadInstance: new LazyLoad(),
 
-  initialize: function (options) {
-    this.items = options.items;
-
+  initialize: function () {
     Lightbox.option({
       'resizeDuration': 150,
       'imageFadeDuration': 300
     });
   },
 
-  render: function () {
-    this.$el.html(this.template.render('pages/picture/container.html', { server: Config.api.server, items: this.items }));
+  render: function (options) {
+    this.setElement('#container');
+
+    this.content = options ? options.content || this.content : this.content;
+
+    this.$el.html(this.template.render('pages/picture/container.html', { server: Config.api.server, items: this.content.get('items') }));
     this.lazyLoadInstance.update();
+
     return this;
   },
 });

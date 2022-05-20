@@ -12,23 +12,25 @@ import { handleSaveModel } from '../../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#modal-data',
 
   events: {
     'click #modal-data-wrapper .submit': 'onSubmitClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-    this.items = options.items;
+  initialize: function () {
   },
 
   render: function (options) {
-    this.element = options.element;
+    this.setElement('#modal-data');
+
+    this.content = options ? options.content || this.content : this.content;
+    this.id = options ? options.id || this.id : this.id;
+
+    this.element = this.content.get('items').elements.find((i) => i.id === this.id);
 
     this.$el.html(this.template.render('pages/data/modal.html', {
       server: Config.api.server,
-      items: this.items,
+      items: this.content.get('items'),
       element: this.element,
       isMetaRefActive: this._isMetaRefActive,
     }));

@@ -4,8 +4,6 @@ import Nunjucks from 'nunjucks';
 import Config from '../../../config';
 import Router from '../../../router';
 import ContentModel from '../../../models/content';
-import NavView from '../../commons/nav';
-import MoreView from '../../commons/more';
 import ContainerView from './container';
 import ModalView from './modal';
 
@@ -20,27 +18,21 @@ export default Backbone.View.extend({
   initialize: function () {
     this.router = Router.prototype.getInstance();
     this.content = new ContentModel();
+    this.containerView = new ContainerView();
+    this.modalView = new ModalView();
   },
 
   render: function (options) {
-    this.id = options.id;
+    this.id = options ? options.id || this.id : this.id;
 
     this.content.url = Config.api.server + Config.api.contents + '/' + this.id;
 
     this.content.fetch().then(() => {
-      this.$el.html(this.template.render('pages/data/index.html', { item: this.content }));
+      this.$el.html(this.template.render('pages/data/index.html', { content: this.content }));
 
-      const navView = new NavView();
-      this.$('#nav').append(navView.render().el);
-
-      const moreView = new MoreView({ id: this.id });
-      this.$('#more').append(moreView.render().el);
-
-      this.items = this.content.get('items');
-      const containerView = new ContainerView({ items: this.items });
-      this.$('#container').append(containerView.render().el);
-
-      this.modalView = new ModalView({ items: this.items });
+      this.$('#nav').append(this.router.views.nav.render().el);
+      this.$('#more').append(this.router.views.more.render({ id: this.id }).el);
+      this.$('#container').append(this.containerView.render({ content: this.content }).el);
     });
 
     return this;
@@ -49,10 +41,8 @@ export default Backbone.View.extend({
   showModal: function (e) {
     e.preventDefault();
 
-    const item_id = e.currentTarget.getAttribute('data-id');
-    let element = this.items.elements.find((i) => i.id === item_id);
-
-    this.$('#modal-data').append(this.modalView.render({ element: element }).el);
+    const id = e.currentTarget.getAttribute('data-id');
+    this.$('#modal-data').append(this.modalView.render({ content: this.content, id: id }).el);
 
     const modal = document.getElementById('modal-data');
     modal.style.display = 'block';

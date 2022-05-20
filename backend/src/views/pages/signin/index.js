@@ -10,6 +10,7 @@ export default Backbone.View.extend({
   events: {
     'input input': 'onInputInput',
     'click #signin .submit': 'onSubmitClick',
+    'keydown input': 'onKeydown',
   },
 
   initialize: function () {
@@ -49,4 +50,8 @@ export default Backbone.View.extend({
         this.router.navigate('/', { trigger: true });
       });
   },
+
+  onKeydown: function (e) {
+    if (e.keyCode === 13) this.onSubmitClick(e);
+  }
 });

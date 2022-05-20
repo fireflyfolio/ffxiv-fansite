@@ -1,7 +1,7 @@
 <h3>Les derniers contenus</h3>
 <ul class="latest">
-  {% for item in items %}
-  <li><a href="/{{ item.attributes.type }}/{{ item.attributes.id }}">{{ item.attributes.title }}</a></li>
+  {% for content in contents %}
+  <li><a href="/{{ content.attributes.type }}/{{ content.attributes.id }}">{{ content.attributes.title }}</a></li>
   {% endfor %}
 </ul>
 <div class="center">

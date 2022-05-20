@@ -1,7 +1,7 @@
 const Router = require('koa-router');
 
 const {
-  fetchAll, fetch, create, update, remove,
+  fetchAll, fetch, create, update, remove, fetchTypes,
   createFiles, removeFiles,
   fetchRelations, createRelations, updateRelations, removeRelations,
   fetchTags, createTags, updateTags, removeTags,
@@ -22,10 +22,11 @@ router.post('/:id/tags', createTags);
 router.put('/:id/tags/:tid', updateTags);
 router.delete('/:id/tags/:tid', removeTags);
 
-router.get('/', fetchAll);
+router.get('/types', fetchTypes);
 router.get('/:id', fetch);
 router.post('/', create);
 router.put('/:id', update);
 router.delete('/:id', remove);
+router.get('/', fetchAll);
 
 module.exports = router.routes();

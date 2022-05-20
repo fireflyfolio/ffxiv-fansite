@@ -1,4 +1,3 @@
-import { options } from 'toastr';
 import Config from '../config';
 import Router from '../router';
 

@@ -1,121 +1,47 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
-import _ from 'underscore';
 
 import Config from '../../../config';
 import Router from '../../../router';
-import NavView from '../../commons/nav';
-import SectionView from './section';
+import ContainerView from './container';
 import OptionsView from './options';
 import StateModel from '../../../models/state';
 import ContentCollection from '../../../models/content_';
-
-import {
-  CONTENT_TYPE_ARTICLE,
-  CONTENT_TYPE_AUDIO,
-  CONTENT_TYPE_DATA,
-  CONTENT_TYPE_PICTURE,
-  CONTENT_TYPE_VIDEO
-} from '../../../config/constants';
 
 export default Backbone.View.extend({
   template: Nunjucks,
 
   events: {
     'click #archive a.ba': 'onClick',
-    'click a.as': 'onSectionClick',
   },
 
   initialize: function () {
     this.router = Router.prototype.getInstance();
-    this.state = new StateModel();
-    this.listenTo(this.state, 'change', this.onStateChange);
-  },
 
-  onStateChange: function (e) {
-    this.doRequest();
+    this.state = new StateModel();
+    this.contents = new ContentCollection();
+
+    this.containerView = new ContainerView();
+    this.optionsView = new OptionsView();
   },
 
   render: function () {
-    this.$el.html(this.template.render('pages/archive/index.html'));
+    this.contents.url = Config.api.server + Config.api.contents +
+      `?sort=${this.state.get('sort')}&sort_dir=${this.state.get('sort_dir')}&limit=100`;
 
-    const navView = new NavView();
-    this.$('#nav').append(navView.render().el);
+    this.contents.fetch().then(() => {
+      this.$el.html(this.template.render('pages/archive/index.html'));
 
-    this.doRequest();
-    return this;
-  },
-
-  doRequest: function () {
-    const sections = [
-      {
-        name: 'Article',
-        type_label: 'article',
-        type_id: CONTENT_TYPE_ARTICLE,
-        total: 0
-      },
-      {
-        name: 'Image',
-        type_label: 'picture',
-        type_id: CONTENT_TYPE_PICTURE,
-        total: 0
-      },
-      {
-        name: 'Collection',
-        type_label: 'data',
-        type_id: CONTENT_TYPE_DATA,
-        total: 0
-      },
-      {
-        name: 'Vidéo',
-        type_label: 'video',
-        type_id: CONTENT_TYPE_VIDEO,
-        total: 0
-      },
-      {
-        name: 'Musique',
-        type_label: 'audio',
-        type_id: CONTENT_TYPE_AUDIO,
-        total: 0
-      },
-    ];
-
-    let fn = (section) => {
-      const content = new ContentCollection();
-      content.url = Config.api.server + Config.api.contents +
-        `?type=${section.type_id}&sort=${this.state.get('sort')}&sort_dir=${this.state.get('sort_dir')}`;
-
-      return new Promise(async (resolve) => {
-        await content.fetch();
-
-        const sectionView = new SectionView({ section: section, items: content });
-        const sectionId = '#' + section.type_label;
-        this.$(sectionId).empty();
-        this.$(sectionId).append(sectionView.render().el);
-
-        section.total = content.length;
-        resolve();
-      });
-    };
-
-    let actions = sections.map(fn);
-    let results = Promise.all(actions);
-
-    results.then(() => {
-      const optionsView = new OptionsView({ sections: sections, state: this.state });
-      this.$('#options').replaceWith(optionsView.render().el);
+      this.$('#nav').append(this.router.views.nav.render().el);
+      this.$('#container').append(this.containerView.render({ contents: this.contents }).el);
+      this.$('#options').append(this.optionsView.render({ state: this.state }).el);
     });
+
+    return this;
   },
 
   onClick: function (e) {
     e.preventDefault();
     this.router.navigate(e.currentTarget.attributes.href.nodeValue, { trigger: true });
-  },
-
-  onSectionClick: function (e) {
-    e.preventDefault();
-    const anchor_name = e.currentTarget.getAttribute('data-anchor');
-    const anchor = document.getElementById(anchor_name);
-    window.scrollTo({ top: anchor.offsetTop, behavior: 'smooth' });
   },
 });

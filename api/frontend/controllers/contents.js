@@ -9,7 +9,7 @@ async function fetchAll (ctx) {
   const schema = Joi.object({
     type: Joi.number().integer(),
     offset: Joi.number().integer(),
-    limit: Joi.number().integer().max(20),
+    limit: Joi.number().integer().max(100),
     sort: Joi.string().allow('date', 'title'),
     sort_dir: Joi.string().allow('asc', 'desc').uppercase()
   });
@@ -17,7 +17,7 @@ async function fetchAll (ctx) {
   const { error, value } = schema.validate({
     type: null ?? ctx.query.type,
     offset: ctx.query.offset ?? 0,
-    limit: ctx.query.limit ?? 10,
+    limit: ctx.query.limit ?? 100,
     sort: ctx.query.sort ?? 'date',
     sort_dir: ctx.query.sort_dir ?? 'desc',
   });
@@ -81,8 +81,27 @@ async function fetchRelations (ctx) {
   });
 }
 
+// @todo: SQL query
+async function fetchTypes (ctx) {
+  const res = [
+    { type: 'article', title: 'Article', count: 23 },
+    { type: 'data', title: 'Collection', count: 2 },
+    { type: 'picture', title: 'Image', count: 6 },
+    { type: 'audio', title: 'Musique', count: 4 },
+    { type: 'static', title: 'Statique', count: 2 },
+    { type: 'video', title: 'Vidéo', count: 3 },
+  ];
+
+  ctx.ok({
+    status: RES_STATUS_OK,
+    message: RES_MESSAGE_SUCCESS,
+    data: res
+  });
+}
+
 module.exports = {
   fetchAll,
   fetch,
-  fetchRelations
+  fetchRelations,
+  fetchTypes,
 };

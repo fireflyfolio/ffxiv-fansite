@@ -2,7 +2,6 @@ import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
 
 import Router from '../../../router';
-import NavView from '../../commons/nav';
 import WelcomeView from './welcome';
 import LatestView from './latest';
 
@@ -15,19 +14,17 @@ export default Backbone.View.extend({
 
   initialize: function () {
     this.router = Router.prototype.getInstance();
+
+    this.welcomeView = new WelcomeView();
+    this.latestView = new LatestView();
   },
 
   render: function () {
     this.$el.html(this.template.render('pages/home/index.html'));
 
-    const navView = new NavView();
-    this.$('#nav').append(navView.render().el);
-
-    const welcomeView = new WelcomeView();
-    this.$('#welcome').append(welcomeView.render().el);
-
-    const latestView = new LatestView();
-    this.$('#latest').append(latestView.render().el);
+    this.$('#nav').append(this.router.views.nav.render().el);
+    this.$('#welcome').append(this.welcomeView.render().el);
+    this.$('#latest').append(this.latestView.render().el);
 
     return this;
   },

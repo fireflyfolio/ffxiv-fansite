@@ -16,17 +16,20 @@ export default Backbone.View.extend({
     'click #content-metadata .add': 'onAddClick',
     'click #content-metadata .move-up': 'onMoveUpClick',
     'click #content-metadata .move-down': 'onMoveDownClick',
+    'click #content-metadata .submit': 'onSubmitClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
 
     this.listenTo(this.router.dispatcher, 'content:metadata:delete', () => this.render());
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#tab-element-2');
+
+    this.content = options ? options.content || this.content : this.content;
+
     this.$el.html(this.template.render('admin/element/metadata.html', { content: this.content }));
 
     return this;
@@ -57,11 +60,7 @@ export default Backbone.View.extend({
     items.metadata = items.metadata ?? [];
     items.metadata.push(meta);
     this.content.set({ items: items });
-
-    handleSaveModel(this.content, () => {
-      Toastr.success('La métadata a été ajoutée avec succès.');
-      this.render();
-    });
+    this.render();
   },
 
   onMoveUpClick: function (e) {
@@ -73,10 +72,7 @@ export default Backbone.View.extend({
     const meta = items.metadata.splice(index, 1)[0];
     items.metadata.splice(index - 1, 0, meta);
 
-    handleSaveModel(this.content, () => {
-      Toastr.success('La métadata a été mise à jour avec succès.');
-      this.render();
-    });
+    this.render();
   },
 
   onMoveDownClick: function (e) {
@@ -88,6 +84,11 @@ export default Backbone.View.extend({
     const meta = items.metadata.splice(index, 1)[0];
     items.metadata.splice(index + 1, 0, meta);
 
+    this.render();
+  },
+
+  onSubmitClick: function (e) {
+    e.preventDefault();
     handleSaveModel(this.content, () => {
       Toastr.success('La métadata a été mise à jour avec succès.');
       this.render();
@@ -104,7 +105,6 @@ export default Backbone.View.extend({
     if (element.type === 'select') value = element.options[element.selectedIndex].value;
 
     meta[element.name] = value;
-    handleSaveModel(this.content, () => Toastr.success('La métadata a été mise à jour avec succès.'));
   },
 
   _findIndex: function (e) {

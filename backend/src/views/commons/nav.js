@@ -9,8 +9,6 @@ import { handleFetch } from '../../utils/auth';
 export default Backbone.View.extend({
   template: Nunjucks,
 
-  el: '#nav',
-
   events: {
     'click a.nav': 'onNavClick',
     'click a.admin': 'onAdminClick',
@@ -22,7 +20,12 @@ export default Backbone.View.extend({
   },
 
   render: function () {
+    this.setElement('#nav');
+
+    this.undelegateEvents();
     this.$el.html(this.template.render('commons/nav.html'));
+    this.delegateEvents();
+
     return this;
   },
 

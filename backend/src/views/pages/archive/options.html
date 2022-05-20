@@ -17,11 +17,11 @@
   </fieldset>
 
   <fieldset>
-    <legend>Section</legend>
+    <legend>Filtre</legend>
     <ul>
-      {% for section in sections %}
-      <li><a class="as" data-anchor="archive-{{ section.type_label }}">
-          {{ section.name }} ({{ section.total }})</a>
+      {% for type in contentTypes %}
+      <li><a class="as" data-type="{{type.attributes.type}}">{{ type.attributes.title }} ({{ type.attributes.count
+          }})</a>
       </li>
       {% endfor %}
     </ul>

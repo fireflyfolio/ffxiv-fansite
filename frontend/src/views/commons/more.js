@@ -9,16 +9,19 @@ export default Backbone.View.extend({
   template: Nunjucks,
 
   events: {
-    'click a.more': 'onClick',
+    'click a.relation': 'onClick',
   },
 
-  initialize: function (options) {
+  initialize: function () {
     this.router = Router.prototype.getInstance();
-    this.id = options.id;
     this.contents = new RelationCollection();
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#more');
+
+    this.id = options ? options.id || this.id : this.id;
+
     this.contents.url = Config.api.server + Config.api.contents + `/${this.id}/relations`;
     this.contents.fetch().then(() => this.$el.html(this.template.render('commons/more.html', { items: this.contents })));
 

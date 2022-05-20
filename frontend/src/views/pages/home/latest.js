@@ -7,18 +7,19 @@ import ContentCollection from '../../../models/content_';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#latest',
 
   events: {
     'click a.archive': 'onArchiveClick',
   },
 
-  initialize: function (options) {
+  initialize: function () {
     this.router = Router.prototype.getInstance();
     this.contents = new ContentCollection();
   },
 
   render: function () {
+    this.setElement('#latest');
+
     this.contents.url = Config.api.server + Config.api.contents;
     this.contents.fetch().then(() => this.$el.html(this.template.render('pages/home/latest.html', { items: this.contents })));
 

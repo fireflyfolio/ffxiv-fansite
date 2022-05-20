@@ -15,15 +15,17 @@ export default Backbone.View.extend({
     'click #content-file .upload': 'onUploadClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
 
     this.listenTo(this.router.dispatcher, 'content:file:delete', (id) => this._deleteFileLocally(id));
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#tab-element-3');
+
+    this.content = options ? options.content || this.content : this.content;
+
     this.$el.html(this.template.render('admin/element/file.html', { server: Config.api.server, content: this.content }));
 
     return this;

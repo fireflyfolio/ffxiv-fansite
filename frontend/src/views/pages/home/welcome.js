@@ -7,14 +7,15 @@ import ContentModel from '../../../models/content';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#welcome',
 
-  initialize: function (options) {
+  initialize: function () {
     this.router = Router.prototype.getInstance();
     this.content = new ContentModel();
   },
 
   render: function () {
+    this.setElement('#welcome');
+
     this.content.url = Config.api.server + Config.api.contents + Config.static.home.welcome;
     this.content.fetch().then(() => this.$el.html(this.template.render('pages/home/welcome.html', { item: this.content })));
 

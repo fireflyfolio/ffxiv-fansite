@@ -18,15 +18,17 @@ export default Backbone.View.extend({
     'click #content-element .move-bottom': 'onMoveBottomClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
 
     this.listenTo(this.router.dispatcher, 'content:element:update', () => this.render());
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#tab-element-1');
+
+    this.content = options ? options.content || this.content : this.content;
+
     this.$el.html(this.template.render('admin/element/element.html', { content: this.content }));
 
     return this;
@@ -54,7 +56,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été ajouté avec succès.");
-      this.router.dispatcher.trigger('content:element:update', items);
+      this.router.dispatcher.trigger('content:element:update');
       this.render();
     });
   },
@@ -70,7 +72,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update', items);
+      this.router.dispatcher.trigger('content:element:update');
       this.render();
     });
   },
@@ -86,7 +88,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update', items);
+      this.router.dispatcher.trigger('content:element:update');
       this.render();
     });
   },
@@ -102,7 +104,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update', items);
+      this.router.dispatcher.trigger('content:element:update');
       this.render();
     });
   },
@@ -118,7 +120,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update', items);
+      this.router.dispatcher.trigger('content:element:update');
       this.render();
     });
   },

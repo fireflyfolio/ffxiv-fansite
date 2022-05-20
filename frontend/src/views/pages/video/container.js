@@ -7,18 +7,21 @@ import Config from '../../../config';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#container',
 
   lazyLoadInstance: new LazyLoad(),
 
-  initialize: function (options) {
-    this.items = options.items;
+  initialize: function () {
   },
 
-  render: function () {
-    this.$el.html(this.template.render('pages/video/container.html', { server: Config.api.server, items: this.items }));
+  render: function (options) {
+    this.setElement('#container');
+
+    this.content = options ? options.content || this.content : this.content;
+
+    this.$el.html(this.template.render('pages/video/container.html', { server: Config.api.server, items: this.content.get('items') }));
     this.lazyLoadInstance.update();
     Mediabox('.mb');
+
     return this;
   },
 });

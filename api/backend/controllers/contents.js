@@ -24,7 +24,7 @@ async function fetchAll (ctx) {
   const { error, value } = schema.validate({
     type: null ?? ctx.query.type,
     offset: ctx.query.offset ?? 0,
-    limit: ctx.query.limit ?? 20,
+    limit: ctx.query.limit ?? 100,
     sort: ctx.query.sort ?? 'date',
     sort_dir: ctx.query.sort_dir ?? 'desc',
   });
@@ -154,6 +154,24 @@ async function remove (ctx) {
   const res2 = await service.remove(value);
 
   ctx.status = 204;
+}
+
+// @todo: SQL query
+async function fetchTypes (ctx) {
+  const res = [
+    { type: 'article', title: 'Article', count: 23 },
+    { type: 'data', title: 'Collection', count: 2 },
+    { type: 'picture', title: 'Image', count: 6 },
+    { type: 'audio', title: 'Musique', count: 4 },
+    { type: 'static', title: 'Statique', count: 2 },
+    { type: 'video', title: 'Vidéo', count: 3 },
+  ];
+
+  ctx.ok({
+    status: RES_STATUS_OK,
+    message: RES_MESSAGE_SUCCESS,
+    data: res
+  });
 }
 
 /* Files methods */
@@ -583,7 +601,7 @@ function _cleanFilename (filename) {
 }
 
 module.exports = {
-  fetchAll, fetch, create, update, remove,
+  fetchAll, fetch, create, update, remove, fetchTypes,
   createFiles, removeFiles,
   fetchRelations, createRelations, updateRelations, removeRelations,
   fetchTags, createTags, updateTags, removeTags,

@@ -8,24 +8,24 @@ import { handleSaveModel, handleFetch } from '../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#modal-delete',
 
   events: {
     'click button.delete-submit': 'onDeleteSubmit',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-    this.relations = options.relations;
-    this.tags = options.tags;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
   },
 
   render: function (options) {
-    this.id = options.id;
-    this.type = options.type;
-    this.title = options.title;
+    this.setElement('#modal-delete');
+
+    this.content = options ? options.content || this.content : this.content;
+    this.relations = options ? options.relations || this.relations : this.relations;
+    this.tags = options ? options.tags || this.tags : this.tags;
+    this.id = options ? options.id || this.id : this.id;
+    this.type = options ? options.type || this.type : this.type;
+    this.title = options ? options.title || this.title : this.title;
 
     this.$el.html(this.template.render('admin/modal.html', { id: this.id, type: this.type, title: this.title }));
 
@@ -52,7 +52,7 @@ export default Backbone.View.extend({
         this.content.set({ items: items });
         handleSaveModel(this.content, () => {
           Toastr.success("L'élément a été supprimé avec succès.");
-          this.router.dispatcher.trigger('content:element:update', items);
+          this.router.dispatcher.trigger('content:element:update');
         });
         break;
 

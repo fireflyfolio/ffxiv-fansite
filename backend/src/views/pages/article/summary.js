@@ -5,22 +5,23 @@ import Router from '../../../router';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#summary',
 
   events: {
     'click a.summary': 'onSummaryClick',
     'click a.anchor': 'onAnchorClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
 
     this.listenTo(this.router.dispatcher, 'content:editor:update', () => this.render());
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#summary');
+
+    this.content = options ? options.content || this.content : this.content;
+
     const body = this.content.get('body');
 
     this.summaries = (body && body.blocks) ?? [];

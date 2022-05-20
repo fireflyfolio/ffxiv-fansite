@@ -14,13 +14,15 @@ export default Backbone.View.extend({
     'click #content-extra .submit': 'onSubmitClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-
+  initialize: function () {
     this.router = Router.prototype.getInstance();
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#tab-content-2');
+
+    this.content = options ? options.content || this.content : this.content;
+
     this.$el.html(this.template.render('admin/content/extra.html', { content: this.content, format: format }));
 
     return this;
@@ -36,7 +38,7 @@ export default Backbone.View.extend({
     e.preventDefault();
     const cb = () => {
       Toastr.success('Le contenu a été mis à jour avec succès.');
-      this.router.dispatcher.trigger('content:element:update', this.content.get('items'));
+      this.router.dispatcher.trigger('content:element:update');
     };
     handleSaveModel(this.content, cb);
   },

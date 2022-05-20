@@ -9,8 +9,6 @@ import Delimiter from '@editorjs/delimiter';
 import Config from '../../../config';
 import Router from '../../../router';
 import ContentModel from '../../../models/content';
-import NavView from '../../commons/nav';
-import MoreView from '../../commons/more';
 import SummaryView from './summary';
 
 export default Backbone.View.extend({
@@ -19,14 +17,16 @@ export default Backbone.View.extend({
   initialize: function () {
     this.router = Router.prototype.getInstance();
     this.content = new ContentModel();
+    this.summaryView = new SummaryView();
   },
 
   render: function (options) {
-    this.id = options.id;
+    this.id = options ? options.id || this.id : this.id;
 
     this.content.url = Config.api.server + Config.api.contents + '/' + this.id;
+
     this.content.fetch().then(() => {
-      const editor = new EditorJS({
+      this.editor = new EditorJS({
         placeholder: 'Hello world!',
         autofocus: true,
         readOnly: true,
@@ -60,14 +60,9 @@ export default Backbone.View.extend({
 
       this.$el.html(this.template.render('pages/article/index.html', { item: this.content }));
 
-      const navView = new NavView();
-      this.$('#nav').append(navView.render().el);
-
-      const moreView = new MoreView({ id: this.id });
-      this.$('#link').append(moreView.render().el);
-
-      const summaryView = new SummaryView({ body: this.content.get('body') });
-      this.$('#summary').append(summaryView.render().el);
+      this.$('#nav').append(this.router.views.nav.render().el);
+      this.$('#more').append(this.router.views.more.render({ id: this.id }).el);
+      this.$('#summary').append(this.summaryView.render({ body: this.content.get('body') }).el);
     });
 
     return this;

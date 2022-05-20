@@ -1,6 +1,9 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
 
+import Config from '../../../config';
+import ContentTypeCollection from '../../../models/content_type_';
+
 export default Backbone.View.extend({
   template: Nunjucks,
 
@@ -9,15 +12,19 @@ export default Backbone.View.extend({
     'change #sort_dir': 'onSortDirChange',
   },
 
-  initialize: function (options) {
-    this.sections = options.sections;
-    this.state = options.state;
+  initialize: function () {
+    this.contentTypes = new ContentTypeCollection();
   },
 
-  render: function () {
-    this.$el.html(this.template.render('pages/archive/options.html', {
-      sections: this.sections,
-    }));
+  render: function (options) {
+    this.setElement('#options');
+
+    this.state = options ? options.state || this.state : this.state;
+    this.contentTypes.url = Config.api.server + Config.api.contents + '/types';
+
+    this.contentTypes.fetch().then(() => {
+      this.$el.html(this.template.render('pages/archive/options.html', { contentTypes: this.contentTypes }));
+    });
 
     return this;
   },

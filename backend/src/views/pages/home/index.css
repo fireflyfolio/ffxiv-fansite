@@ -1,9 +1,9 @@
-#welcome {
+#home #welcome {
   max-width: 100%;
   padding: 0 20px;
 }
 
-#latest {
+#home #latest {
   max-width: 100%;
   padding: 20px;
   color: #000;
@@ -11,11 +11,11 @@
   border: solid 1px #ccc;
 }
 
-#latest a {
+#home #latest a {
   color: #000;
 }
 
-#latest li {
+#home #latest li {
   border-bottom: solid 1px #ccc;
   padding: 1em 0;
 }

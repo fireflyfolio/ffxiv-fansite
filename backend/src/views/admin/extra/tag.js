@@ -14,9 +14,7 @@ export default Backbone.View.extend({
     'click #content-tag .submit': 'onSubmitClick',
   },
 
-  initialize: function (options) {
-    this.content = options.content;
-    this.tags = options.tags;
+  initialize: function () {
     this.editId = null;
     this.editMode = false;
 
@@ -25,7 +23,12 @@ export default Backbone.View.extend({
     this.listenTo(this.router.dispatcher, 'content:tag:update', () => this.render());
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#tab-extra-2');
+
+    this.content = options ? options.content || this.content : this.content;
+    this.tags = options ? options.tags || this.tags : this.tags;
+
     this.tags.url = Config.api.server + Config.api.backend.contents_tags.replace('{id}', this.content.get('id'));
 
     const cb = () => this.$el.html(this.template.render('admin/extra/tag.html', { tags: this.tags, editMode: this.editMode }));

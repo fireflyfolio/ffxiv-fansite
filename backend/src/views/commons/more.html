@@ -1,7 +1,8 @@
 <h3>Voir aussi</h3>
 <ul>
   {% for relation in relations %}
-  <li><a class="more" href="/{{ relation.attributes.type }}/{{ relation.attributes.id }}">{{ relation.attributes.title
+  <li><a class="relation" href="/{{ relation.attributes.type }}/{{ relation.attributes.id }}">{{
+      relation.attributes.title
       }}</a></li>
   {% endfor %}
 </ul>

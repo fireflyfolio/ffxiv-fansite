@@ -1,0 +1,22 @@
+<div class="block">
+  <a id="archive-{{ section.type_label }}"></a>
+  <h2>{{ contents.length }} contenus</h2>
+  <ul>
+    {% for content in contents %}
+    <li>
+      <a class="ba" href="/{{ content.attributes.type }}/{{ content.attributes.id }}">
+        {{ dateOnly(content.attributes.update_date) }} -
+        {{ content.attributes.type }} :
+        {{ content.attributes.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <ul class="pagination">
+    <li><a class="ba" href="#">&lt;</a></li>
+    {% for i in [1,2,3] %}
+    <li><a class="ba" href="#">{{ i }}</a></li>
+    {% endfor %}
+    <li><a class="ba" href="#">&gt;</a></li>
+  </ul>
+</div>

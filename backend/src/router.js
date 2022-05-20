@@ -2,6 +2,14 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
 
+import {
+  CONTENT_TYPE_ARTICLE,
+  CONTENT_TYPE_DATA,
+  CONTENT_TYPE_PICTURE,
+  CONTENT_TYPE_AUDIO,
+  CONTENT_TYPE_VIDEO
+} from './config/constants';
+
 import SessionModel from './models/session';
 
 import HomePage from './views/pages/home';
@@ -12,7 +20,10 @@ import AudioPage from './views/pages/audio';
 import DataPage from './views/pages/data';
 import PicturePage from './views/pages/picture';
 import VideoPage from './views/pages/video';
-import { CONTENT_TYPE_ARTICLE, CONTENT_TYPE_DATA, CONTENT_TYPE_PICTURE, CONTENT_TYPE_AUDIO, CONTENT_TYPE_VIDEO } from './config/constants';
+
+import NavView from './views/commons/nav';
+import MoreView from './views/commons/more';
+import AdminView from './views/admin/index';
 
 export default Backbone.Router.extend({
   routes: {
@@ -35,11 +46,15 @@ export default Backbone.Router.extend({
   },
 
   initialize: function () {
+    this.views.nav = new NavView();
+    this.views.more = new MoreView();
+    this.views.admin = new AdminView();
+
     this.dispatcher.on('admin:show:toggle');
     this.dispatcher.on('content:update', (content) => content);
     this.dispatcher.on('content:element:edit', (id) => id);
     this.dispatcher.on('content:element:edit:cancel');
-    this.dispatcher.on('content:element:update', (items) => items);
+    this.dispatcher.on('content:element:update');
     this.dispatcher.on('content:metadata:delete');
     this.dispatcher.on('content:relation:update');
     this.dispatcher.on('content:tag:update');

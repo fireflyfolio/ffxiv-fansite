@@ -10,10 +10,7 @@ import Toastr from 'toastr';
 import Config from '../../../config';
 import Router from '../../../router';
 import ContentModel from '../../../models/content';
-import NavView from '../../commons/nav';
-import MoreView from '../../commons/more';
 import SummaryView from './summary';
-import AdminView from '../../admin';
 import { handleFetchModel } from '../../../utils/auth';
 
 export default Backbone.View.extend({
@@ -22,14 +19,14 @@ export default Backbone.View.extend({
   events: {
     'click #article .submit': 'onSubmitClick',
   },
-
   initialize: function () {
     this.router = Router.prototype.getInstance();
     this.content = new ContentModel();
+    this.summaryView = new SummaryView();
   },
 
   render: function (options) {
-    this.id = options.id;
+    this.id = options ? options.id || this.id : this.id;
 
     this.content.url = Config.api.server + Config.api.backend.contents + '/' + this.id;
 
@@ -65,19 +62,12 @@ export default Backbone.View.extend({
         data: this.content.get('body'),
       });
 
-      this.$el.html(this.template.render('pages/article/index.html', { item: this.content }));
+      this.$el.html(this.template.render('pages/article/index.html', { content: this.content }));
 
-      const navView = new NavView();
-      this.$('#nav').append(navView.render().el);
-
-      const moreView = new MoreView({ id: this.id });
-      this.$('#link').append(moreView.render().el);
-
-      const summaryView = new SummaryView({ content: this.content });
-      this.$('#summary').append(summaryView.render().el);
-
-      const adminView = new AdminView({ id: this.id });
-      this.$('#admin').append(adminView.render().el);
+      this.$('#nav').append(this.router.views.nav.render().el);
+      this.$('#more').append(this.router.views.more.render({ id: this.id }).el);
+      this.$('#summary').append(this.summaryView.render({ content: this.content }).el);
+      this.$('#admin').append(this.router.views.admin.render({ id: this.id }).el);
     };
 
     handleFetchModel(this.content, cb);

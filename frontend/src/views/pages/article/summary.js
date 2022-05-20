@@ -3,19 +3,21 @@ import Nunjucks from 'nunjucks';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#summary',
 
   events: {
     'click a.summary': 'onSummaryClick',
     'click a.anchor': 'onAnchorClick',
   },
 
-  initialize: function (options) {
-    this.summaries = (options.body && options.body.blocks) ?? [];
-    this.summaries = this.summaries.filter(block => block.type === 'header');
+  initialize: function () {
   },
 
-  render: function () {
+  render: function (options) {
+    this.setElement('#summary');
+
+    this.summaries = (options.body && options.body.blocks) ?? [];
+    this.summaries = this.summaries.filter(block => block.type === 'header');
+
     this.$el.html(this.template.render('pages/article/summary.html', { items: this.summaries }));
     return this;
   },

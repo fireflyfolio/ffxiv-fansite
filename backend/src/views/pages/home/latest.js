@@ -8,7 +8,6 @@ import { handleFetchModel } from '../../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
-  el: '#latest',
 
   events: {
     'click a.archive': 'onArchiveClick',
@@ -20,9 +19,11 @@ export default Backbone.View.extend({
   },
 
   render: function () {
+    this.setElement('#latest');
+
     this.contents.url = Config.api.server + Config.api.backend.contents + '?limit=10';
 
-    const cb = () => this.$el.html(this.template.render('pages/home/latest.html', { items: this.contents }));
+    const cb = () => this.$el.html(this.template.render('pages/home/latest.html', { contents: this.contents }));
     handleFetchModel(this.contents, cb);
 
     return this;

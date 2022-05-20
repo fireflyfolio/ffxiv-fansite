@@ -8,6 +8,9 @@ import DataPage from './views/pages/data/index';
 import PicturePage from './views/pages/picture/index';
 import VideoPage from './views/pages/video/index';
 
+import NavView from './views/commons/nav';
+import MoreView from './views/commons/more';
+
 export default Backbone.Router.extend({
   routes: {
     '': 'home',
@@ -23,6 +26,11 @@ export default Backbone.Router.extend({
 
   getInstance: function () {
     return this;
+  },
+
+  initialize: function () {
+    this.views.nav = new NavView();
+    this.views.more = new MoreView();
   },
 
   archive: function () {

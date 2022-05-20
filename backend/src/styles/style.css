@@ -23,37 +23,37 @@
 }
 
 /* more */
-#more {
+.more {
   max-width: 40%;
   padding: 2px;
   margin: 0 auto;
 }
 
-#more a {
+.more a {
   display: block;
   line-height: 1.5em;
 }
 
 @media (max-width: 1280px) {
-  #more {
+  .more {
     max-width: 50%;
   }
 }
 
 @media (max-width: 1024px) {
-  #more {
+  .more {
     max-width: 70%;
   }
 }
 
 @media (max-width: 768px) {
-  #more {
+  .more {
     max-width: 80%;
   }
 }
 
 @media (max-width: 568px) {
-  #more {
+  .more {
     max-width: 90%;
   }
 }
@@ -147,7 +147,6 @@
   float: right;
   color: red;
 }
-
 
 .delete {
   color: red;
