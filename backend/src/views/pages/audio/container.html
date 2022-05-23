@@ -6,7 +6,7 @@
         data-src="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}" /></a>
   </div>
   <div class="meta">
-    <div>Titre : {{ element.title }}</div>
+    <div><b>{{ element.title }}</b></div>
 
     {% for meta in element.typed_metadata %}
     <div>{{ meta.label }} : {{ meta.value }}</div>
