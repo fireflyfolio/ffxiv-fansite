@@ -41,6 +41,8 @@ export default Backbone.View.extend({
       .then((json) => {
         if (!json.data) return false;
 
+        this.undelegateEvents();
+
         this.router.session.set({
           signedIn: true,
           accessToken: json.data.accessToken,

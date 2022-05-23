@@ -13,6 +13,7 @@ export default Backbone.View.extend({
     'click a.nav': 'onNavClick',
     'click a.admin': 'onAdminClick',
     'click a.new': 'onNewClick',
+    'click a.quit': 'onQuitClick',
   },
 
   initialize: function () {
@@ -54,5 +55,9 @@ export default Backbone.View.extend({
     };
 
     handleFetch(options);
+  },
+
+  onQuitClick: function (e) {
+    window.location.href = '/';
   },
 });
