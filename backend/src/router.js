@@ -30,6 +30,7 @@ export default Backbone.Router.extend({
     '': 'home',
     'signin': 'signin',
     'archive': 'archive',
+    'static/:id': 'article',
     'article/:id': 'article',
     'audio/:id': 'audio',
     'data/:id': 'data',

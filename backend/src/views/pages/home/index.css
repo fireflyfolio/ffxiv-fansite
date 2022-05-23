@@ -1,4 +1,9 @@
-#home #welcome {
+#home #spotlight {
+  max-width: 100%;
+  padding: 20px;
+}
+
+#home #editorial {
   max-width: 100%;
   padding: 0 20px;
 }
@@ -6,16 +11,16 @@
 #home #latest {
   max-width: 100%;
   padding: 20px;
-  color: #000;
-  background-color: #eee;
-  border: solid 1px #ccc;
 }
 
-#home #latest a {
-  color: #000;
+#home .highlighting {
+  max-width: 100%;
+  padding: 20px;
 }
 
-#home #latest li {
-  border-bottom: solid 1px #ccc;
-  padding: 1em 0;
+#home #editorial #editorjs {
+  padding: 20px 0 0 0;
+  margin: 20px 0 0 0;
+  background: #444;
+  color: #fff;
 }

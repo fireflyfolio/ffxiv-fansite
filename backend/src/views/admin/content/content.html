@@ -2,11 +2,11 @@
   <fieldset>
     <label>Type</label>
     <select class="pure-input-1" name="type">
+      <option value="0" {{ "selected" if content.attributes.type==0 }}>Statique</option>
       <option value="1" {{ "selected" if content.attributes.type==1 }}>Article</option>
       <option value="2" {{ "selected" if content.attributes.type==2 }}>Collection</option>
       <option value="3" {{ "selected" if content.attributes.type==3 }}>Image</option>
       <option value="4" {{ "selected" if content.attributes.type==4 }}>Musique</option>
-      <option value="0" {{ "selected" if content.attributes.type==0 }}>Statique</option>
       <option value="5" {{ "selected" if content.attributes.type==5 }}>Vidéo</option>
     </select>
 

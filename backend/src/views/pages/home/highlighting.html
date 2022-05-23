@@ -1,12 +1,12 @@
-<div class="latest">
-  <h3>Derniers contenus</h3>
+{% if contents.length %}
+<div class="highlighting">
+  <h3>Mise en avant de contenus "{{ getTypeLabel(type) }}"</h3>
   <ul>
     {% for content in contents %}
     <li><a href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
         {{ dateOnly(content.attributes.update_date) }} -
-        {{ getTypeLabel(content.attributes.type) }} :
+        {{ getStatus(content.attributes.status) }} :
         {{ content.attributes.title }}
-        ({{ getStatus(content.attributes.status) }})
       </a></li>
     {% endfor %}
   </ul>
@@ -14,3 +14,4 @@
     <a class="archive" href="/archive">Voir plus</a>
   </div>
 </div>
+{% endif %}

@@ -5,7 +5,7 @@ export default {
   },
   static: {
     home: {
-      welcome: '/6',
+      editorial: '/6',
     }
   }
 };

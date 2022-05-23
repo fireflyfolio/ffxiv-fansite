@@ -4,17 +4,18 @@
   <ul>
     {% for content in contents %}
     <li>
-      <a class="ba" href="/{{ content.attributes.type }}/{{ content.attributes.id }}">
+      <a class="ba" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
         {{ dateOnly(content.attributes.update_date) }} -
-        {{ content.attributes.type }} :
+        {{ getTypeLabel(content.attributes.type) }} :
         {{ content.attributes.title }}
+        ({{ getStatus(content.attributes.status) }})
       </a>
     </li>
     {% endfor %}
   </ul>
   <ul class="pagination">
     <li><a class="ba" href="#">&lt;</a></li>
-    {% for i in [1,2,3] %}
+    {% for i in [1,2,3,4,5] %}
     <li><a class="ba" href="#">{{ i }}</a></li>
     {% endfor %}
     <li><a class="ba" href="#">&gt;</a></li>

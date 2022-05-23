@@ -19,17 +19,21 @@ async function fetchAll (params) {
 
   const order = `ORDER BY ${sort} ${params.sort_dir}`;
 
-  // Filter by type
+  // Filter by criteria
   let type = '';
+  if (params.type) type = `AND type = ${params.type}`;
 
-  if (params.type) {
-    type = `AND type = $1`;
-    values.push(params.type);
-  }
+  let focus = '';
+  if (params.is_focus)
+    focus = `AND is_focus = ${params.is_focus}`;
+
+  let pin = '';
+  if (params.is_pin)
+    focus = `AND is_pin = ${params.is_pin}`;
 
   // Define clauses
-  let sql = `SELECT id, title, type, update_date FROM public.contents
-    WHERE type <> 0 ${type} ${order} ${limit}`;
+  let sql = `SELECT id, title, status, type, update_date FROM public.contents
+    WHERE 1=1 ${type} ${focus} ${pin} ${order} ${limit}`;
 
   try {
     const result = await pool.query(sql, values);

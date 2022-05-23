@@ -6,12 +6,13 @@ import Router from '../../../router';
 import ContentCollection from '../../../models/content_';
 import { getStatus, getType, getTypeLabel } from '../../../utils/string';
 import { dateOnly } from '../../../utils/date';
+import { CONTENT_TYPE_ARTICLE } from '../../../config/constants';
 
 export default Backbone.View.extend({
   template: Nunjucks,
 
   events: {
-    'click .latest a.archive': 'onArchiveClick',
+    'click .highlighting a.archive': 'onArchiveClick',
   },
 
   initialize: function () {
@@ -19,17 +20,20 @@ export default Backbone.View.extend({
     this.contents = new ContentCollection();
   },
 
-  render: function () {
-    this.setElement('#latest');
+  render: function (options) {
+    this.type = options ? options.type || this.type : CONTENT_TYPE_ARTICLE;
 
-    this.contents.url = Config.api.server + Config.api.contents + '?limit=10';
+    this.setElement(`#highlighting-${this.type}`);
 
-    this.contents.fetch().then(() => this.$el.html(this.template.render('pages/home/latest.html', {
+    this.contents.url = Config.api.server + Config.api.contents + `?limit=10&type=${this.type}&is_pin=true`;
+
+    this.contents.fetch().then(() => this.$el.html(this.template.render('pages/home/highlighting.html', {
       contents: this.contents,
       dateOnly: dateOnly,
       getStatus: getStatus,
       getType: getType,
       getTypeLabel: getTypeLabel,
+      type: this.type,
     })));
 
     return this;
