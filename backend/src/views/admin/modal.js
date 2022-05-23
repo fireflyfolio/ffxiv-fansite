@@ -52,7 +52,7 @@ export default Backbone.View.extend({
         this.content.set({ items: items });
         handleSaveModel(this.content, () => {
           Toastr.success("L'élément a été supprimé avec succès.");
-          this.router.dispatcher.trigger('content:element:update');
+          this.router.dispatcher.trigger('content:element:update', this.content);
         });
         break;
 
@@ -72,7 +72,7 @@ export default Backbone.View.extend({
         this.content.set({ items: items });
         handleSaveModel(this.content, () => {
           Toastr.success('La métadonnée a été supprimée avec succès.');
-          this.router.dispatcher.trigger('content:metadata:delete');
+          this.router.dispatcher.trigger('content:metadata:delete', this.content);
         });
         break;
 
@@ -82,7 +82,7 @@ export default Backbone.View.extend({
           method: 'DELETE',
           callback: () => {
             Toastr.success('La relation a été supprimée avec succès.');
-            this.router.dispatcher.trigger('content:relation:update');
+            this.router.dispatcher.trigger('content:relation:update', { content: this.content, relations: this.relations });
           },
         });
         break;
@@ -93,7 +93,7 @@ export default Backbone.View.extend({
           method: 'DELETE',
           callback: () => {
             Toastr.success('Le tag a été supprimé avec succès.');
-            this.router.dispatcher.trigger('content:tag:update');
+            this.router.dispatcher.trigger('content:tag:update', { content: this.content, tags: this.tags });
           },
         });
         break;

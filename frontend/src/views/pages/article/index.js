@@ -61,7 +61,7 @@ export default Backbone.View.extend({
       this.$el.html(this.template.render('pages/article/index.html', { item: this.content }));
 
       this.$('#nav').append(this.router.views.nav.render().el);
-      this.$('#more').append(this.router.views.more.render({ id: this.id }).el);
+      this.$('#more').append(this.router.views.more.render({ content: this.content }).el);
       this.$('#summary').append(this.summaryView.render({ body: this.content.get('body') }).el);
     });
 

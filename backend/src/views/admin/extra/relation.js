@@ -5,6 +5,7 @@ import Toastr from 'toastr';
 import Config from '../../../config';
 import Router from '../../../router';
 import { handleFetch, handleFetchModel } from '../../../utils/auth';
+import { getType } from '../../../utils/string';
 
 export default Backbone.View.extend({
   template: Nunjucks,
@@ -20,7 +21,7 @@ export default Backbone.View.extend({
   initialize: function () {
     this.router = Router.prototype.getInstance();
 
-    this.listenTo(this.router.dispatcher, 'content:relation:update', () => this.render());
+    this.listenTo(this.router.dispatcher, 'content:relation:update', (options) => this.render(options));
   },
 
   render: function (options) {
@@ -33,7 +34,10 @@ export default Backbone.View.extend({
 
     const cb = () => {
       this.relations.sort();
-      this.$el.html(this.template.render('admin/extra/relation.html', { relations: this.relations }));
+      this.$el.html(this.template.render('admin/extra/relation.html', {
+        relations: this.relations,
+        getType: getType,
+      }));
     };
 
     handleFetchModel(this.relations, cb);
@@ -98,7 +102,7 @@ export default Backbone.View.extend({
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify(body),
-      callback: () => this.router.dispatcher.trigger('content:relation:update'),
+      callback: () => this.router.dispatcher.trigger('content:relation:update', { content: this.content, relations: this.relations }),
     });
   },
 
@@ -115,7 +119,7 @@ export default Backbone.View.extend({
       body: JSON.stringify(body),
       callback: () => {
         Toastr.success('La relation a été mise à jour avec succès.');
-        this.router.dispatcher.trigger('content:relation:update');
+        this.router.dispatcher.trigger('content:relation:update', { content: this.content, relations: this.relations });
       },
     });
   },

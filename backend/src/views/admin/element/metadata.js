@@ -22,7 +22,7 @@ export default Backbone.View.extend({
   initialize: function () {
     this.router = Router.prototype.getInstance();
 
-    this.listenTo(this.router.dispatcher, 'content:metadata:delete', () => this.render());
+    this.listenTo(this.router.dispatcher, 'content:metadata:delete', (content) => this.render({ content: content }));
   },
 
   render: function (options) {

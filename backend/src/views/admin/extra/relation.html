@@ -7,7 +7,8 @@
           <tr>
             <td>#{{ relation.attributes.id }}</td>
             <td class="w-70">
-              <a class="more" href="/{{ relation.attributes.type }}/{{ relation.attributes.id }}" title="Voir">{{
+              <a class="more" href="/{{ getType(relation.attributes.type) }}/{{ relation.attributes.id }}"
+                title="Voir">{{
                 relation.attributes.title }}</a>
             </td>
             <td>

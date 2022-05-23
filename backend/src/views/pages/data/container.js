@@ -13,7 +13,7 @@ export default Backbone.View.extend({
   initialize: function () {
     this.router = Router.prototype.getInstance();
 
-    this.listenTo(this.router.dispatcher, 'content:element:update', () => this.render());
+    this.listenTo(this.router.dispatcher, 'content:element:update', (content) => this.render({ content: content }));
   },
 
   render: function (options) {

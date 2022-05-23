@@ -4,6 +4,7 @@ import Nunjucks from 'nunjucks';
 import Config from '../../config';
 import Router from '../../router';
 import RelationCollection from '../../models/content_relation_';
+import { getType } from '../../utils/string';
 
 export default Backbone.View.extend({
   template: Nunjucks,
@@ -14,16 +15,20 @@ export default Backbone.View.extend({
 
   initialize: function () {
     this.router = Router.prototype.getInstance();
-    this.contents = new RelationCollection();
+    this.relations = new RelationCollection();
   },
 
   render: function (options) {
     this.setElement('#more');
 
-    this.id = options ? options.id || this.id : this.id;
+    this.content = options ? options.content || this.content : this.content;
+    this.id = this.content.get('id');
 
-    this.contents.url = Config.api.server + Config.api.contents + `/${this.id}/relations`;
-    this.contents.fetch().then(() => this.$el.html(this.template.render('commons/more.html', { items: this.contents })));
+    this.relations.url = Config.api.server + Config.api.contents + `/${this.id}/relations`;
+    this.relations.fetch().then(() => this.$el.html(this.template.render('commons/more.html', {
+      relations: this.relations,
+      getType: getType,
+    })));
 
     return this;
   },

@@ -68,7 +68,7 @@ export default Backbone.View.extend({
     const cb = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update');
+      this.router.dispatcher.trigger('content:element:update', this.content);
       this.router.dispatcher.trigger('content:element:edit:cancel');
     };
     handleSaveModel(this.content, cb);

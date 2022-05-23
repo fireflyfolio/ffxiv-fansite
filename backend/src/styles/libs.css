@@ -7,3 +7,7 @@
 .cdx-block {
   font-family: 'Verdana', sans-serif !important;
 }
+
+.codex-editor__redactor {
+  padding: 30px 0 150px 0 !important;
+}

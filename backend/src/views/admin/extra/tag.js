@@ -20,7 +20,7 @@ export default Backbone.View.extend({
 
     this.router = Router.prototype.getInstance();
 
-    this.listenTo(this.router.dispatcher, 'content:tag:update', () => this.render());
+    this.listenTo(this.router.dispatcher, 'content:tag:update', (options) => this.render(options));
   },
 
   render: function (options) {
@@ -68,7 +68,7 @@ export default Backbone.View.extend({
         this.editId = null;
         this.editMode = false;
         document.getElementById('tag-label').value = '';
-        this.router.dispatcher.trigger('content:tag:update');
+        this.router.dispatcher.trigger('content:tag:update', { content: this.content, tags: this.tags });
       },
     });
   },

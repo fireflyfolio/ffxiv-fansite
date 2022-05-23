@@ -21,7 +21,7 @@ export default Backbone.View.extend({
   initialize: function () {
     this.router = Router.prototype.getInstance();
 
-    this.listenTo(this.router.dispatcher, 'content:element:update', () => this.render());
+    this.listenTo(this.router.dispatcher, 'content:element:update', (content) => this.render({ content: content }));
   },
 
   render: function (options) {
@@ -56,7 +56,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été ajouté avec succès.");
-      this.router.dispatcher.trigger('content:element:update');
+      this.router.dispatcher.trigger('content:element:update', this.content);
       this.render();
     });
   },
@@ -72,7 +72,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update');
+      this.router.dispatcher.trigger('content:element:update', this.content);
       this.render();
     });
   },
@@ -88,7 +88,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update');
+      this.router.dispatcher.trigger('content:element:update', this.content);
       this.render();
     });
   },
@@ -104,7 +104,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update');
+      this.router.dispatcher.trigger('content:element:update', this.content);
       this.render();
     });
   },
@@ -120,7 +120,7 @@ export default Backbone.View.extend({
 
     handleSaveModel(this.content, () => {
       Toastr.success("L'élément a été mis à jour avec succès.");
-      this.router.dispatcher.trigger('content:element:update');
+      this.router.dispatcher.trigger('content:element:update', this.content);
       this.render();
     });
   },
