@@ -23,7 +23,7 @@ export default Backbone.View.extend({
   render: function () {
     this.setElement('#latest');
 
-    this.contents.url = Config.api.server + Config.api.backend.contents + '?limit=10';
+    this.contents.url = Config.api.server + Config.api.backend.contents + '?limit=20';
 
     const cb = () => this.$el.html(this.template.render('pages/home/latest.html', {
       contents: this.contents,

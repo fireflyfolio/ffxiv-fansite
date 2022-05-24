@@ -35,9 +35,17 @@ async function fetchAll (params) {
   let sql = `SELECT id, title, status, type, update_date FROM public.contents
     WHERE 1=1 ${type} ${focus} ${pin} ${order} ${limit}`;
 
+  let sqlCount = `SELECT COUNT(*) AS total FROM public.contents
+    WHERE 1=1 ${type} ${focus} ${pin}`;
+
   try {
     const result = await pool.query(sql, values);
-    return result.rows;
+    const resultCount = await pool.query(sqlCount, values);
+
+    return {
+      ...resultCount.rows[0],
+      rows: result.rows,
+    };
   } catch (e) {
     console.error(e);
   } finally {

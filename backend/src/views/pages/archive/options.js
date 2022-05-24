@@ -2,6 +2,7 @@ import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
 
 import Config from '../../../config';
+import Router from '../../../router';
 import ContentTypeCollection from '../../../models/content_type_';
 import { handleFetchModel } from '../../../utils/auth';
 
@@ -14,13 +15,12 @@ export default Backbone.View.extend({
   },
 
   initialize: function () {
+    this.router = Router.prototype.getInstance();
     this.contentTypes = new ContentTypeCollection();
   },
 
   render: function (options) {
     this.setElement('#options');
-
-    this.state = options ? options.state || this.state : this.state;
 
     this.contentTypes.url = Config.api.server + Config.api.backend.contents + '/types';
 
@@ -34,10 +34,10 @@ export default Backbone.View.extend({
   },
 
   onSortChange: function (e) {
-    this.state.set({ sort: e.currentTarget.value });
+    this.router.state.set({ sort: e.currentTarget.value });
   },
 
   onSortDirChange: function (e) {
-    this.state.set({ sort_dir: e.currentTarget.value });
+    this.router.state.set({ sort_dir: e.currentTarget.value });
   }
 });

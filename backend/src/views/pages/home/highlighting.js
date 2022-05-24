@@ -26,7 +26,7 @@ export default Backbone.View.extend({
 
     this.setElement(`#highlighting-${this.type}`);
 
-    this.contents.url = Config.api.server + Config.api.backend.contents + `?limit=10&type=${this.type}&is_pin=true`;
+    this.contents.url = Config.api.server + Config.api.backend.contents + `?limit=20&type=${this.type}&is_pin=true`;
 
     const cb = () => this.$el.html(this.template.render('pages/home/highlighting.html', {
       contents: this.contents,

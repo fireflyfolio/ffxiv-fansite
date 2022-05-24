@@ -32,7 +32,8 @@ async function fetchAll (ctx) {
   ctx.ok({
     status: RES_STATUS_OK,
     message: RES_MESSAGE_SUCCESS,
-    data: res
+    total: res.total,
+    data: res.rows,
   });
 }
 

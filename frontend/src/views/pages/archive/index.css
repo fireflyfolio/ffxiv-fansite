@@ -1,39 +1,43 @@
-#container {
+#archive #container {
   max-width: 100%;
   padding: 0 20px;
 }
 
-#container .block {
+#archive #container .block {
   margin-bottom: 3em;
 }
 
-#container h2 {
+#archive #container h2 {
   border-bottom: solid 1px #ccc;
   padding-bottom: 0.5em;
   letter-spacing: 0.1em;
 }
 
-#container .pagination {
+#archive #container .pagination {
   text-align: center;
   margin: 2em 0 4em 0;
 }
 
-#container .pagination li {
+#archive #container .pagination li {
   display: inline-block;
 }
 
-#container .pagination li a {
+#archive #container .pagination li a {
   display: inline-block;
   padding: 0.3em 0.7em;
   border: solid 1px #ccc;
 }
 
-#options {
+#archive #container .pagination li a.active {
+  background: red;
+}
+
+#archive #options {
   max-width: 100%;
   padding: 20px;
   margin-bottom: 2em;
 }
 
-#options label {
+#archive #options label {
   letter-spacing: 0.1em;
 }

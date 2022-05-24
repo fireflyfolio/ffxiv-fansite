@@ -1,6 +1,6 @@
 <div class="block">
   <a id="archive-{{ section.type_label }}"></a>
-  <h2>{{ contents.length }} contenus</h2>
+  <h2>{{ contents.total }} contenus</h2>
   <ul>
     {% for content in contents %}
     <li>
@@ -14,10 +14,12 @@
     {% endfor %}
   </ul>
   <ul class="pagination">
-    <li><a class="ba" href="#">&lt;</a></li>
-    {% for i in [1,2,3,4,5] %}
-    <li><a class="ba" href="#">{{ i }}</a></li>
+    <li><a class="start">|&lt;</a></li>
+    <li><a class="previous">&lt;</a></li>
+    {% for p in pages %}
+    <li><a class="page {{ 'active' if p == page }}" data-page="{{ p }}">{{ p }}</a></li>
     {% endfor %}
-    <li><a class="ba" href="#">&gt;</a></li>
+    <li><a class="next">&gt;</a></li>
+    <li><a class="end">&gt;|</a></li>
   </ul>
 </div>

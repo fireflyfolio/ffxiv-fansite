@@ -11,6 +11,7 @@ import {
 } from './config/constants';
 
 import SessionModel from './models/session';
+import StateModel from './models/state';
 
 import HomePage from './views/pages/home';
 import SigninPage from './views/pages/signin';
@@ -40,6 +41,7 @@ export default Backbone.Router.extend({
 
   views: {},
   session: new SessionModel(),
+  state: new StateModel(),
   dispatcher: _.clone(Backbone.Events),
 
   getInstance: function () {
@@ -61,6 +63,7 @@ export default Backbone.Router.extend({
     this.dispatcher.on('content:tag:update', (options) => options);
     this.dispatcher.on('content:file:delete', (id) => id);
     this.dispatcher.on('content:editor:update', (body) => body);
+    this.dispatcher.on('archive:pagination', (page) => page);
 
     this.listenTo(this.dispatcher, 'content:update', (content) => {
       const id = content.get('id');

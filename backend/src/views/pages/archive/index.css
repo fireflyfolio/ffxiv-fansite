@@ -28,6 +28,10 @@
   border: solid 1px #ccc;
 }
 
+#archive #container .pagination li a.active {
+  background: red;
+}
+
 #archive #options {
   max-width: 100%;
   padding: 20px;

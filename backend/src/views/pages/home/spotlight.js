@@ -19,7 +19,7 @@ export default Backbone.View.extend({
   render: function (options) {
     this.setElement(`#spotlight`);
 
-    this.contents.url = Config.api.server + Config.api.backend.contents + '?limit=10&is_focus=true';
+    this.contents.url = Config.api.server + Config.api.backend.contents + '?limit=20&is_focus=true';
 
     const cb = () => this.$el.html(this.template.render('pages/home/spotlight.html', {
       contents: this.contents,

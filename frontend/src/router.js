@@ -1,4 +1,7 @@
 import Backbone from 'backbone';
+import _ from 'underscore';
+
+import StateModel from './models/state';
 
 import HomePage from './views/pages/home/index';
 import ArchivePage from './views/pages/archive/index';
@@ -23,6 +26,8 @@ export default Backbone.Router.extend({
   },
 
   views: {},
+  state: new StateModel(),
+  dispatcher: _.clone(Backbone.Events),
 
   getInstance: function () {
     return this;
@@ -31,6 +36,8 @@ export default Backbone.Router.extend({
   initialize: function () {
     this.views.nav = new NavView();
     this.views.more = new MoreView();
+
+    this.dispatcher.on('archive:pagination', (page) => page);
   },
 
   archive: function () {
