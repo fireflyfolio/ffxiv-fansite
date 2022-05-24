@@ -1,3 +1,4 @@
+{% if relations.length > 0 %}
 <h3>Voir aussi</h3>
 <ul>
   {% for relation in relations %}
@@ -6,3 +7,4 @@
       }}</a></li>
   {% endfor %}
 </ul>
+{% endif %}

@@ -6,7 +6,6 @@ import Router from '../../../router';
 import ContainerView from './container';
 import OptionsView from './options';
 import ContentCollection from '../../../models/content_';
-import { handleFetchModel } from '../../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
@@ -31,19 +30,17 @@ export default Backbone.View.extend({
     const limit = this.router.state.get('limit');
     const offset = (this.router.state.get('page') - 1) * limit;
 
-    this.contents.url = Config.api.server + Config.api.backend.contents +
+    this.contents.url = Config.api.server + Config.api.contents +
       `?sort=${this.router.state.get('sort')}&sort_dir=${this.router.state.get('sort_dir')}` +
       `&limit=${limit}&offset=${offset}`;
 
-    const cb = () => {
+    this.contents.fetch().then(() => {
       this.$el.html(this.template.render('pages/archive/index.html'));
 
       this.$('#nav').append(this.router.views.nav.render().el);
       this.$('#container').append(this.containerView.render({ contents: this.contents }).el);
       this.$('#options').append(this.optionsView.render().el);
-    };
-
-    handleFetchModel(this.contents, cb);
+    });
 
     return this;
   },

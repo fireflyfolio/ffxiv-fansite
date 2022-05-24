@@ -37,6 +37,7 @@ export default Backbone.View.extend({
 
   onAdminClick: function (e) {
     e.preventDefault();
+    this.router.state.set({ show_admin: !this.router.state.get('show_admin') });
     this.router.dispatcher.trigger('admin:show:toggle');
   },
 

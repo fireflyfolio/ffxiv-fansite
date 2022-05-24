@@ -5,9 +5,10 @@ export default Backbone.Model.extend({
     return {
       sort: 'date',
       sort_dir: 'desc',
-      limit: 10,
+      limit: 100,
       range: 10,
       page: 1,
+      show_admin: true,
     };
   }
 });

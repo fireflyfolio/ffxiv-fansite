@@ -63,7 +63,7 @@ export default Backbone.View.extend({
     this.content.url = Config.api.server + Config.api.backend.contents + '/' + this.id;
 
     const cb = () => {
-      this.$el.html(this.template.render('admin/index.html'));
+      this.$el.html(this.template.render('admin/index.html', { state: this.router.state }));
 
       this.$('#tab-content-1').append(this.contentView.render({ content: this.content }).el);
       this.$('#tab-content-2').append(this.contentExtraView.render({ content: this.content }).el);
@@ -80,6 +80,8 @@ export default Backbone.View.extend({
       this.$(`#tab-element-3`).hide();
       this.$(`#tab-extra-2`).hide();
       this.$(`#tab-extra-3`).hide();
+
+      this.toggleAdminPanel();
     };
 
     handleFetchModel(this.content, cb);
@@ -88,7 +90,14 @@ export default Backbone.View.extend({
   },
 
   toggleAdminPanel: function (e) {
-    this.$('#wrapper').toggle();
+    const show_admin = this.router.state.get('show_admin');
+
+    console.log(show_admin);
+
+    if (show_admin)
+      this.$('#wrapper').show();
+    else
+      this.$('#wrapper').hide();
   },
 
   onMenuClick: function (e) {

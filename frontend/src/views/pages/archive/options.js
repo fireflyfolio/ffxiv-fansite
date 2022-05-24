@@ -4,7 +4,6 @@ import Nunjucks from 'nunjucks';
 import Config from '../../../config';
 import Router from '../../../router';
 import ContentTypeCollection from '../../../models/content_type_';
-import { handleFetchModel } from '../../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
@@ -22,13 +21,11 @@ export default Backbone.View.extend({
   render: function (options) {
     this.setElement('#options');
 
-    this.contentTypes.url = Config.api.server + Config.api.backend.contents + '/types';
+    this.contentTypes.url = Config.api.server + Config.api.contents + '/types';
 
-    const cb = () => {
+    this.contentTypes.fetch().then(() => {
       this.$el.html(this.template.render('pages/archive/options.html', { contentTypes: this.contentTypes }));
-    };
-
-    handleFetchModel(this.contentTypes, cb);
+    });
 
     return this;
   },
