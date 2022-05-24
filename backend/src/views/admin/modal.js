@@ -68,8 +68,14 @@ export default Backbone.View.extend({
         break;
 
       case 'metadata':
+        items.elements = items.elements.map((element) => {
+          element.customized_metadata = element.customized_metadata.filter((meta) => meta.id !== this.id);
+          return element;
+        });
+
         items.metadata = items.metadata.filter((item) => item.id !== this.id);
         this.content.set({ items: items });
+
         handleSaveModel(this.content, () => {
           Toastr.success('La métadonnée a été supprimée avec succès.');
           this.router.dispatcher.trigger('content:metadata:delete', this.content);

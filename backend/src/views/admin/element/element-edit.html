@@ -43,11 +43,11 @@
       <option value="false">Inactif</option>
       <option value="true" {{ "selected" if meta.value }}>Actif</option>
     </select>
-    {% elif meta.type == "number" %} <input class="pure-input-1" type="number" placeholder="{{ meta.label }}"
+    {% elif meta.type == "number" %} <input class="pure-input-1" type="number" placeholder="{{ meta.key }}"
       name="{{ meta.key }}" value="{{ meta.value if meta.value else meta.default }}" data-type="{{ meta.type }}"
       data-meta-type="customized" data-id="{{ meta.id }}" />
     {% else %}
-    <input class="pure-input-1" type="text" placeholder="{{ meta.label }}" name="{{ meta.key }}"
+    <input class="pure-input-1" type="text" placeholder="{{ meta.key }}" name="{{ meta.key }}"
       value="{{ meta.value if meta.value else meta.default }}" data-type="{{ meta.type }}" data-meta-type="customized"
       data-id="{{ meta.id }}" />
     {% endif %}

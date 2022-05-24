@@ -12,6 +12,10 @@
   color: green;
 }
 
+.label {
+  color: #aaa;
+}
+
 /* buttons */
 .button-small {
   font-size: 85%;

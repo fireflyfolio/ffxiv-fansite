@@ -72,6 +72,18 @@ export default Backbone.View.extend({
     const meta = items.metadata.splice(index, 1)[0];
     items.metadata.splice(index - 1, 0, meta);
 
+    // Reorder meta in existing elements
+    if (items.elements) {
+      items.elements.map((element) => {
+        if (!element.customized_metadata) return element;
+
+        const custom = element.customized_metadata.splice(index, 1)[0];
+        element.customized_metadata.splice(index - 1, 0, custom);
+
+        return element;
+      });
+    }
+
     this.render();
   },
 
@@ -84,13 +96,62 @@ export default Backbone.View.extend({
     const meta = items.metadata.splice(index, 1)[0];
     items.metadata.splice(index + 1, 0, meta);
 
+    // Reorder meta in existing elements
+    if (items.elements) {
+      items.elements.map((element) => {
+        if (!element.customized_metadata) return element;
+
+        const custom = element.customized_metadata.splice(index, 1)[0];
+        element.customized_metadata.splice(index + 1, 0, custom);
+
+        return element;
+      });
+    }
+
     this.render();
   },
 
   onSubmitClick: function (e) {
     e.preventDefault();
+
+    // Check if key or label is empty
+    const nullKeys = this.content.get('items').metadata.filter((meta) => meta.key === '' || meta.label === '');
+    if (nullKeys.length > 0) return Toastr.error('Une metadata ne doit pas avoir de clé ou de libellé vide.');
+
+    let items = this.content.get('items') ?? {};
+    if (!items.metadata) return;
+
+    // Update or add metadata to existing elements
+    items.metadata.map((metaRef) => {
+      items.elements = items.elements.map((element) => {
+        let metaExists = false;
+
+        // Update existing metadata
+        element.customized_metadata = element.customized_metadata.map((meta) => {
+          if (meta.id === metaRef.id) {
+            meta.key = metaRef.key;
+            meta.label = metaRef.label;
+            meta.type = metaRef.type;
+            meta.default = metaRef.default;
+            meta.is_active = metaRef.is_active;
+            metaExists = true;
+          }
+
+          return meta;
+        });
+
+        // Add new metadata to element
+        if (!metaExists) element.customized_metadata.push(metaRef);
+
+        return element;
+      });
+    });
+
+    this.content.set({ items: items });
+
     handleSaveModel(this.content, () => {
       Toastr.success('La métadata a été mise à jour avec succès.');
+      this.router.dispatcher.trigger('content:element:update', this.content);
       this.render();
     });
   },

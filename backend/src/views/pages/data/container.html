@@ -10,7 +10,7 @@
 
     {% for meta in element.customized_metadata %}
     {% if isMetaRefActive(items.metadata, meta) %}
-    <div>{{ meta.label }} : {{ meta.value }}</div>
+    <div><span class="label">{{ meta.label }}</span> {{ meta.value }}</div>
     {% endif %}
     {% endfor %}
   </div>
