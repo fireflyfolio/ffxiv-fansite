@@ -13,23 +13,27 @@ const { exists } = require('../../utils/filesytem');
 /* Contents methods */
 async function fetchAll (ctx) {
   const schema = Joi.object({
-    type: Joi.number().integer(),
     offset: Joi.number().integer(),
     limit: Joi.number().integer().max(100),
     sort: Joi.string().allow('date', 'title'),
     sort_dir: Joi.string().allow('asc', 'desc').uppercase(),
     is_focus: Joi.boolean(),
     is_pin: Joi.boolean(),
+    type: Joi.number().integer(),
+    search: Joi.string().trim().min(2).max(20).allow(null, ''),
+    tag: Joi.number().integer(),
   });
 
   const { error, value } = schema.validate({
-    type: null ?? ctx.query.type,
     offset: ctx.query.offset ?? 0,
     limit: ctx.query.limit ?? 100,
     sort: ctx.query.sort ?? 'date',
     sort_dir: ctx.query.sort_dir ?? 'desc',
     is_focus: ctx.query.is_focus ?? false,
     is_pin: ctx.query.is_pin ?? false,
+    type: ctx.query.type ?? -1,
+    search: ctx.query.search ?? null,
+    tag: ctx.query.tag ?? -1,
   });
 
   if (error) throw new BadRequestError(error);
@@ -158,15 +162,27 @@ async function remove (ctx) {
   ctx.status = 204;
 }
 
-// @todo: SQL query
 async function fetchTypes (ctx) {
+  const schema = Joi.object({
+    search: Joi.string().trim().min(2).max(20).allow(null, ''),
+    tag: Joi.number().integer(),
+  });
+
+  const { error, value } = schema.validate({
+    search: ctx.query.search ?? null,
+    tag: ctx.query.tag ?? -1,
+  });
+
+  if (error) throw new BadRequestError(error);
+
   const res = [
-    { type: 'article', title: 'Article', count: 23 },
-    { type: 'data', title: 'Collection', count: 2 },
-    { type: 'picture', title: 'Image', count: 6 },
-    { type: 'audio', title: 'Musique', count: 4 },
-    { type: 'static', title: 'Statique', count: 2 },
-    { type: 'video', title: 'Vidéo', count: 3 },
+    { type: -1, title: 'Tout', ...await service.countType(value, -1) },
+    { type: 0, title: 'Statique', ...await service.countType(value, 0) },
+    { type: 1, title: 'Article', ...await service.countType(value, 1) },
+    { type: 2, title: 'Collection', ...await service.countType(value, 2) },
+    { type: 3, title: 'Image', ...await service.countType(value, 3) },
+    { type: 4, title: 'Musique', ...await service.countType(value, 4) },
+    { type: 5, title: 'Vidéo', ...await service.countType(value, 5) },
   ];
 
   ctx.ok({
@@ -467,7 +483,7 @@ async function createTags (ctx) {
   // Check parameters
   const schema = Joi.object({
     id: Joi.number().required(),
-    label: Joi.string().lowercase().trim().required(),
+    label: Joi.string().lowercase().trim().min(2).max(20).required(),
   });
 
   const { error, value } = schema.validate({
@@ -509,7 +525,7 @@ async function updateTags (ctx) {
   const schema = Joi.object({
     id: Joi.number().required(),
     tid: Joi.number().required(),
-    label: Joi.string().lowercase().trim().required(),
+    label: Joi.string().lowercase().trim().max(20).required(),
   });
 
   const { error, value } = schema.validate({

@@ -6,40 +6,52 @@ const config = require('../../config');
 async function fetchAll (params) {
   const pool = new Pool(config.db);
 
-  const values = [];
-  const limit = `LIMIT ${params.limit} OFFSET ${params.offset}`;
+  const sqlLimit = `LIMIT ${params.limit} OFFSET ${params.offset}`;
 
   // Sort
-  let sort = 'update_date';
+  let sqlSort = 'c.update_date';
 
   switch (params.sort) {
-    case 'title': sort = 'title';
+    case 'title': sqlSort = 'c.title';
   }
 
-  const order = `ORDER BY ${sort} ${params.sort_dir}`;
+  const sqlOrder = `ORDER BY ${sqlSort} ${params.sort_dir}`;
 
   // Filter by criteria
-  let type = '';
-  if (params.type) type = `AND type = ${params.type}`;
+  let whereType = '';
+  if (params.type > -1) whereType = `AND c.type = ${params.type}`;
 
-  let focus = '';
+  let whereFocus = '';
   if (params.is_focus)
-    focus = `AND is_focus = ${params.is_focus}`;
+    whereFocus = `AND c.is_focus = ${params.is_focus}`;
 
-  let pin = '';
+  let wherePin = '';
   if (params.is_pin)
-    focus = `AND is_pin = ${params.is_pin}`;
+    whereFocus = `AND c.is_pin = ${params.is_pin}`;
+
+  let whereSearch = '';
+  if (params.search)
+    whereSearch = `AND c.title ILIKE '%${params.search}%'`;
+
+  // Filter by tag
+  let joinTag = '';
+  let whereTag = '';
+
+  if (params.tag > -1) {
+    joinTag = 'LEFT JOIN public.contents_tags ct ON c.id = ct.content_id';
+    whereTag = `AND ct.tag_id = ${params.tag}`;
+  }
 
   // Define clauses
-  let sql = `SELECT id, title, status, type, update_date FROM public.contents
-    WHERE status IN (1, 2) AND type <> 0 ${type} ${focus} ${pin} ${order} ${limit}`;
+  let sql = `SELECT c.id, c.title, c.status, c.type, c.update_date FROM public.contents c ${joinTag}
+    WHERE 1=1 ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag} ${sqlOrder} ${sqlLimit}`;
 
-  let sqlCount = `SELECT COUNT(*) AS total FROM public.contents
-    WHERE status IN (1, 2) AND type <> 0 ${type} ${focus} ${pin}`;
+  let sqlCount = `SELECT COUNT(*) AS total FROM public.contents c ${joinTag}
+    WHERE 1=1 ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag}`;
 
   try {
-    const result = await pool.query(sql, values);
-    const resultCount = await pool.query(sqlCount, values);
+    const result = await pool.query(sql);
+    const resultCount = await pool.query(sqlCount);
 
     return {
       ...resultCount.rows[0],
@@ -60,6 +72,39 @@ async function fetch (params) {
       FROM public.contents WHERE status = 1 AND id = $1`;
     const values = [params.id];
     const result = await pool.query(sql, values);
+
+    return result.rows[0];
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await pool.end();
+  }
+}
+
+async function countType (params, type) {
+  const pool = new Pool(config.db);
+
+  // Filter by criteria
+  let whereType = '';
+  if (type >= 0) whereType = `AND type = ${type}`;
+
+  let whereSearch = '';
+  if (params.search)
+    whereSearch = `AND title ILIKE '%${params.search}%'`;
+
+  // Filter by tag
+  let joinTag = '';
+  let whereTag = '';
+
+  if (params.tag > -1) {
+    joinTag = 'LEFT JOIN public.contents_tags ct ON c.id = ct.content_id';
+    whereTag = `AND ct.tag_id = ${params.tag}`;
+  }
+
+  try {
+    const sql = `SELECT COUNT(*) AS total FROM public.contents c ${joinTag}
+      WHERE 1=1 ${whereType} ${whereSearch} ${whereTag}`;
+    const result = await pool.query(sql);
 
     return result.rows[0];
   } catch (e) {
@@ -91,7 +136,6 @@ async function fetchRelations (params) {
 }
 
 module.exports = {
-  fetchAll,
-  fetch,
+  fetchAll, fetch, countType,
   fetchRelations,
 };

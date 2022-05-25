@@ -33,6 +33,7 @@ export default Backbone.View.extend({
       contents: this.contents,
       page: page,
       pages: pages,
+      state: this.router.state,
       dateOnly: dateOnly,
       getStatus: getStatus,
       getType: getType,

@@ -38,6 +38,7 @@ export default Backbone.Router.extend({
     this.views.more = new MoreView();
 
     this.dispatcher.on('archive:pagination', (page) => page);
+    this.dispatcher.on('archive:options');
   },
 
   archive: function () {

@@ -36,4 +36,5 @@ module.exports = (router) => {
   // Protected routes
   router.use(jwt({ secret: configBackend.security.jwt.secret }));
   router.use('/backend/contents', require('./backend/routes/contents'));
+  router.use('/backend/tags', require('./backend/routes/tags'));
 }

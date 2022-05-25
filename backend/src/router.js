@@ -64,6 +64,7 @@ export default Backbone.Router.extend({
     this.dispatcher.on('content:file:delete', (id) => id);
     this.dispatcher.on('content:editor:update', (body) => body);
     this.dispatcher.on('archive:pagination', (page) => page);
+    this.dispatcher.on('archive:options');
 
     this.listenTo(this.dispatcher, 'content:update', (content) => {
       const id = content.get('id');

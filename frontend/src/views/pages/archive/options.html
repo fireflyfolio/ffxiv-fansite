@@ -1,18 +1,19 @@
 <form class="pure-form pure-form-stacked">
   <fieldset>
     <legend>Recherche</legend>
-    <input type="text" placeholder="Recherche dans le titre" />
+    <input type="text" class="search" placeholder="Recherche dans le titre" name="search" minlength="2"
+      maxlength="20" />
   </fieldset>
 
   <fieldset>
     <legend>Tri</legend>
     <select class="inline" id="sort">
-      <option value="date" selected>Date</option>
-      <option value="title">Titre</option>
+      <option value="date" {{ "selected" if state.attributes.sort=='date' }}>Date</option>
+      <option value="title" {{ "selected" if state.attributes.sort=='title' }}>Titre</option>
     </select>
     <select class="inline" id="sort_dir">
-      <option value="asc">Croissant</option>
-      <option value="desc" selected>Décroissant</option>
+      <option value="asc" {{ "selected" if state.attributes.sort_dir=='asc' }}>Croissant</option>
+      <option value="desc" {{ "selected" if state.attributes.sort_dir=='desc' }}>Décroissant</option>
     </select>
   </fieldset>
 
@@ -20,29 +21,11 @@
     <legend>Filtre</legend>
     <ul>
       {% for type in contentTypes %}
-      <li><a class="as" data-type="{{type.attributes.type}}">{{ type.attributes.title }} ({{ type.attributes.count
-          }})</a>
-      </li>
+      <li><a class="type {{ 'active' if type.attributes.type == state.attributes.type }}"
+          data-type="{{type.attributes.type}}">
+          {{ type.attributes.title }} ({{ type.attributes.total }})
+        </a></li>
       {% endfor %}
     </ul>
-  </fieldset>
-
-  <fieldset>
-    <legend>Tag</legend>
-    <a>SI (12)</a>
-    <a>Image (15)</a>
-    <a>Musique (7)</a>
-    <a>Ecriture (5)</a>
-    <a>Langue (6)</a>
-    <a>Web (11)</a>
-    <a>Mobile (2)</a>
-    <a>Application (1)</a>
-    <a>Système (4)</a>
-    <a>Jeu vidéo (6)</a>
-    <a>Informatique (14)</a>
-    <a>Croquis (52)</a>
-    <a>Illustration (18)</a>
-    <a>Narration (19) </a>
-    <a>Animation (2)</a>
   </fieldset>
 </form>

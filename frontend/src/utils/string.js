@@ -7,6 +7,7 @@ import {
   CONTENT_TYPE_AUDIO,
   CONTENT_TYPE_DATA,
   CONTENT_TYPE_PICTURE,
+  CONTENT_TYPE_STATIC,
   CONTENT_TYPE_VIDEO
 } from "../config/constants";
 
@@ -26,7 +27,9 @@ function getStatus (value) {
 }
 
 function getType (value) {
-  switch (value) {
+  switch (parseInt(value)) {
+    case CONTENT_TYPE_STATIC:
+      return 'static';
     case CONTENT_TYPE_ARTICLE:
       return 'article';
     case CONTENT_TYPE_PICTURE:
@@ -39,11 +42,13 @@ function getType (value) {
       return 'video';
   }
 
-  return 'static';
+  return '';
 }
 
 function getTypeLabel (value) {
-  switch (value) {
+  switch (parseInt(value)) {
+    case CONTENT_TYPE_STATIC:
+      return 'Statique';
     case CONTENT_TYPE_ARTICLE:
       return 'Article';
     case CONTENT_TYPE_PICTURE:
@@ -56,7 +61,7 @@ function getTypeLabel (value) {
       return 'Vidéo';
   }
 
-  return 'Statique';
+  return '';
 }
 
 export {

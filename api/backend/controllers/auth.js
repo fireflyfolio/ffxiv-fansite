@@ -9,8 +9,8 @@ const security = require('../../utils/security');
 async function signin (ctx) {
   // Check parameters
   const schema = Joi.object({
-    username: Joi.string().trim().required(),
-    password: Joi.string().trim().required(),
+    username: Joi.string().trim().min(4).max(50).required(),
+    password: Joi.string().trim().min(4).max(200).required(),
   });
 
   const { error, value } = schema.validate({
