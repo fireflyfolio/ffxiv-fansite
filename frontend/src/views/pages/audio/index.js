@@ -21,10 +21,11 @@ export default Backbone.View.extend({
     this.content.url = Config.api.server + Config.api.contents + '/' + this.id;
 
     this.content.fetch().then(() => {
-      this.$el.html(this.template.render('pages/audio/index.html', { item: this.content }));
+      this.$el.html(this.template.render('pages/audio/index.html', { content: this.content }));
 
       this.$('#nav').append(this.router.views.nav.render().el);
       this.$('#more').append(this.router.views.more.render({ content: this.content }).el);
+      this.$('#tag').append(this.router.views.tag.render({ content: this.content }).el);
       this.$('#container').append(this.containerView.render({ content: this.content }).el);
     });
 

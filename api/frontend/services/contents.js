@@ -135,7 +135,28 @@ async function fetchRelations (params) {
   }
 }
 
+/* Tags SQL */
+async function fetchTags (params) {
+  const pool = new Pool(config.db);
+
+  try {
+    const sql = `SELECT t.id, t.label, t.total
+      FROM public.contents_tags c
+      LEFT JOIN public.tags t ON t.id = c.tag_id
+      WHERE c.content_id = $1
+      ORDER BY t.total DESC, t.label ASC`;
+    const values = [params.id];
+    const result = await pool.query(sql, values);
+
+    return result.rows;
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await pool.end();
+  }
+}
+
 module.exports = {
   fetchAll, fetch, countType,
-  fetchRelations,
+  fetchRelations, fetchTags,
 };

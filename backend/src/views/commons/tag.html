@@ -1,0 +1,8 @@
+{% if tags.length > 0 %}
+<h3>Tags</h3>
+<ul>
+  {% for tag in tags %}
+  <li><a class="at" data-id="{{ tag.attributes.id }}">{{ tag.attributes.label }} ({{ tag.attributes.total }})</a></li>
+  {% endfor %}
+</ul>
+{% endif %}

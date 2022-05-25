@@ -85,6 +85,30 @@ async function fetchRelations (ctx) {
   });
 }
 
+async function fetchTags (ctx) {
+  const schema = Joi.object({
+    id: Joi.number().required(),
+  });
+
+  const { error, value } = schema.validate({
+    id: ctx.params.id,
+  });
+
+  if (error) throw new BadRequestError(error);
+
+  // Check if content exists
+  const res = await service.fetch(value);
+  if (!res) throw new NotFoundError();
+
+  const res2 = await service.fetchTags(value);
+
+  ctx.ok({
+    status: RES_STATUS_OK,
+    message: RES_MESSAGE_SUCCESS,
+    data: res2
+  });
+}
+
 async function fetchTypes (ctx) {
   const schema = Joi.object({
     search: Joi.string().trim().min(2).max(20).allow(null, ''),
@@ -118,5 +142,6 @@ async function fetchTypes (ctx) {
 module.exports = {
   fetchAll, fetch,
   fetchRelations,
+  fetchTags,
   fetchTypes,
 };

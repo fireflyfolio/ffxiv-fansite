@@ -22,10 +22,11 @@ export default Backbone.View.extend({
     this.content.url = Config.api.server + Config.api.backend.contents + '/' + this.id;
 
     const cb = () => {
-      this.$el.html(this.template.render('pages/picture/index.html', { item: this.content }));
+      this.$el.html(this.template.render('pages/picture/index.html', { content: this.content }));
 
       this.$('#nav').append(this.router.views.nav.render().el);
       this.$('#more').append(this.router.views.more.render({ content: this.content }).el);
+      this.$('#tag').append(this.router.views.tag.render({ content: this.content }).el);
       this.$('#container').append(this.containerView.render({ content: this.content }).el);
       this.$('#admin').append(this.router.views.admin.render({ id: this.id }).el);
     };

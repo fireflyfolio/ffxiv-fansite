@@ -10,7 +10,7 @@ export default Backbone.View.extend({
   template: Nunjucks,
 
   events: {
-    'click .tag': 'onTagClick',
+    'click a.at': 'onTagClick',
   },
 
   initialize: function () {

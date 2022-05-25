@@ -13,6 +13,7 @@ import VideoPage from './views/pages/video/index';
 
 import NavView from './views/commons/nav';
 import MoreView from './views/commons/more';
+import TagView from './views/commons/tag';
 
 export default Backbone.Router.extend({
   routes: {
@@ -36,9 +37,19 @@ export default Backbone.Router.extend({
   initialize: function () {
     this.views.nav = new NavView();
     this.views.more = new MoreView();
+    this.views.tag = new TagView();
 
     this.dispatcher.on('archive:pagination', (page) => page);
     this.dispatcher.on('archive:options');
+
+    window.onscroll = () => {
+      const top = document.getElementById('top');
+
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+        top.style.display = "block";
+      else
+        top.style.display = "none";
+    };
   },
 
   archive: function () {
@@ -73,7 +84,6 @@ export default Backbone.Router.extend({
     if (!this.views[key]) this.views[key] = new View({ el: 'main' });
     this.views[key].render(options);
 
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   },
 });

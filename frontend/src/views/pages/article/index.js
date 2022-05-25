@@ -58,10 +58,11 @@ export default Backbone.View.extend({
         data: this.content.get('body'),
       });
 
-      this.$el.html(this.template.render('pages/article/index.html', { item: this.content }));
+      this.$el.html(this.template.render('pages/article/index.html', { content: this.content }));
 
       this.$('#nav').append(this.router.views.nav.render().el);
       this.$('#more').append(this.router.views.more.render({ content: this.content }).el);
+      this.$('#tag').append(this.router.views.tag.render({ content: this.content }).el);
       this.$('#summary').append(this.summaryView.render({ body: this.content.get('body') }).el);
     });
 

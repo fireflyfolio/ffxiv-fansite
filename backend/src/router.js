@@ -24,6 +24,7 @@ import VideoPage from './views/pages/video';
 
 import NavView from './views/commons/nav';
 import MoreView from './views/commons/more';
+import TagView from './views/commons/tag';
 import AdminView from './views/admin/index';
 
 export default Backbone.Router.extend({
@@ -51,6 +52,7 @@ export default Backbone.Router.extend({
   initialize: function () {
     this.views.nav = new NavView();
     this.views.more = new MoreView();
+    this.views.tag = new TagView();
     this.views.admin = new AdminView();
 
     this.dispatcher.on('admin:show:toggle');
@@ -87,6 +89,15 @@ export default Backbone.Router.extend({
           break;
       }
     });
+
+    window.onscroll = () => {
+      const top = document.getElementById('top');
+
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+        top.style.display = "block";
+      else
+        top.style.display = "none";
+    };
   },
 
   execute: function (callback, args, name) {
