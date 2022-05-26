@@ -4,9 +4,9 @@
   <ul>
     {% for content in contents %}
     <li><a href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
-        {{ dateOnly(content.attributes.update_date) }} -
-        {{ getStatus(content.attributes.status) }} :
-        {{ content.attributes.title }}
+        {{ dateOnly(content.attributes.update_date) }}
+        :
+        {{ content.attributes.title }} ({{ getStatus(content.attributes.status) }})
       </a></li>
     {% endfor %}
   </ul>

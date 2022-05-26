@@ -124,7 +124,6 @@ async function fetchTypes (ctx) {
 
   const res = [
     { type: -1, title: 'Tout', ...await service.countType(value, -1) },
-    { type: 0, title: 'Statique', ...await service.countType(value, 0) },
     { type: 1, title: 'Article', ...await service.countType(value, 1) },
     { type: 2, title: 'Collection', ...await service.countType(value, 2) },
     { type: 3, title: 'Image', ...await service.countType(value, 3) },

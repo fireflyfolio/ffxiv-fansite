@@ -18,8 +18,8 @@ async function fetchAll (params) {
   const sqlOrder = `ORDER BY ${sqlSort} ${params.sort_dir}`;
 
   // Filter by criteria
-  let whereType = '';
-  if (params.type > -1) whereType = `AND c.type = ${params.type}`;
+  let whereType = 'AND c.type <> 0 ';
+  if (params.type > -1) whereType += `AND c.type = ${params.type}`;
 
   let whereFocus = '';
   if (params.is_focus)
@@ -44,10 +44,10 @@ async function fetchAll (params) {
 
   // Define clauses
   let sql = `SELECT c.id, c.title, c.status, c.type, c.update_date FROM public.contents c ${joinTag}
-    WHERE 1=1 ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag} ${sqlOrder} ${sqlLimit}`;
+    WHERE c.status IN (1, 2) ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag} ${sqlOrder} ${sqlLimit}`;
 
   let sqlCount = `SELECT COUNT(*) AS total FROM public.contents c ${joinTag}
-    WHERE 1=1 ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag}`;
+    WHERE c.status IN (1, 2) ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag}`;
 
   try {
     const result = await pool.query(sql);
@@ -69,7 +69,7 @@ async function fetch (params) {
 
   try {
     const sql = `SELECT id, title, summary, body, items, cover
-      FROM public.contents WHERE status = 1 AND id = $1`;
+      FROM public.contents WHERE status IN (1, 2) AND id = $1`;
     const values = [params.id];
     const result = await pool.query(sql, values);
 
@@ -85,8 +85,8 @@ async function countType (params, type) {
   const pool = new Pool(config.db);
 
   // Filter by criteria
-  let whereType = '';
-  if (type >= 0) whereType = `AND type = ${type}`;
+  let whereType = 'AND c.type <> 0 ';
+  if (type >= 0) whereType += `AND c.type = ${type}`;
 
   let whereSearch = '';
   if (params.search)
@@ -103,7 +103,7 @@ async function countType (params, type) {
 
   try {
     const sql = `SELECT COUNT(*) AS total FROM public.contents c ${joinTag}
-      WHERE 1=1 ${whereType} ${whereSearch} ${whereTag}`;
+      WHERE c.status IN (1,2) ${whereType} ${whereSearch} ${whereTag}`;
     const result = await pool.query(sql);
 
     return result.rows[0];
@@ -122,7 +122,7 @@ async function fetchRelations (params) {
     const sql = `SELECT r.relation_id AS id, c.type, c.title
       FROM public.contents_relations r
       LEFT JOIN public.contents c ON c.id = r.relation_id
-      WHERE r.status = 1 AND r.content_id = $1
+      WHERE c.status IN (1, 2) AND c.type <> 0 AND r.status = 1 AND r.content_id = $1
       ORDER BY r.position ASC`;
     const values = [params.id];
     const result = await pool.query(sql, values);
@@ -141,9 +141,10 @@ async function fetchTags (params) {
 
   try {
     const sql = `SELECT t.id, t.label, t.total
-      FROM public.contents_tags c
-      LEFT JOIN public.tags t ON t.id = c.tag_id
-      WHERE c.content_id = $1
+      FROM public.contents c
+      INNER JOIN public.contents_tags ct ON c.id = ct.content_id
+      INNER JOIN public.tags t ON t.id = ct.tag_id
+      WHERE c.status IN (1,2) AND c.type <> 0 AND c.id = $1
       ORDER BY t.total DESC, t.label ASC`;
     const values = [params.id];
     const result = await pool.query(sql, values);
