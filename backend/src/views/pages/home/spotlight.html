@@ -1,10 +1,22 @@
-<h3>A la Une</h3>
-<ul>
+{% if contents.length > 0 %}
+<div class="slideshow-container">
   {% for content in contents %}
-  <li><a href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
-      {{ dateOnly(content.attributes.update_date) }} -
-      {{ getTypeLabel(content.attributes.type) }} :
-      {{ content.attributes.title }}
-    </a></li>
+  <div class="slide fade">
+    <a class="image" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
+      <img class="lazy"
+        src="{{ server }}/static/contents/{{ content.attributes.folder }}/{{ content.attributes.cover }}">
+    </a>
+    <div class="text">{{ content.attributes.title }}</div>
+  </div>
   {% endfor %}
-</ul>
+
+  <a class="previous" href="#">&#10094;</a>
+  <a class="next" href="#">&#10095;</a>
+</div>
+
+<div style="text-align:center">
+  {% for content in contents %}
+  <span class="dot" data-slide="{{ loop.index }}"></span>
+  {% endfor %}
+</div>
+{% endif %}

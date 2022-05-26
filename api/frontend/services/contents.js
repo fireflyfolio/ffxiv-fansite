@@ -43,7 +43,8 @@ async function fetchAll (params) {
   }
 
   // Define clauses
-  let sql = `SELECT c.id, c.title, c.status, c.type, c.update_date FROM public.contents c ${joinTag}
+  let sql = `SELECT c.id, c.title, c.status, c.type, c.update_date, c.cover, c.items->'folder' AS folder
+    FROM public.contents c ${joinTag}
     WHERE c.status IN (1, 2) ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag} ${sqlOrder} ${sqlLimit}`;
 
   let sqlCount = `SELECT COUNT(*) AS total FROM public.contents c ${joinTag}

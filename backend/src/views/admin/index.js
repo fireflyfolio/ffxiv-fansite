@@ -92,8 +92,6 @@ export default Backbone.View.extend({
   toggleAdminPanel: function (e) {
     const show_admin = this.router.state.get('show_admin');
 
-    console.log(show_admin);
-
     if (show_admin)
       this.$('#wrapper').show();
     else
