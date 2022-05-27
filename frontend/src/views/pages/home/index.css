@@ -1,55 +1,37 @@
+/* spotlight */
 #home #spotlight {
   max-width: 100%;
   padding: 20px;
 }
 
-#home #editorial {
-  max-width: 100%;
-  padding: 0 20px;
-}
-
-#home #latest {
-  max-width: 100%;
-  padding: 20px;
-}
-
-#home .highlighting {
-  max-width: 100%;
-  padding: 20px;
-}
-
-#home #editorial #editorjs {
-  margin: 20px 0 0 0;
-  background: #444;
-  color: #fff;
-}
-
-/* Slideshow container */
-#home .slideshow-container {
+#home #spotlight .container {
   position: relative;
   margin: auto;
+  background: #444;
+  border-radius: 15px;
 }
 
-#home .slide {
+#home #spotlight .slide {
   display: none;
 }
 
-#home .image {
+#home #spotlight .image {
   display: flex;
   justify-content: center;
   align-items: start;
   overflow: hidden;
   height: 600px;
+  border-radius: 15px;
 }
 
-#home .image img {
+#home #spotlight .image img {
   flex-shrink: 0;
   min-width: 100%;
   min-height: 100%;
 }
 
-#home .previous,
-#home .next {
+#home #spotlight .previous,
+#home #spotlight .next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -64,17 +46,17 @@
   text-decoration: none;
 }
 
-#home .next {
+#home #spotlight .next {
   right: 0;
   border-radius: 5px 0 0 5px;
 }
 
-#home .previous:hover,
-#home .next:hover {
+#home #spotlight .previous:hover,
+#home #spotlight .next:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#home .text {
+#home #spotlight .text {
   color: #fff;
   font-size: 28px;
   padding: 20px;
@@ -84,7 +66,7 @@
   text-align: center;
 }
 
-#home .dot {
+#home #spotlight .dot {
   cursor: pointer;
   height: 15px;
   width: 15px;
@@ -96,22 +78,48 @@
   transition: background-color 0.3s ease;
 }
 
-#home .active,
-#home .dot:hover {
+#home #spotlight .active,
+#home #spotlight .dot:hover {
   background-color: #eee;
 }
 
-#home .fade {
-  animation-name: fade;
-  animation-duration: 1s;
+/* editorial */
+#home #editorial {
+  max-width: 100%;
+  padding: 0 20px;
+  margin-bottom: 20px;
 }
 
-@keyframes fade {
-  from {
-    opacity: .3
-  }
+#home #editorial .editor {
+  margin: 20px 0 0 0;
+  background: #444;
+  color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+}
 
-  to {
-    opacity: 1
-  }
+/* latest */
+#home #latest {
+  max-width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#home #latest .wrapper {
+  background: #444;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+/* highlighting */
+#home .highlighting {
+  max-width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#home .highlighting .wrapper {
+  background: #444;
+  border-radius: 15px;
+  padding: 20px;
 }

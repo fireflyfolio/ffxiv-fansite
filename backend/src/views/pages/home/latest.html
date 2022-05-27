@@ -1,6 +1,6 @@
 <div class="latest">
-  <h3>Derniers contenus</h3>
-  <ul>
+  <h2>Derniers contenus</h2>
+  <ul class="wrapper">
     {% for content in contents %}
     <li><a href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
         {{ dateOnly(content.attributes.update_date) }} -

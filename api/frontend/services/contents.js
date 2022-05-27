@@ -18,8 +18,8 @@ async function fetchAll (params) {
   const sqlOrder = `ORDER BY ${sqlSort} ${params.sort_dir}`;
 
   // Filter by criteria
-  let whereType = 'AND c.type <> 0 ';
-  if (params.type > -1) whereType += `AND c.type = ${params.type}`;
+  let whereType = params.is_editorial ? 'AND c.type = 0 ' : 'AND c.type <> 0 ';
+  if (params.type > -1 && !params.is_editorial) whereType += `AND c.type = ${params.type}`;
 
   let whereFocus = '';
   if (params.is_focus)
@@ -42,8 +42,12 @@ async function fetchAll (params) {
     whereTag = `AND ct.tag_id = ${params.tag}`;
   }
 
+  // Add body
+  let selectBody = '';
+  if (params.is_editorial) selectBody = ', c.body';
+
   // Define clauses
-  let sql = `SELECT c.id, c.title, c.status, c.type, c.update_date, c.cover, c.items->'folder' AS folder
+  let sql = `SELECT c.id, c.title, c.status, c.type, c.update_date, c.cover, c.items->'folder' AS folder ${selectBody}
     FROM public.contents c ${joinTag}
     WHERE c.status IN (1, 2) ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag} ${sqlOrder} ${sqlLimit}`;
 

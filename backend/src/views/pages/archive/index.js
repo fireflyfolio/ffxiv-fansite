@@ -14,6 +14,7 @@ export default Backbone.View.extend({
 
   events: {
     'click #archive a.ba': 'onClick',
+    'click #archive #settings .toggle': 'onToggleSettingsClick',
   },
 
   initialize: function () {
@@ -38,7 +39,7 @@ export default Backbone.View.extend({
 
     this.contents.url = Config.api.server + Config.api.backend.contents +
       `?sort=${this.router.state.get('sort')}&sort_dir=${this.router.state.get('sort_dir')}` +
-      `&limit=${limit}&offset=${offset}`;
+      `&limit=${limit}&offset=${offset}&is_archive=true`;
 
     if (type !== '-1') this.contents.url += `&type=${type}`;
     if (search !== '-1') this.contents.url += `&search=${search}`;
@@ -51,6 +52,13 @@ export default Backbone.View.extend({
       this.$('#container').append(this.containerView.render({ contents: this.contents }).el);
       this.$('#options').append(this.optionsView.render().el);
       this.$('#tag').append(this.tagView.render().el);
+
+      if (this.router.state.get('show_settings'))
+        this.$('#settings .wrapper').show();
+      else
+        this.$('#settings .wrapper').hide();
+
+      this._refreshSettingsToggle();
     };
 
     handleFetchModel(this.contents, cb);
@@ -63,8 +71,26 @@ export default Backbone.View.extend({
     this.router.navigate(e.currentTarget.attributes.href.nodeValue, { trigger: true });
   },
 
+  onToggleSettingsClick: function (e) {
+    e.preventDefault();
+    this.$('#settings .wrapper').toggle();
+    this._refreshSettingsToggle();
+  },
+
   _refreshPagination: function (page) {
     this.router.state.set({ page: page });
     this.render();
+  },
+
+  _refreshSettingsToggle: function () {
+    if (this.$('#settings .wrapper').is(':visible')) {
+      this.$('#settings .toggle i').removeClass('icon-arrow-up');
+      this.$('#settings .toggle i').addClass('icon-arrow-down');
+      this.router.state.set({ show_settings: true });
+    } else {
+      this.$('#settings .toggle i').addClass('icon-arrow-up');
+      this.$('#settings .toggle i').removeClass('icon-arrow-down');
+      this.router.state.set({ show_settings: false });
+    }
   }
 });

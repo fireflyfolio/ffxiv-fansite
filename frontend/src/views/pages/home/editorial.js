@@ -8,21 +8,25 @@ import Delimiter from '@editorjs/delimiter';
 
 import Config from '../../../config';
 import Router from '../../../router';
-import ContentModel from '../../../models/content';
+import ContentCollection from '../../../models/content_';
 export default Backbone.View.extend({
   template: Nunjucks,
 
   initialize: function () {
     this.router = Router.prototype.getInstance();
-    this.content = new ContentModel();
+    this.contents = new ContentCollection();
   },
 
   render: function () {
     this.setElement('#editorial');
 
-    this.content.url = Config.api.server + Config.api.contents + Config.static.home.editorial;
+    this.contents.url = Config.api.server + Config.api.contents + '?type=0&is_focus=true&limit=1&is_editorial=true';
 
-    this.content.fetch().then(() => {
+    this.contents.fetch().then(() => {
+      this.content = this.contents.length > 0 ? this.contents.pop() : null;
+
+      if (!this.content) return;
+
       this.$el.html(this.template.render('pages/home/editorial.html', { content: this.content }));
 
       this.editor = new EditorJS({

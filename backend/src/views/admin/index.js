@@ -47,6 +47,7 @@ export default Backbone.View.extend({
 
     this.listenTo(this.router.dispatcher, 'admin:show:toggle', () => this.toggleAdminPanel());
     this.listenTo(this.router.dispatcher, 'content:element:update', () => this.hideDeleteModal());
+    this.listenTo(this.router.dispatcher, 'content:element:delete:modal', (e) => this.showDeleteModal(e));
     this.listenTo(this.router.dispatcher, 'content:metadata:delete', () => this.hideDeleteModal());
     this.listenTo(this.router.dispatcher, 'content:file:delete', () => this.hideDeleteModal());
     this.listenTo(this.router.dispatcher, 'content:relation:update', () => this.hideDeleteModal());
@@ -120,6 +121,7 @@ export default Backbone.View.extend({
     const id = e.currentTarget.attributes['data-id'].nodeValue;
     const type = e.currentTarget.attributes['data-type'].nodeValue;
     const title = e.currentTarget.attributes['data-title'] ? e.currentTarget.attributes['data-title'].nodeValue : false;
+    const cover = e.currentTarget.attributes['data-cover'] ? e.currentTarget.attributes['data-cover'].nodeValue : false;
 
     this.$('#modal-delete').append(this.modalView.render({
       content: this.content,
@@ -128,6 +130,7 @@ export default Backbone.View.extend({
       id: id,
       type: type,
       title: title,
+      cover: cover,
     }).el);
 
     const modal = document.getElementById('modal-delete');

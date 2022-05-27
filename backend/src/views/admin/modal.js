@@ -25,9 +25,10 @@ export default Backbone.View.extend({
     this.tags = options ? options.tags || this.tags : this.tags;
     this.id = options ? options.id || this.id : this.id;
     this.type = options ? options.type || this.type : this.type;
-    this.title = options ? options.title || this.title : this.title;
+    this.title = options ? options.title || null : null;
+    this.cover = options ? options.cover || null : null;
 
-    this.$el.html(this.template.render('admin/modal.html', { id: this.id, type: this.type, title: this.title }));
+    this.$el.html(this.template.render('admin/modal.html', { id: this.id, type: this.type, title: this.title, cover: this.cover }));
 
     return this;
   },
@@ -48,23 +49,25 @@ export default Backbone.View.extend({
         break;
 
       case 'element':
+        let file = null;
+
+        if (this.cover) {
+          file = items.files.filter((item) => item.name === this.cover);
+          if (file.length > 0) file = file[0];
+        }
+
         items.elements = items.elements.filter((item) => item.id !== this.id);
         this.content.set({ items: items });
+
         handleSaveModel(this.content, () => {
+          if (file) this._deleteFile(file.id);
           Toastr.success("L'élément a été supprimé avec succès.");
           this.router.dispatcher.trigger('content:element:update', this.content);
         });
         break;
 
       case 'file':
-        handleFetch({
-          url: Config.api.server + Config.api.backend.contents_files.replace('{id}', this.content.id) + '/' + this.id,
-          method: 'DELETE',
-          callback: () => {
-            Toastr.success('Le fichier a été supprimé avec succès.');
-            this.router.dispatcher.trigger('content:file:delete', this.id);
-          },
-        });
+        this._deleteFile(this.id);
         break;
 
       case 'metadata':
@@ -104,5 +107,16 @@ export default Backbone.View.extend({
         });
         break;
     }
+  },
+
+  _deleteFile: function (id) {
+    handleFetch({
+      url: Config.api.server + Config.api.backend.contents_files.replace('{id}', this.content.id) + '/' + id,
+      method: 'DELETE',
+      callback: () => {
+        Toastr.success('Le fichier a été supprimé avec succès.');
+        this.router.dispatcher.trigger('content:file:delete', id);
+      },
+    });
   }
 });

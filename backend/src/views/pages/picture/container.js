@@ -2,12 +2,17 @@ import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
 import Lightbox from 'lightbox2';
 import LazyLoad from 'vanilla-lazyload';
+import Toastr from 'toastr';
 
 import Config from '../../../config';
 import Router from '../../../router';
 
 export default Backbone.View.extend({
   template: Nunjucks,
+
+  events: {
+    'click .copy': 'onCopyClick',
+  },
 
   lazyLoadInstance: new LazyLoad(),
 
@@ -31,5 +36,17 @@ export default Backbone.View.extend({
     this.lazyLoadInstance.update();
 
     return this;
+  },
+
+  onCopyClick: function (e) {
+    e.preventDefault();
+
+    const id = e.currentTarget.attributes['data-id'].nodeValue;
+    const items = this.content.get('items') ?? {};
+    const elements = items.elements ?? [];
+    const element = elements.find((item) => item.id === id);
+
+    navigator.clipboard.writeText(element.cover);
+    Toastr.success(`Le nom du fichier a été copié dans le presse-papier : ${element.cover}`);
   },
 });

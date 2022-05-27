@@ -19,6 +19,8 @@ async function fetchAll (ctx) {
     sort_dir: Joi.string().allow('asc', 'desc').uppercase(),
     is_focus: Joi.boolean(),
     is_pin: Joi.boolean(),
+    is_editorial: Joi.boolean(),
+    is_archive: Joi.boolean(),
     type: Joi.number().integer(),
     search: Joi.string().trim().min(2).max(20).allow(null, ''),
     tag: Joi.number().integer(),
@@ -31,6 +33,8 @@ async function fetchAll (ctx) {
     sort_dir: ctx.query.sort_dir ?? 'desc',
     is_focus: ctx.query.is_focus ?? false,
     is_pin: ctx.query.is_pin ?? false,
+    is_editorial: ctx.query.is_editorial ?? false,
+    is_archive: ctx.query.is_archive ?? false,
     type: ctx.query.type ?? -1,
     search: ctx.query.search ?? null,
     tag: ctx.query.tag ?? -1,
@@ -234,7 +238,7 @@ async function createFiles (ctx) {
     try {
       const target = path.join(__dirname, folder + file.name);
 
-      if (await exists(target)) continue;
+      if (await exists(target)) await fs.unlink(target);
 
       await fs.copyFile(file.path, target);
       await fs.unlink(file.path);

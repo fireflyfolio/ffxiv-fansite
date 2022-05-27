@@ -1,12 +1,12 @@
 <form class="pure-form pure-form-stacked">
-  <fieldset>
-    <legend>Recherche</legend>
+  <div class="layer">
+    <h3>Recherche</h3>
     <input type="text" class="search" placeholder="Recherche dans le titre" name="search" minlength="2"
       maxlength="20" />
-  </fieldset>
+  </div>
 
-  <fieldset>
-    <legend>Tri</legend>
+  <div class="layer">
+    <h3>Tri</h3>
     <select class="inline" id="sort">
       <option value="date" {{ "selected" if state.attributes.sort=='date' }}>Date</option>
       <option value="title" {{ "selected" if state.attributes.sort=='title' }}>Titre</option>
@@ -15,10 +15,10 @@
       <option value="asc" {{ "selected" if state.attributes.sort_dir=='asc' }}>Croissant</option>
       <option value="desc" {{ "selected" if state.attributes.sort_dir=='desc' }}>Décroissant</option>
     </select>
-  </fieldset>
+  </div>
 
-  <fieldset>
-    <legend>Filtre</legend>
+  <div class="layer">
+    <h3>Filtre</h3>
     <ul>
       {% for type in contentTypes %}
       <li><a class="type {{ 'active' if type.attributes.type == state.attributes.type }}"
@@ -27,5 +27,5 @@
         </a></li>
       {% endfor %}
     </ul>
-  </fieldset>
+  </div>
 </form>

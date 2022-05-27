@@ -77,7 +77,7 @@ export default Backbone.View.extend({
     items.files = items.files ?? [];
 
     const index = _.findIndex(items.files, (i) => i.id === id);
-    items.files.splice(index, 1);
+    if (index > -1) items.files.splice(index, 1);
 
     this.render();
   },

@@ -1,5 +1,5 @@
 {% if contents.length > 0 %}
-<div class="slideshow-container">
+<div class="container">
   {% for content in contents %}
   <div class="slide fade">
     <a class="image" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">

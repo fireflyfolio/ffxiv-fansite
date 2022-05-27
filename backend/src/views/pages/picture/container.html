@@ -1,7 +1,24 @@
 {% for element in items.elements %}
 {% if element.is_active %}
-<a class="item" data-lightbox="image" href="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}"
-  data-title="{{ element.title }}">
-  <img class="lazy" data-src="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}" /></a>
+<div class="element">
+  <a class="item" data-lightbox="image" href="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}"
+    data-title="{{ element.title }}">
+    <img class="lazy" data-src="{{ server }}/static/contents/{{ items.folder }}/{{ element.cover }}" /></a>
+
+  <ul class="pure-menu-list overlay">
+    <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+      <a href="#" class="pure-menu-link"><i class="icon icon-menu"></i></a>
+      <ul class="pure-menu-children">
+        <li class="pure-menu-item">
+          <a href="#" class="pure-menu-link copy" data-id="{{ element.id }}">Copier</a>
+        </li>
+        <li class="pure-menu-item">
+          <a href="#" class="pure-menu-link delete" data-type="element" data-id="{{ element.id }}"
+            data-title="{{ element.title if element.title }}" data-cover="{{ element.cover }}">Supprimer</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
 {% endif %}
 {% endfor %}

@@ -11,9 +11,4 @@ export default {
       auth: '/v1/backend/auth'
     }
   },
-  static: {
-    home: {
-      editorial: '/6',
-    }
-  }
 };

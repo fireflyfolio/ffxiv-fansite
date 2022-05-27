@@ -1,13 +1,11 @@
-<form class="pure-form pure-form-stacked">
-  <fieldset>
-    <legend>Tags</legend>
-    <a class="at {{ 'active' if state.attributes.tag == -1}}" data-id="-1">Tout ({{ total }})</a>
-    {% for tag in tags %}
-    {% if tag.attributes.total > 0 %}
-    <a class="at {{ 'active' if tag.attributes.id == state.attributes.tag}}" data-id="{{ tag.attributes.id}}">{{
-      tag.attributes.label | capitalize }} ({{ tag.attributes.total
-      }})</a>
-    {% endif %}
-    {% endfor %}
-  </fieldset>
-</form>
+<div class="layer">
+  <h3>Tags</h3>
+  <a class="at {{ 'active' if state.attributes.tag == -1}}" data-id="-1">Tout ({{ total }})</a>
+  {% for tag in tags %}
+  {% if tag.attributes.total > 0 %}
+  <a class="at {{ 'active' if tag.attributes.id == state.attributes.tag}}" data-id="{{ tag.attributes.id}}">{{
+    tag.attributes.label | capitalize }} ({{ tag.attributes.total
+    }})</a>
+  {% endif %}
+  {% endfor %}
+</div>

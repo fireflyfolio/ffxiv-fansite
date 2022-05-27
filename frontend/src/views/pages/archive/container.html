@@ -5,7 +5,7 @@
     avec le mot-clé "{{ state.attributes.search }}"
     {% endif %}
   </h2>
-  <ul>
+  <ul class="wrapper">
     {% for content in contents %}
     <li>
       <a class="ba" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">

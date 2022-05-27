@@ -110,10 +110,6 @@
   border-bottom: solid 1px #ddd;
 }
 
-.modal .wrapper .meta span {
-  display: block;
-}
-
 /* top */
 #top {
   display: none;
@@ -129,6 +125,7 @@
   padding: 15px;
   border-radius: 5px;
   font-size: 18px;
+  opacity: .5;
 }
 
 #top:hover {

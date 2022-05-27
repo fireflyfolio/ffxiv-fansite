@@ -122,10 +122,6 @@
   border-bottom: solid 1px #ddd;
 }
 
-.modal .wrapper .meta span {
-  display: block;
-}
-
 .modal .close {
   float: right;
   color: red;
@@ -164,10 +160,6 @@
   border-bottom: solid 1px #ddd;
 }
 
-.modal .wrapper .meta span {
-  display: block;
-}
-
 .modal .wrapper .message {
   padding: 20px;
   background-color: #fff;
@@ -197,6 +189,7 @@
   padding: 15px;
   border-radius: 5px;
   font-size: 18px;
+  opacity: .5;
 }
 
 #top:hover {

@@ -100,6 +100,7 @@ module.exports = function (grunt) {
           'dist/styles.min.css': [
             'src/styles/index.css',
             'src/libs/mediabox/index.css',
+            'src/libs/icons/index.css',
             'build/css/src/libs/lightbox2/index.css',
           ]
         }

@@ -1,8 +1,9 @@
 <div class="wrapper">
   <div class="message">
-    Confirmez-vous la suppression de l'objet <b class="danger">#{{ id }}</b>
+    Confirmez-vous la suppression de l'objet de type <b class="info">{{ type }}</b> : <b class="danger">#{{ id }}</b>
     {% if title %}intitulé <b>"{{ title }}"</b>{% endif %}
-    de type <b class="info">{{ type }}</b> ?
+    {% if cover %} avec le fichier <b>"{{ cover }}"</b>{% endif %}
+    ?
   </div>
   <div class="l-box center">
     <button class="pure-button cancel">Annuler</button>

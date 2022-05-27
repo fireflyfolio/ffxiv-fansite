@@ -10,6 +10,10 @@ import { handleFetchModel } from '../../../utils/auth';
 export default Backbone.View.extend({
   template: Nunjucks,
 
+  events: {
+    'click .delete': 'showDeleteModal',
+  },
+
   initialize: function () {
     this.router = Router.prototype.getInstance();
     this.content = new ContentModel();
@@ -34,5 +38,10 @@ export default Backbone.View.extend({
     handleFetchModel(this.content, cb);
 
     return this;
+  },
+
+  showDeleteModal: function (e) {
+    e.preventDefault();
+    this.router.dispatcher.trigger('content:element:delete:modal', e);
   },
 });
