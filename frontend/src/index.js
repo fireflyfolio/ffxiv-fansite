@@ -13,7 +13,6 @@ Lightbox.option({
   resizeDuration: 100,
   fadeDuration: 0,
   imageFadeDuration: 100,
-  positionFromTop: 20,
 });
 
 // Define your master router on the application namespace and trigger all
