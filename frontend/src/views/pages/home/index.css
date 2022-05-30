@@ -30,6 +30,15 @@
   min-height: 100%;
 }
 
+#home #spotlight .cover {
+  background: #444;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 30px;
+}
+
 #home #spotlight .previous,
 #home #spotlight .next {
   cursor: pointer;
