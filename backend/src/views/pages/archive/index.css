@@ -101,7 +101,18 @@
 #archive #container .layout-card-visit .preview {
   float: left;
   width: 50%;
+  height: 100%;
   overflow: hidden;
+  background: #eee;
+}
+
+#archive #container .layout-card-visit .preview .cover {
+  color: #888;
+  text-align: center;
+  padding: 40px 20px;
+  width: 100%;
+  display: block;
+  letter-spacing: .05em;
 }
 
 #archive #container .layout-card-visit .preview img {
@@ -154,6 +165,20 @@
   color: #000;
 }
 
+#archive #container .layout-card-game .preview {
+  background: #eee;
+}
+
+#archive #container .layout-card-game .preview .cover {
+  color: #888;
+  text-align: center;
+  padding: 40px 20px;
+  width: 100%;
+  min-height: 250px;
+  display: block;
+  letter-spacing: .05em;
+}
+
 #archive #container .layout-card-game .preview img {
   display: block;
   width: 100%;
@@ -163,6 +188,7 @@
   padding: 10px;
   background: #fff;
   color: #000;
+  letter-spacing: .05em;
 }
 
 #archive #container .layout-card-game .info .label {
@@ -184,18 +210,30 @@
 /* layout-masonry */
 #archive #container .layout-masonry {
   padding: 0;
-  margin: 20px 0;
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: masonry;
   column-gap: 15px;
-  row-gap: 0;
+  row-gap: 15px;
+}
+
+#archive #container .layout-masonry .cover {
+  background: #555;
+  color: #888;
+  text-align: center;
+  padding: 40px 20px;
+  width: 100%;
+  min-height: 250px;
+  display: block;
+  letter-spacing: .05em;
+  border-radius: 10px;
 }
 
 #archive #container .layout-masonry .ba {
   display: inline-block;
   padding: 0;
-  margin: 0 0 10px 0;
+  margin: 0;
   box-sizing: border-box;
   break-inside: avoid;
   width: 100%;
@@ -229,6 +267,18 @@
   row-gap: 0;
 }
 
+#archive #container .layout-icon .cover {
+  background: #555;
+  color: #888;
+  text-align: center;
+  padding: 20px;
+  display: block;
+  letter-spacing: .05em;
+  border-radius: 20px;
+  width: 8.5vmax;
+  height: 8.5vmax;
+}
+
 #archive #container .layout-icon .ba {
   display: inline-block;
   padding: 0;
@@ -254,6 +304,11 @@
     width: 13.5vmin;
     height: 13.5vmin;
   }
+
+  #archive #container .layout-icon .cover {
+    width: 13.5vmin;
+    height: 13.5vmin;
+  }
 }
 
 @media (max-width: 768px) {
@@ -262,6 +317,11 @@
   }
 
   #archive #container .layout-icon img {
+    width: 25vmin;
+    height: 25vmin;
+  }
+
+  #archive #container .layout-icon .cover {
     width: 25vmin;
     height: 25vmin;
   }
@@ -276,6 +336,18 @@
   grid-template-rows: masonry;
   column-gap: 15px;
   row-gap: 0;
+}
+
+#archive #container .layout-bubble .cover {
+  background: #555;
+  color: #888;
+  text-align: center;
+  padding: 40px;
+  display: block;
+  letter-spacing: .05em;
+  border-radius: 100px;
+  width: 10.5vmax;
+  height: 10.5vmax;
 }
 
 #archive #container .layout-bubble .ba {
@@ -303,6 +375,12 @@
     width: 15vmin;
     height: 15vmin;
   }
+
+  #archive #container .layout-bubble .cover {
+    width: 15vmin;
+    height: 15vmin;
+    padding: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -313,5 +391,11 @@
   #archive #container .layout-bubble img {
     width: 26.5vmin;
     height: 26.5vmin;
+  }
+
+  #archive #container .layout-bubble .cover {
+    width: 26.5vmin;
+    height: 26.5vmin;
+    padding: 40px 20px;
   }
 }
