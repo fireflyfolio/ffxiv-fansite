@@ -22,13 +22,17 @@ async function fetchAll (params) {
   let whereType = params.is_editorial ? 'AND c.type = 0 ' : (params.is_archive ? '' : 'AND c.type <> 0 ');
   if (params.type > -1 && !params.is_editorial) whereType += `AND c.type = ${params.type}`;
 
+  let whereStatus = '';
+  if (params.status > -1)
+    whereStatus = `AND c.status = ${params.status}`;
+
   let whereFocus = '';
   if (params.is_focus)
     whereFocus = `AND c.is_focus = ${params.is_focus}`;
 
   let wherePin = '';
   if (params.is_pin)
-    whereFocus = `AND c.is_pin = ${params.is_pin}`;
+    wherePin = `AND c.is_pin = ${params.is_pin}`;
 
   let whereSearch = '';
   if (params.search)
@@ -50,10 +54,10 @@ async function fetchAll (params) {
   // Define clauses
   let sql = `SELECT c.id, c.title, c.status, c.type, c.update_date, c.cover, c.items->'folder' AS folder ${selectBody}
     FROM public.contents c ${joinTag}
-    WHERE 1=1 ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag} ${sqlOrder} ${sqlLimit}`;
+    WHERE 1=1 ${whereType} ${whereStatus} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag} ${sqlOrder} ${sqlLimit}`;
 
   let sqlCount = `SELECT COUNT(*) AS total FROM public.contents c ${joinTag}
-    WHERE 1=1 ${whereType} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag}`;
+    WHERE 1=1 ${whereType} ${whereStatus} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag}`;
 
   try {
     const result = await pool.query(sql);
@@ -161,7 +165,10 @@ async function countType (params, type) {
 
   // Filter by criteria
   let whereType = '';
-  if (type >= 0) whereType = `AND type = ${type}`;
+  if (type > -1) whereType = `AND type = ${type}`;
+
+  let whereStatus = '';
+  if (params.status > -1) whereStatus = `AND status = ${params.status}`;
 
   let whereSearch = '';
   if (params.search)
@@ -178,7 +185,7 @@ async function countType (params, type) {
 
   try {
     const sql = `SELECT COUNT(*) AS total FROM public.contents c ${joinTag}
-      WHERE 1=1 ${whereType} ${whereSearch} ${whereTag}`;
+      WHERE 1=1 ${whereType} ${whereStatus} ${whereSearch} ${whereTag}`;
     const result = await pool.query(sql);
 
     return result.rows[0];

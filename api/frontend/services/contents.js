@@ -27,7 +27,7 @@ async function fetchAll (params) {
 
   let wherePin = '';
   if (params.is_pin)
-    whereFocus = `AND c.is_pin = ${params.is_pin}`;
+    wherePin = `AND c.is_pin = ${params.is_pin}`;
 
   let whereSearch = '';
   if (params.search)

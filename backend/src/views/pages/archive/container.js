@@ -1,12 +1,16 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
+import LazyLoad from 'vanilla-lazyload';
 
+import Config from '../../../config';
 import Router from '../../../router';
 import { dateOnly } from '../../../utils/date';
 import { getStatus, getType, getTypeLabel } from '../../../utils/string';
 
 export default Backbone.View.extend({
   template: Nunjucks,
+
+  lazyLoadInstance: new LazyLoad(),
 
   events: {
     'click .start': 'onStartClick',
@@ -31,6 +35,7 @@ export default Backbone.View.extend({
 
     this.$el.html(this.template.render('pages/archive/container.html', {
       contents: this.contents,
+      server: Config.api.server,
       page: page,
       pages: pages,
       state: this.router.state,
@@ -39,6 +44,8 @@ export default Backbone.View.extend({
       getType: getType,
       getTypeLabel: getTypeLabel,
     }));
+
+    this.lazyLoadInstance.update();
 
     return this;
   },

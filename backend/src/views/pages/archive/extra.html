@@ -1,0 +1,18 @@
+<form class="pure-form pure-form-stacked">
+  <div class="layer">
+    <h3>Mise en page</h3>
+    <select class="inline" id="layout">
+      <option value="layout-list" {{ "selected" if state.attributes.layout=='layout-list' }}>Liste</option>
+      <option value="layout-card-visit" {{ "selected" if state.attributes.layout=='layout-card-visit' }}>Carte de visite
+      </option>
+      <option value="layout-card-game" {{ "selected" if state.attributes.layout=='layout-card-game' }}>Carte de jeu
+      </option>
+      <option value="layout-masonry" {{ "selected" if state.attributes.layout=='layout-masonry' }}>Masonry</option>
+      <option value="layout-icon" {{ "selected" if state.attributes.layout=='layout-icon' }}>Icône</option>
+      <option value="layout-bubble" {{ "selected" if state.attributes.layout=='layout-bubble' }}>Bulle</option>
+    </select>
+  </div>
+  <div class="layer">
+    <button type="button" class="pure-button pure-button-primary reset">Réinitialiser</button>
+  </div>
+</form>

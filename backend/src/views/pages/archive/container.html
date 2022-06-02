@@ -5,25 +5,95 @@
     avec le mot-clé "{{ state.attributes.search }}"
     {% endif %}
   </h2>
-  <ul class="wrapper">
+
+  <!-- list layout -->
+  {% if state.attributes.layout == 'layout-list' %}
+  <div class="layout-list wrapper">
+    <ul>
+      {% for content in contents %}
+      <li>
+        <a class="ba" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
+          {{ dateOnly(content.attributes.update_date) }} -
+          {{ getTypeLabel(content.attributes.type) }} :
+          {{ content.attributes.title }}
+          ({{ getStatus(content.attributes.status) }})
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% elif state.attributes.layout == 'layout-card-visit' %}
+  <div class="layout-card-visit">
     {% for content in contents %}
-    <li>
-      <a class="ba" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
-        {{ dateOnly(content.attributes.update_date) }} -
-        {{ getTypeLabel(content.attributes.type) }} :
-        {{ content.attributes.title }}
-        ({{ getStatus(content.attributes.status) }})
+    <div class="element">
+      <div class="preview">
+        <a class="ba" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
+          {% if content.attributes.cover %}
+          <img class="lazy"
+            src="{{ server }}/static/contents/{{ content.attributes.folder }}/{{ content.attributes.cover }}">
+          {% else %}
+          <span class="cover">Sans couverture</span>
+          {% endif %}
+        </a>
+      </div>
+      <div class="info">
+        <div>{{ content.attributes.title }}</div>
+        <div class="label">{{ dateOnly(content.attributes.update_date) }}</div>
+        <div class="label">{{ getTypeLabel(content.attributes.type) }}</div>
+        <div class="label">{{ getStatus(content.attributes.status) }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% elif state.attributes.layout == 'layout-card-game' %}
+  <div class="layout-card-game">
+    {% for content in contents %}
+    <div class="element">
+      <div class="preview">
+        <a class="ba" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
+          {% if content.attributes.cover %}
+          <img class="lazy"
+            src="{{ server }}/static/contents/{{ content.attributes.folder }}/{{ content.attributes.cover }}">
+          {% else %}
+          <span class="cover">Sans couverture</span>
+          {% endif %}
+        </a>
+      </div>
+      <div class="info">
+        <div>{{ content.attributes.title }}</div>
+        <div class="label">{{ dateOnly(content.attributes.update_date) }}</div>
+        <div class="label">{{ getTypeLabel(content.attributes.type) }}</div>
+        <div class="label">{{ getStatus(content.attributes.status) }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="{{ state.attributes.layout }}">
+    {% for content in contents %}
+    <div class="element">
+      <a class="ba" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}"
+        title="{{ content.attributes.title }}">
+        {% if content.attributes.cover %}
+        <img class="lazy"
+          src="{{ server }}/static/contents/{{ content.attributes.folder }}/{{ content.attributes.cover }}">
+        {% else %}
+        <span class="cover">Sans couverture</span>
+        {% endif %}
       </a>
-    </li>
+    </div>
     {% endfor %}
-  </ul>
-  <ul class="pagination">
-    <li><a class="start">|&lt;</a></li>
-    <li><a class="previous">&lt;</a></li>
-    {% for p in pages %}
-    <li><a class="page {{ 'active' if p == page }}" data-page="{{ p }}">{{ p }}</a></li>
-    {% endfor %}
-    <li><a class="next">&gt;</a></li>
-    <li><a class="end">&gt;|</a></li>
-  </ul>
+  </div>
+  {% endif %}
+</div>
+
+<ul class="pagination">
+  <li><a class="start">|&lt;</a></li>
+  <li><a class="previous">&lt;</a></li>
+  {% for p in pages %}
+  <li><a class="page {{ 'active' if p == page }}" data-page="{{ p }}">{{ p }}</a></li>
+  {% endfor %}
+  <li><a class="next">&gt;</a></li>
+  <li><a class="end">&gt;|</a></li>
+</ul>
 </div>

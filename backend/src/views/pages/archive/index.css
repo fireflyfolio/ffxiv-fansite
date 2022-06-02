@@ -2,7 +2,7 @@
 #archive #settings {
   background: #444;
   border-radius: 15px;
-  margin: 20px;
+  margin: 20px 20px 40px 20px;
   position: relative;
 }
 
@@ -33,10 +33,10 @@
   padding: 20px;
 }
 
-
 #archive #container h2 {
   padding-bottom: 0.5em;
   letter-spacing: 0.1em;
+  margin-bottom: 20px;
 }
 
 #archive #container .pagination {
@@ -71,9 +71,247 @@
 /* tag */
 #archive #tag {
   max-width: 100%;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 #archive #tag .active {
   color: red;
+}
+
+/* layout-card-visit */
+#archive #container .layout-card-visit {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 15px;
+  row-gap: 20px;
+}
+
+#archive #container .layout-card-visit .element {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  break-inside: avoid;
+  color: #000;
+  background: #fff;
+}
+
+#archive #container .layout-card-visit .preview {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+}
+
+#archive #container .layout-card-visit .preview img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+#archive #container .layout-card-visit .info {
+  float: right;
+  width: 50%;
+  padding: 10px;
+  color: #000;
+  letter-spacing: .05em;
+}
+
+#archive #container .layout-card-visit .info .label {
+  color: #888;
+}
+
+@media (max-width: 1600px) {
+  #archive #container .layout-card-visit {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #archive #container .layout-card-visit {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* layout-card-game */
+#archive #container .layout-card-game {
+  padding: 0;
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 15px;
+  row-gap: 20px;
+}
+
+#archive #container .layout-card-game .element {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  break-inside: avoid;
+  color: #000;
+}
+
+#archive #container .layout-card-game .preview img {
+  display: block;
+  width: 100%;
+}
+
+#archive #container .layout-card-game .info {
+  padding: 10px;
+  background: #fff;
+  color: #000;
+}
+
+#archive #container .layout-card-game .info .label {
+  color: #888;
+}
+
+@media (max-width: 1024px) {
+  #archive #container .layout-card-game {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #archive #container .layout-card-game {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* layout-masonry */
+#archive #container .layout-masonry {
+  padding: 0;
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: masonry;
+  column-gap: 15px;
+  row-gap: 0;
+}
+
+#archive #container .layout-masonry .ba {
+  display: inline-block;
+  padding: 0;
+  margin: 0 0 10px 0;
+  box-sizing: border-box;
+  break-inside: avoid;
+  width: 100%;
+}
+
+#archive #container .layout-masonry img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+  #archive #container .layout-masonry {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #archive #container .layout-masonry {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* layout-icon */
+#archive #container .layout-icon {
+  padding: 0;
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: masonry;
+  column-gap: 15px;
+  row-gap: 0;
+}
+
+#archive #container .layout-icon .ba {
+  display: inline-block;
+  padding: 0;
+  margin: 0 0 10px 0;
+  box-sizing: border-box;
+  break-inside: avoid;
+  width: 100%;
+}
+
+#archive #container .layout-icon img {
+  width: 8.5vmax;
+  height: 8.5vmax;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+@media (max-width: 1280px) {
+  #archive #container .layout-icon {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  #archive #container .layout-icon img {
+    width: 13.5vmin;
+    height: 13.5vmin;
+  }
+}
+
+@media (max-width: 768px) {
+  #archive #container .layout-icon {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #archive #container .layout-icon img {
+    width: 25vmin;
+    height: 25vmin;
+  }
+}
+
+/* layout-bubble */
+#archive #container .layout-bubble {
+  padding: 0;
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: masonry;
+  column-gap: 15px;
+  row-gap: 0;
+}
+
+#archive #container .layout-bubble .ba {
+  display: inline-block;
+  padding: 0;
+  margin: 0 0 10px 0;
+  box-sizing: border-box;
+  break-inside: avoid;
+  width: 100%;
+}
+
+#archive #container .layout-bubble img {
+  width: 10.5vmax;
+  height: 10.5vmax;
+  object-fit: cover;
+  border-radius: 100px;
+}
+
+@media (max-width: 1280px) {
+  #archive #container .layout-bubble {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  #archive #container .layout-bubble img {
+    width: 15vmin;
+    height: 15vmin;
+  }
+}
+
+@media (max-width: 768px) {
+  #archive #container .layout-bubble {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #archive #container .layout-bubble img {
+    width: 26.5vmin;
+    height: 26.5vmin;
+  }
 }

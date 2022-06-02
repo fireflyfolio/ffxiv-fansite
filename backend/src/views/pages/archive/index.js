@@ -6,6 +6,7 @@ import Router from '../../../router';
 import ContainerView from './container';
 import OptionsView from './options';
 import TagView from './tag';
+import ExtraView from './extra';
 import ContentCollection from '../../../models/content_';
 import { handleFetchModel } from '../../../utils/auth';
 
@@ -25,6 +26,7 @@ export default Backbone.View.extend({
     this.containerView = new ContainerView();
     this.optionsView = new OptionsView();
     this.tagView = new TagView();
+    this.extraView = new ExtraView();
 
     this.listenTo(this.router.dispatcher, 'archive:pagination', (page) => this._refreshPagination(page));
     this.listenTo(this.router.dispatcher, 'archive:options', () => this.render());
@@ -34,6 +36,7 @@ export default Backbone.View.extend({
     const limit = this.router.state.get('limit');
     const offset = (this.router.state.get('page') - 1) * limit;
     const type = this.router.state.get('type');
+    const status = this.router.state.get('status');
     const search = this.router.state.get('search');
     const tag = this.router.state.get('tag');
 
@@ -42,6 +45,7 @@ export default Backbone.View.extend({
       `&limit=${limit}&offset=${offset}&is_archive=true`;
 
     if (type !== '-1') this.contents.url += `&type=${type}`;
+    if (status !== '-1') this.contents.url += `&status=${status}`;
     if (search !== '-1') this.contents.url += `&search=${search}`;
     if (tag !== '-1') this.contents.url += `&tag=${tag}`;
 
@@ -52,6 +56,7 @@ export default Backbone.View.extend({
       this.$('#container').append(this.containerView.render({ contents: this.contents }).el);
       this.$('#options').append(this.optionsView.render().el);
       this.$('#tag').append(this.tagView.render().el);
+      this.$('#extra').append(this.extraView.render().el);
 
       if (this.router.state.get('show_settings'))
         this.$('#settings .wrapper').show();

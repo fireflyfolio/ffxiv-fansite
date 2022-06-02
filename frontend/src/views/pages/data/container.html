@@ -7,7 +7,6 @@
   </div>
   <div class="meta">
     <div><b>{{ element.title }}</b></div>
-
     {% for meta in element.customized_metadata %}
     {% if isMetaRefActive(items.metadata, meta) %}
     <div><span class="label">{{ meta.label }}</span> {{ meta.value }}</div>

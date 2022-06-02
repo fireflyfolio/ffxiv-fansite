@@ -12,6 +12,7 @@ export default Backbone.View.extend({
   events: {
     'change #sort': 'onSortChange',
     'change #sort_dir': 'onSortDirChange',
+    'change #status': 'onStatusChange',
     'click .type': 'onTypeClick',
     'click .tag': 'onTagClick',
     'keydown .search': 'onSearchKeydown',
@@ -25,11 +26,13 @@ export default Backbone.View.extend({
   render: function () {
     this.setElement('#options');
 
+    const status = this.router.state.get('status');
     const search = this.router.state.get('search');
     const tag = this.router.state.get('tag');
 
     this.contentTypes.url = Config.api.server + Config.api.backend.contents + '/types?empty=true';
 
+    if (status !== '-1') this.contentTypes.url += `&status=${status}`;
     if (search !== '-1') this.contentTypes.url += `&search=${search}`;
     if (tag !== '-1') this.contentTypes.url += `&tag=${tag}`;
 
@@ -50,6 +53,11 @@ export default Backbone.View.extend({
 
   onSortDirChange: function (e) {
     this.router.state.set({ sort_dir: e.currentTarget.value });
+    this.router.dispatcher.trigger('archive:options');
+  },
+
+  onStatusChange: function (e) {
+    this.router.state.set({ status: e.currentTarget.value });
     this.router.dispatcher.trigger('archive:options');
   },
 

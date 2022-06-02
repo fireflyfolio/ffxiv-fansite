@@ -4,6 +4,7 @@ export default Backbone.Model.extend({
   defaults: function () {
     return {
       show_settings: false,
+      layout: 'layout-card-visit',
       limit: 100,
       range: 10,
       page: 1,

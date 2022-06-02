@@ -22,6 +22,7 @@ async function fetchAll (ctx) {
     is_editorial: Joi.boolean(),
     is_archive: Joi.boolean(),
     type: Joi.number().integer(),
+    status: Joi.number().integer(),
     search: Joi.string().trim().min(2).max(20).allow(null, ''),
     tag: Joi.number().integer(),
   });
@@ -36,6 +37,7 @@ async function fetchAll (ctx) {
     is_editorial: ctx.query.is_editorial ?? false,
     is_archive: ctx.query.is_archive ?? false,
     type: ctx.query.type ?? -1,
+    status: ctx.query.status ?? -1,
     search: ctx.query.search ?? null,
     tag: ctx.query.tag ?? -1,
   });
@@ -168,11 +170,13 @@ async function remove (ctx) {
 
 async function fetchTypes (ctx) {
   const schema = Joi.object({
+    status: Joi.number().integer(),
     search: Joi.string().trim().min(2).max(20).allow(null, ''),
     tag: Joi.number().integer(),
   });
 
   const { error, value } = schema.validate({
+    status: ctx.query.status ?? -1,
     search: ctx.query.search ?? null,
     tag: ctx.query.tag ?? -1,
   });

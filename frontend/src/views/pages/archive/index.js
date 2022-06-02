@@ -6,6 +6,7 @@ import Router from '../../../router';
 import ContainerView from './container';
 import OptionsView from './options';
 import TagView from './tag';
+import ExtraView from './extra';
 import ContentCollection from '../../../models/content_';
 
 export default Backbone.View.extend({
@@ -24,6 +25,7 @@ export default Backbone.View.extend({
     this.containerView = new ContainerView();
     this.optionsView = new OptionsView();
     this.tagView = new TagView();
+    this.extraView = new ExtraView();
 
     this.listenTo(this.router.dispatcher, 'archive:pagination', (page) => this._refreshPagination(page));
     this.listenTo(this.router.dispatcher, 'archive:options', () => this.render());
@@ -51,6 +53,7 @@ export default Backbone.View.extend({
       this.$('#container').append(this.containerView.render({ contents: this.contents }).el);
       this.$('#options').append(this.optionsView.render().el);
       this.$('#tag').append(this.tagView.render().el);
+      this.$('#extra').append(this.extraView.render().el);
 
       if (this.router.state.get('show_settings'))
         this.$('#settings .wrapper').show();

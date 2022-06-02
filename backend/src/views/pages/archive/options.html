@@ -18,7 +18,19 @@
   </div>
 
   <div class="layer">
-    <h3>Filtre</h3>
+    <h3>Statut</h3>
+    <select class="inline" id="status">
+      <option value="-1" {{ "selected" if state.attributes.status=='-1' }}>Tout</option>
+      <option value="0" {{ "selected" if state.attributes.status=='0' }}>Brouillon</option>
+      <option value="1" {{ "selected" if state.attributes.status=='1' }}>Publié</option>
+      <option value="2" {{ "selected" if state.attributes.status=='2' }}>Protégé</option>
+      <option value="3" {{ "selected" if state.attributes.status=='3' }}>Privé</option>
+      <option value="4" {{ "selected" if state.attributes.status=='4' }}>Secret</option>
+    </select>
+  </div>
+
+  <div class="layer">
+    <h3>Type</h3>
     <ul>
       {% for type in contentTypes %}
       <li><a class="type {{ 'active' if type.attributes.type == state.attributes.type }}"
