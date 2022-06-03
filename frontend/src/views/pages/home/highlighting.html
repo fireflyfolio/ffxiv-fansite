@@ -4,9 +4,12 @@
   <ul class="wrapper">
     {% for content in contents %}
     <li><a href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
-        {{ dateOnly(content.attributes.update_date) }}
-        :
-        {{ content.attributes.title }} ({{ getStatus(content.attributes.status) }})
+        <span class="date">{{ dateOnly(content.attributes.update_date) }}</span>
+        <span class="title">{{ content.attributes.title }}</span>
+        <span class="type">{{ getTypeLabel(content.attributes.type) }}</span>
+        {% if content.attributes.status != 1 %}
+        <span class="status">{{ getStatus(content.attributes.status) }}</span>
+        {% endif %}
       </a></li>
     {% endfor %}
   </ul>

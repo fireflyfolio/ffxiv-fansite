@@ -11,7 +11,7 @@ function format (value) {
 function dateOnly (value) {
   const date = new Date(value);
 
-  return date.getDate() + '/' + prefixZero(date.getMonth() + 1) + '/' + date.getFullYear();
+  return prefixZero(date.getDate()) + '/' + prefixZero(date.getMonth() + 1) + '/' + date.getFullYear();
 }
 
 export {
