@@ -41,7 +41,7 @@
 }
 
 #data .layout .item .preview {
-  background: #fff;
+  background: #f8f8f8;
 }
 
 #data .layout .item .preview img {
@@ -53,5 +53,5 @@
   padding: 10px;
   margin: 0 !important;
   color: #000;
-  background: #fff;
+  background: #f8f8f8;
 }

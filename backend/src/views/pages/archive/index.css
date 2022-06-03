@@ -141,7 +141,7 @@
   box-sizing: border-box;
   break-inside: avoid;
   color: #000;
-  background: #fff;
+  background: #f8f8f8;
 }
 
 #archive #container .layout-card-visit .preview {
@@ -232,7 +232,7 @@
 
 #archive #container .layout-card-game .info {
   padding: 10px;
-  background: #fff;
+  background: #f8f8f8;
   color: #000;
   letter-spacing: .05em;
 }

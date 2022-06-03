@@ -108,7 +108,7 @@
   min-width: 380px;
   max-width: 900px;
   overflow: hidden;
-  background-color: #fff;
+  background: #f8f8f8;
   color: #000;
 }
 
@@ -146,7 +146,7 @@
   min-width: 380px;
   max-width: 900px;
   overflow: hidden;
-  background-color: #fff;
+  background: #f8f8f8;
   color: #000;
 }
 
@@ -162,7 +162,7 @@
 
 .modal .wrapper .message {
   padding: 20px;
-  background-color: #fff;
+  background: #f8f8f8;
 }
 
 .modal .close {
