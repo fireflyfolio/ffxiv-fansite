@@ -12,6 +12,7 @@ export default Backbone.View.extend({
   events: {
     'click a.nav': 'onNavClick',
     'click a.admin': 'onAdminClick',
+    'click a.privacy': 'onPrivacyClick',
     'click a.new': 'onNewClick',
     'click a.quit': 'onQuitClick',
   },
@@ -24,7 +25,7 @@ export default Backbone.View.extend({
     this.setElement('#nav');
 
     this.undelegateEvents();
-    this.$el.html(this.template.render('commons/nav.html'));
+    this.$el.html(this.template.render('commons/nav.html', { state: this.router.state }));
     this.delegateEvents();
 
     return this;
@@ -39,6 +40,12 @@ export default Backbone.View.extend({
     e.preventDefault();
     this.router.state.set({ show_admin: !this.router.state.get('show_admin') });
     this.router.dispatcher.trigger('admin:show:toggle');
+  },
+
+  onPrivacyClick: function (e) {
+    e.preventDefault();
+    this.router.state.set({ show_privacy: !this.router.state.get('show_privacy') });
+    this.router.dispatcher.trigger('contents:privacy');
   },
 
   onNewClick: function (e) {

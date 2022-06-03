@@ -33,6 +33,8 @@ export default Backbone.View.extend({
     this.pictureView = new HighlightingView();
     this.audioView = new HighlightingView();
     this.videoView = new HighlightingView();
+
+    this.listenTo(this.router.dispatcher, 'contents:privacy', () => this.render());
   },
 
   render: function () {

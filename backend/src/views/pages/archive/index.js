@@ -30,6 +30,7 @@ export default Backbone.View.extend({
 
     this.listenTo(this.router.dispatcher, 'archive:pagination', (page) => this._refreshPagination(page));
     this.listenTo(this.router.dispatcher, 'archive:options', () => this.render());
+    this.listenTo(this.router.dispatcher, 'contents:privacy', () => this.render());
   },
 
   render: function () {
@@ -43,6 +44,8 @@ export default Backbone.View.extend({
     this.contents.url = Config.api.server + Config.api.backend.contents +
       `?sort=${this.router.state.get('sort')}&sort_dir=${this.router.state.get('sort_dir')}` +
       `&limit=${limit}&offset=${offset}&is_archive=true`;
+
+    if (this.router.state.get('show_privacy')) this.contents.url += '&show_privacy=true';
 
     if (type !== '-1') this.contents.url += `&type=${type}`;
     if (status !== '-1') this.contents.url += `&status=${status}`;

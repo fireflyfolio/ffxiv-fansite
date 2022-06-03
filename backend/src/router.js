@@ -56,6 +56,7 @@ export default Backbone.Router.extend({
     this.views.admin = new AdminView();
 
     this.dispatcher.on('admin:show:toggle');
+    this.dispatcher.on('contents:privacy');
     this.dispatcher.on('content:update', (content) => content);
     this.dispatcher.on('content:element:edit', (id) => id);
     this.dispatcher.on('content:element:delete:modal', (e) => e);

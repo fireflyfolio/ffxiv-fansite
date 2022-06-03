@@ -25,6 +25,8 @@ export default Backbone.View.extend({
 
     this.contents.url = Config.api.server + Config.api.backend.contents + '?limit=20';
 
+    if (this.router.state.get('show_privacy')) this.contents.url += '&show_privacy=true';
+
     const cb = () => this.$el.html(this.template.render('pages/home/latest.html', {
       contents: this.contents,
       dateOnly: dateOnly,

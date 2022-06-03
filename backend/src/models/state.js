@@ -3,8 +3,9 @@ import Backbone from 'backbone';
 export default Backbone.Model.extend({
   defaults: function () {
     return {
-      show_admin: true,
+      show_admin: false,
       show_settings: false,
+      show_privacy: false,
       layout: 'layout-card-visit',
       limit: 100,
       range: 10,

@@ -30,6 +30,8 @@ export default Backbone.View.extend({
     this.slideIndex = 1;
     this.contents.url = Config.api.server + Config.api.backend.contents + '?limit=20&is_focus=true';
 
+    if (this.router.state.get('show_privacy')) this.contents.url += '&show_privacy=true';
+
     const cb = () => {
       this.$el.html(this.template.render('pages/home/spotlight.html', {
         contents: this.contents,

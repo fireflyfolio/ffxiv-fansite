@@ -41,6 +41,7 @@
 
 .pure-menu-link:hover {
   background-color: transparent;
+  color: #000;
 }
 
 .pure-menu-selected a {

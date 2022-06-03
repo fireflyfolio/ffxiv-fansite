@@ -117,7 +117,7 @@
 
 #home #editorial .editor {
   margin: 20px 0 0 0;
-  background: #eee;
+  background: #f8f8f8;
   color: #000;
   padding: 20px;
   border-radius: 15px;
@@ -191,6 +191,7 @@
   color: #ccc;
   background: #666;
   padding: 2px 10px;
+  margin-bottom: 5px;
   margin-left: 10px;
   border-radius: 5px;
   font-size: 12px;
@@ -201,6 +202,7 @@
   color: #eee;
   background: #d66;
   padding: 2px 10px;
+  margin-bottom: 5px;
   border-radius: 5px;
   font-size: 12px;
 }

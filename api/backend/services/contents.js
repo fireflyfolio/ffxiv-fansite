@@ -26,6 +26,11 @@ async function fetchAll (params) {
   if (params.status > -1)
     whereStatus = `AND c.status = ${params.status}`;
 
+  if (params.show_privacy)
+    whereStatus += ' AND c.status IN (0,1,2,3,4)';
+  else
+    whereStatus += ' AND c.status IN (0,1,2)';
+
   let whereFocus = '';
   if (params.is_focus)
     whereFocus = `AND c.is_focus = ${params.is_focus}`;

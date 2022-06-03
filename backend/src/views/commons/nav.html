@@ -10,7 +10,13 @@
       <a href="#" id="menuLink1" class="pure-menu-link">Admin</a>
       <ul class="pure-menu-children">
         <li class="pure-menu-item">
-          <a class="pure-menu-link admin">Afficher/Cacher</a>
+          <a class="pure-menu-link privacy">
+            {{ 'Mode Discrétion' if state.attributes.show_privacy == true }}
+            {{ 'Tous Contenus' if state.attributes.show_privacy == false }}
+          </a>
+        </li>
+        <li class="pure-menu-item">
+          <a class="pure-menu-link admin">Panneau Admin</a>
         </li>
         <li class="pure-menu-item">
           <a class="pure-menu-link new">Nouveau</a>
