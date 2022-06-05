@@ -41,6 +41,7 @@ export default Backbone.View.extend({
 
   onArchiveClick: function (e) {
     e.preventDefault();
+    this.router.state.set({ type: this.type });
     this.router.navigate(e.currentTarget.attributes.href.nodeValue, { trigger: true });
   }
 });
