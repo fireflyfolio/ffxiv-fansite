@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
 import Lightbox from 'lightbox2';
+import Toastr from 'toastr';
 
 import Router from './router';
 
@@ -14,6 +15,11 @@ Lightbox.option({
   fadeDuration: 0,
   imageFadeDuration: 100,
 });
+
+Toastr.options.timeOut = 1500;
+Toastr.options.showDuration = 100;
+Toastr.options.hideDuration = 100;
+Toastr.options.progressBar = true;
 
 // Define your master router on the application namespace and trigger all
 // navigation from this instance.
