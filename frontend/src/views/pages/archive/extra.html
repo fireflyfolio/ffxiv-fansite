@@ -12,7 +12,11 @@
       <option value="layout-bubble" {{ "selected" if state.attributes.layout=='layout-bubble' }}>Bulle</option>
     </select>
   </div>
-  <div class="layer">
+  <div class="layer preset">
+    <h3>Préréglages</h3>
+    <button type="button" class="pure-button preset-list-title-asc">Liste triée par Titre croissant</button>
+    <button type="button" class="pure-button preset-icon-title-asc">Icône triée par Titre croissant</button>
+    <button type="button" class="pure-button preset-bubble-date-desc">Bulle triée par Date décroissante</button>
     <button type="button" class="pure-button pure-button-primary reset">Réinitialiser</button>
   </div>
 </form>

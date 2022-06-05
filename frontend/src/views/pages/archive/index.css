@@ -24,6 +24,11 @@
   padding: 0 0 0 40px;
 }
 
+#archive #settings .preset button {
+  display: block;
+  margin-bottom: 5px;
+}
+
 /* container */
 #archive #container {
   max-width: 100%;
