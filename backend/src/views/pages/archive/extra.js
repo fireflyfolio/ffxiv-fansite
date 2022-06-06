@@ -33,19 +33,19 @@ export default Backbone.View.extend({
 
   onPresetListTitleAscClick: function (e) {
     e.preventDefault();
-    this.router.state.set({ layout: 'layout-list', sort: 'title', sort_dir: 'asc' });
+    this.router.state.set({ layout: 'layout-list', sort: 'title', sort_dir: 'asc', show_settings: false });
     this.router.dispatcher.trigger('archive:options');
   },
 
   onPresetIconTitleAscClick: function (e) {
     e.preventDefault();
-    this.router.state.set({ layout: 'layout-icon', sort: 'title', sort_dir: 'asc' });
+    this.router.state.set({ layout: 'layout-icon', sort: 'title', sort_dir: 'asc', show_settings: false });
     this.router.dispatcher.trigger('archive:options');
   },
 
   onPresetBubbleDateDescClick: function (e) {
     e.preventDefault();
-    this.router.state.set({ layout: 'layout-bubble', sort: 'date', sort_dir: 'desc' });
+    this.router.state.set({ layout: 'layout-bubble', sort: 'date', sort_dir: 'desc', show_settings: false });
     this.router.dispatcher.trigger('archive:options');
   },
 
