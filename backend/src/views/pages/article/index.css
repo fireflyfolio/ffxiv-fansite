@@ -3,6 +3,14 @@
   padding: 20px;
 }
 
+#article #summary a {
+  color: #fff;
+}
+
+#article #summary li {
+  list-style: none;
+}
+
 #article .editor {
   color: #000;
   background: #f8f8f8;

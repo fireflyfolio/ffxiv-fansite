@@ -27,6 +27,8 @@ export default Backbone.View.extend({
       this.$('#more').append(this.router.views.more.render({ content: this.content }).el);
       this.$('#tag').append(this.router.views.tag.render({ content: this.content }).el);
       this.$('#container').append(this.containerView.render({ content: this.content }).el);
+
+      window.scrollTo({ top: 0 });
     });
 
     return this;

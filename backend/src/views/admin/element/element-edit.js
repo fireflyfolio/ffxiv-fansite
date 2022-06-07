@@ -66,7 +66,7 @@ export default Backbone.View.extend({
   onSubmitClick: function (e) {
     e.preventDefault();
     const cb = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0 });
       Toastr.success("L'élément a été mis à jour avec succès.");
       this.router.dispatcher.trigger('content:element:update', this.content);
       this.router.dispatcher.trigger('content:element:edit:cancel');
@@ -76,7 +76,7 @@ export default Backbone.View.extend({
 
   onCancelClick: function (e) {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0 });
     this.router.dispatcher.trigger('content:element:edit:cancel');
   },
 

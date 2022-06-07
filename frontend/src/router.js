@@ -84,6 +84,6 @@ export default Backbone.Router.extend({
     if (!this.views[key]) this.views[key] = new View({ el: 'main' });
     this.views[key].render(options);
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0 });
   },
 });

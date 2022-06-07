@@ -130,6 +130,14 @@
   margin-bottom: 40px;
 }
 
+#home #latest li {
+  list-style: none;
+}
+
+#home #latest a.archive {
+  color: #fff;
+}
+
 #home #latest .wrapper {
   background: #555;
   border-radius: 15px;
@@ -170,6 +178,14 @@
   max-width: 100%;
   padding: 20px;
   margin-bottom: 40px;
+}
+
+#home .highlighting a.archive {
+  color: #fff;
+}
+
+#home .highlighting li {
+  list-style: none;
 }
 
 #home .highlighting .wrapper {

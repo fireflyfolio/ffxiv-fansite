@@ -16,7 +16,7 @@ export default Backbone.View.extend({
     this.setElement('#summary');
 
     this.summaries = (options.body && options.body.blocks) ?? [];
-    this.summaries = this.summaries.filter(block => block.type === 'header');
+    this.summaries = this.summaries.filter(block => block.type === 'header' && block.data.level === 1);
 
     this.$el.html(this.template.render('pages/article/summary.html', { items: this.summaries }));
     return this;
@@ -24,7 +24,7 @@ export default Backbone.View.extend({
 
   onSummaryClick: function (e) {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0 });
   },
 
   onAnchorClick: function (e) {

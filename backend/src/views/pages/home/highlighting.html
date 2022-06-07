@@ -3,7 +3,7 @@
   <h2>Mise en avant de contenus "{{ getTypeLabel(type) }}"</h2>
   <ul class="wrapper">
     {% for content in contents %}
-    <li><a href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
+    <li><a class="link" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
         <span class="date">{{ dateOnly(content.attributes.update_date) }}</span>
         <span class="title">{{ content.attributes.title }}</span>
         <span class="type">{{ getTypeLabel(content.attributes.type) }}</span>

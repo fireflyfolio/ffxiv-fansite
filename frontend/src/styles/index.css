@@ -22,6 +22,7 @@
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
   scrollbar-width: thin;
+  word-break: break-word;
 }
 
 html,
@@ -49,12 +50,7 @@ ul {
   line-height: 1.5em;
 }
 
-li {
-  list-style: none;
-}
-
 a {
-  color: #fff;
   text-decoration: none;
   letter-spacing: 0.11em;
   cursor: pointer;
@@ -62,7 +58,6 @@ a {
 
 a:hover {
   text-decoration: none;
-  color: #fff;
 }
 
 h1,

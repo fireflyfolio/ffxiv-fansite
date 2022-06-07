@@ -2,7 +2,7 @@
 <div class="container">
   {% for content in contents %}
   <div class="slide fade">
-    <a class="image" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
+    <a class="link image" href="/{{ getType(content.attributes.type) }}/{{ content.attributes.id }}">
       {% if content.attributes.cover %}
       <img class="lazy"
         src="{{ server }}/static/contents/{{ content.attributes.folder }}/{{ content.attributes.cover }}">

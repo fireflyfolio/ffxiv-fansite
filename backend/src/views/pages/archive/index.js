@@ -86,7 +86,7 @@ export default Backbone.View.extend({
   },
 
   _refreshPagination: function (page) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0 });
     this.router.state.set({ page: page });
     this.render();
   },

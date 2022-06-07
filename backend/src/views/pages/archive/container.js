@@ -88,5 +88,5 @@ export default Backbone.View.extend({
     if (end < range) offsetRange = 1;
 
     return Array(range).fill(null).map((_, index) => offsetRange + index);
-  }
+  },
 });

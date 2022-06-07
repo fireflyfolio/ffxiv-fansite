@@ -1,19 +1,27 @@
-#summary {
+#article #summary {
   max-width: 100%;
   padding: 20px;
 }
 
-.editor {
+#article #summary a {
+  color: #fff;
+}
+
+#article #summary li {
+  list-style: none;
+}
+
+#article .editor {
   color: #000;
-  background-color: #f8f8f8;
+  background: #f8f8f8;
   padding: 20px;
 }
 
-.editor a {
+#article .editor a {
   color: #000;
 }
 
-#link {
+#article #link {
   max-width: 100%;
   padding: 20px;
 }

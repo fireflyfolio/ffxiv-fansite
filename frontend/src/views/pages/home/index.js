@@ -19,7 +19,7 @@ export default Backbone.View.extend({
   template: Nunjucks,
 
   events: {
-    'click #home a': 'onClick',
+    'click #home a.link': 'onClick',
   },
 
   initialize: function () {
@@ -47,6 +47,8 @@ export default Backbone.View.extend({
     this.$('#highlighting-3').append(this.pictureView.render({ type: CONTENT_TYPE_PICTURE }).el);
     this.$('#highlighting-4').append(this.audioView.render({ type: CONTENT_TYPE_AUDIO }).el);
     this.$('#highlighting-5').append(this.videoView.render({ type: CONTENT_TYPE_VIDEO }).el);
+
+    window.scrollTo({ top: 0 });
 
     return this;
   },

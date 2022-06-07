@@ -93,6 +93,8 @@ export default Backbone.View.extend({
       this.$('#more').append(this.router.views.more.render({ content: this.content }).el);
       this.$('#tag').append(this.router.views.tag.render({ content: this.content }).el);
       this.$('#summary').append(this.summaryView.render({ body: this.content.get('body') }).el);
+
+      window.scrollTo({ top: 0 });
     });
 
     return this;
