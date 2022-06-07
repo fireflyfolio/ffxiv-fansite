@@ -1,7 +1,3 @@
-#home h2 {
-  text-align: center;
-}
-
 #home .archive {
   display: inline-block;
   padding: 15px 30px;
@@ -123,6 +119,10 @@
   border-radius: 15px;
 }
 
+#home #editorial h2 {
+  text-align: center;
+}
+
 /* latest */
 #home #latest {
   max-width: 100%;
@@ -136,6 +136,10 @@
 
 #home #latest a.archive {
   color: #fff;
+}
+
+#home #latest h2 {
+  text-align: center;
 }
 
 #home #latest .wrapper {
@@ -186,6 +190,10 @@
 
 #home .highlighting li {
   list-style: none;
+}
+
+#home .highlighting h2 {
+  text-align: center;
 }
 
 #home .highlighting .wrapper {
