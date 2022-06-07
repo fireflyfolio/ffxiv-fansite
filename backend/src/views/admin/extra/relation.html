@@ -6,7 +6,7 @@
           {% for relation in relations %}
           <tr>
             <td>#{{ relation.attributes.id }}</td>
-            <td class="w-70">
+            <td class="w-50">
               <a class="more" href="/{{ getType(relation.attributes.type) }}/{{ relation.attributes.id }}"
                 title="Voir">{{
                 relation.attributes.title }}</a>

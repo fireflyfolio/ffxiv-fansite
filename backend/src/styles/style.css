@@ -31,14 +31,15 @@
   color: #fff;
 }
 
-#more li {
+#more li,
+#tag li,
+.tag li {
   list-style: none;
 }
 
 .more,
 .tag {
   max-width: 50%;
-  padding: 20px;
   margin: 0 auto;
 }
 
