@@ -190,6 +190,15 @@
   color: #888;
 }
 
+#archive #container .layout-card-visit .status {
+  display: inline-block;
+  color: #eee;
+  background: #d66;
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
 @media (max-width: 1600px) {
   #archive #container .layout-card-visit {
     grid-template-columns: repeat(2, 1fr);
@@ -249,6 +258,15 @@
 
 #archive #container .layout-card-game .info .label {
   color: #888;
+}
+
+#archive #container .layout-card-game .status {
+  display: inline-block;
+  color: #eee;
+  background: #d66;
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-size: 12px;
 }
 
 @media (max-width: 1024px) {

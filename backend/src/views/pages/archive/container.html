@@ -42,7 +42,9 @@
         <div>{{ content.attributes.title }}</div>
         <div class="label">{{ dateOnly(content.attributes.update_date) }}</div>
         <div class="label">{{ getTypeLabel(content.attributes.type) }}</div>
-        <div class="label">{{ getStatus(content.attributes.status) }}</div>
+        {% if content.attributes.status != 1 %}
+        <div class="status">{{ getStatus(content.attributes.status) }}</div>
+        {% endif %}
       </div>
     </div>
     {% endfor %}
@@ -65,7 +67,9 @@
         <div>{{ content.attributes.title }}</div>
         <div class="label">{{ dateOnly(content.attributes.update_date) }}</div>
         <div class="label">{{ getTypeLabel(content.attributes.type) }}</div>
-        <div class="label">{{ getStatus(content.attributes.status) }}</div>
+        {% if content.attributes.status != 1 %}
+        <div class="status">{{ getStatus(content.attributes.status) }}</div>
+        {% endif %}
       </div>
     </div>
     {% endfor %}
