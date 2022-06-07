@@ -18,6 +18,10 @@
   margin-bottom: 40px;
 }
 
+#home #spotlight a {
+  color: #fff;
+}
+
 #home #spotlight .container {
   position: relative;
   margin: auto;
@@ -119,7 +123,7 @@
   border-radius: 15px;
 }
 
-#home #editorial h2 {
+#home #editorial h2.header-panel {
   text-align: center;
 }
 
