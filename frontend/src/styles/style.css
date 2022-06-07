@@ -13,6 +13,11 @@
   color: #fff;
 }
 
+/* nav */
+#nav a:hover {
+  color: #aaa;
+}
+
 /* content */
 #more a {
   color: #fff;
