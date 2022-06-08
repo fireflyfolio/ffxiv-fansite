@@ -8,6 +8,7 @@
 @import './libs.css';
 @import './style.css';
 
+@import '../views/pages/signin/index.css';
 @import '../views/pages/home/index.css';
 @import '../views/pages/archive/index.css';
 @import '../views/pages/article/index.css';
