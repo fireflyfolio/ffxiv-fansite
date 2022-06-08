@@ -1,7 +1,7 @@
-AuthType Basic
-AuthName "Restricted Access"
-AuthUserFile /home/lbfamily/private/.htpasswd
-Require valid-user
+#AuthType Basic
+#AuthName "Restricted Access"
+#AuthUserFile /home/lbfamily/private/.htpasswd
+#Require valid-user
 
 Options -Indexes
 
