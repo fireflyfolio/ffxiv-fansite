@@ -42,13 +42,14 @@
 }
 
 .description {
+  width: 50%;
   margin: 0 auto;
   padding: 20px;
   font-size: 16px;
 }
 
 @media (max-width: 1280px) {
-  .summary {
+  .description {
     width: 70%;
   }
 }
@@ -60,7 +61,7 @@
     max-width: 80%;
   }
 
-  .summary {
+  .description {
     width: 80%;
   }
 }
@@ -72,7 +73,7 @@
     max-width: 90%;
   }
 
-  .summary {
+  .description {
     width: 90%;
   }
 }
@@ -84,7 +85,7 @@
     max-width: 100%;
   }
 
-  .summary {
+  .description {
     width: 100%;
   }
 }
