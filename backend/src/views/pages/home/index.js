@@ -19,7 +19,7 @@ export default Backbone.View.extend({
   template: Nunjucks,
 
   events: {
-    'click #home a.link': 'onClick',
+    'click a.link': 'onClick',
   },
 
   initialize: function () {

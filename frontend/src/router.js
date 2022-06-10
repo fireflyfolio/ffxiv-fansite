@@ -19,6 +19,7 @@ export default Backbone.Router.extend({
   routes: {
     '': 'home',
     'archive': 'archive',
+    'static/:id': 'article',
     'article/:id': 'article',
     'audio/:id': 'audio',
     'data/:id': 'data',
