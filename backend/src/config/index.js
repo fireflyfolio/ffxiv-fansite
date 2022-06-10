@@ -14,4 +14,7 @@ export default {
   cookies: {
     expires: 1
   },
+  spotlight: {
+    timeout: 4000,
+  }
 };

@@ -6,4 +6,8 @@ export default {
     contents_tags: '/v1/contents/{id}/tags',
     tags: '/v1/tags',
   },
+  spotlight: {
+    timeout: 4000,
+  }
 };
+
