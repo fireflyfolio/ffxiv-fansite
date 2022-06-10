@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto');
-
 @import '../../node_modules/purecss/build/pure.css';
 @import '../../node_modules/purecss/build/grids-responsive.css';
 
@@ -23,7 +21,7 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Verdana', sans-serif;
   scrollbar-width: thin;
   word-break: break-word;
 }
