@@ -1,5 +1,5 @@
-
 import Backbone from 'backbone';
+import Cookies from 'js-cookie';
 import _ from 'underscore';
 
 import {
@@ -47,6 +47,14 @@ export default Backbone.Router.extend({
 
   getInstance: function () {
     return this;
+  },
+
+  preinitialize: function () {
+    this.session.set({
+      signedIn: Cookies.get('session.signedIn') ?? false,
+      accessToken: Cookies.get('session.accessToken') ?? null,
+      refreshToken: Cookies.get('session.refreshToken') ?? null,
+    });
   },
 
   initialize: function () {

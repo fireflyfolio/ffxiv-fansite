@@ -1,5 +1,6 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
+import Cookies from 'js-cookie';
 
 import Config from '../../../config';
 import Router from '../../../router';
@@ -49,6 +50,10 @@ export default Backbone.View.extend({
           accessToken: json.data.accessToken,
           refreshToken: json.data.refreshToken,
         });
+
+        Cookies.set('session.signedIn', this.router.session.get('signedIn'), { expires: Config.cookies.expires });
+        Cookies.set('session.accessToken', this.router.session.get('accessToken'), { expires: Config.cookies.expires });
+        Cookies.set('session.refreshToken', this.router.session.get('refreshToken'), { expires: Config.cookies.expires });
 
         this.router.navigate('/', { trigger: true });
       });

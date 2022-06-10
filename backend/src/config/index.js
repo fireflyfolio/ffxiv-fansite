@@ -11,4 +11,7 @@ export default {
       auth: '/v1/backend/auth'
     }
   },
+  cookies: {
+    expires: 1
+  },
 };

@@ -1,5 +1,6 @@
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
+import Cookies from 'js-cookie';
 import Toastr from 'toastr';
 
 import Config from '../../config';
@@ -66,6 +67,10 @@ export default Backbone.View.extend({
   },
 
   onQuitClick: function (e) {
+    Cookies.remove('session.signedIn');
+    Cookies.remove('session.accessToken');
+    Cookies.remove('session.refreshToken');
+
     window.location.href = '/';
   },
 });
