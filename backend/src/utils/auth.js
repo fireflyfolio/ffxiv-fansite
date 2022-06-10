@@ -1,5 +1,6 @@
 import Config from '../config';
 import Router from '../router';
+import Cookies from 'js-cookie';
 
 function setAuthorizationHeader () {
   const router = Router.prototype.getInstance();
@@ -26,6 +27,10 @@ function handleFetchModel (model, callback) {
               accessToken: json.data.accessToken,
               refreshToken: json.data.refreshToken,
             });
+
+            Cookies.set('session.signedIn', router.session.get('signedIn'), { expires: Config.cookies.expires });
+            Cookies.set('session.accessToken', router.session.get('accessToken'), { expires: Config.cookies.expires });
+            Cookies.set('session.refreshToken', router.session.get('refreshToken'), { expires: Config.cookies.expires });
           } catch (e) {
             return _signout();
           }
@@ -58,6 +63,10 @@ function handleSaveModel (model, callback) {
               accessToken: json.data.accessToken,
               refreshToken: json.data.refreshToken,
             });
+
+            Cookies.set('session.signedIn', router.session.get('signedIn'), { expires: Config.cookies.expires });
+            Cookies.set('session.accessToken', router.session.get('accessToken'), { expires: Config.cookies.expires });
+            Cookies.set('session.refreshToken', router.session.get('refreshToken'), { expires: Config.cookies.expires });
           } catch (e) {
             return _signout();
           }
@@ -104,6 +113,10 @@ function handleFetch (params) {
               accessToken: json.data.accessToken,
               refreshToken: json.data.refreshToken,
             });
+
+            Cookies.set('session.signedIn', router.session.get('signedIn'), { expires: Config.cookies.expires });
+            Cookies.set('session.accessToken', router.session.get('accessToken'), { expires: Config.cookies.expires });
+            Cookies.set('session.refreshToken', router.session.get('refreshToken'), { expires: Config.cookies.expires });
           } catch (e) {
             return _signout();
           }
@@ -119,7 +132,12 @@ function handleFetch (params) {
 
 function _signout () {
   const router = Router.prototype.getInstance();
-  router.session.set({ signedIn: false, accessToken: null, refreshToken: null });
+  router.session.set({ ...router.session.defaults() });
+
+  Cookies.remove('session.signedIn');
+  Cookies.remove('session.accessToken');
+  Cookies.remove('session.refreshToken');
+
   router.navigate('/signin', { trigger: true });
   return false;
 }
