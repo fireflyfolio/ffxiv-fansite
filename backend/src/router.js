@@ -1,3 +1,4 @@
+
 import Backbone from 'backbone';
 import Cookies from 'js-cookie';
 import _ from 'underscore';
@@ -70,6 +71,7 @@ export default Backbone.Router.extend({
     this.dispatcher.on('content:element:delete:modal', (e) => e);
     this.dispatcher.on('content:element:edit:cancel');
     this.dispatcher.on('content:element:update', (content) => content);
+    this.dispatcher.on('content:element:delete:picture', (id) => id);
     this.dispatcher.on('content:metadata:delete', (content) => content);
     this.dispatcher.on('content:relation:update', (options) => options);
     this.dispatcher.on('content:tag:update', (options) => options);

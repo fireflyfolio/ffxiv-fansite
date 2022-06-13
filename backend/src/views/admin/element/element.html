@@ -4,7 +4,7 @@
       <table class="pure-table pure-table-horizontal">
         <tbody>
           {% for element in content.attributes.items.elements %}
-          <tr>
+          <tr id="element-{{ element.id }}">
             <td class="w-90"><a class="edit" title="Editer" data-id="{{ element.id }}">
                 {{ element.title if element.title else element.id }}</a></td>
             <td class="element-option">

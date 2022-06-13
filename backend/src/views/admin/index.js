@@ -1,3 +1,4 @@
+
 import Backbone from 'backbone';
 import Nunjucks from 'nunjucks';
 import Toastr from 'toastr';
@@ -123,6 +124,7 @@ export default Backbone.View.extend({
     const title = e.currentTarget.attributes['data-title'] ? e.currentTarget.attributes['data-title'].nodeValue : false;
     const cover = e.currentTarget.attributes['data-cover'] ? e.currentTarget.attributes['data-cover'].nodeValue : false;
 
+    this.$('#modal-delete').empty();
     this.$('#modal-delete').append(this.modalView.render({
       content: this.content,
       relations: this.relations,

@@ -28,7 +28,12 @@ export default Backbone.View.extend({
     this.title = options ? options.title || null : null;
     this.cover = options ? options.cover || null : null;
 
-    this.$el.html(this.template.render('admin/modal.html', { id: this.id, type: this.type, title: this.title, cover: this.cover }));
+    this.$el.html(this.template.render('admin/modal.html', {
+      id: this.id,
+      type: this.type,
+      title: this.title,
+      cover: this.cover,
+    }));
 
     return this;
   },
@@ -60,9 +65,14 @@ export default Backbone.View.extend({
         this.content.set({ items: items });
 
         handleSaveModel(this.content, () => {
-          if (file) this._deleteFile(file.id);
+          if (file) {
+            this._deleteFile(file.id);
+            this.router.dispatcher.trigger('content:element:delete:picture', this.id);
+          } else {
+            this.router.dispatcher.trigger('content:element:update', this.content);
+          }
+
           Toastr.success("L'élément a été supprimé avec succès.");
-          this.router.dispatcher.trigger('content:element:update', this.content);
         });
         break;
 

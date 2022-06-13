@@ -20,6 +20,7 @@ export default Backbone.View.extend({
     this.router = Router.prototype.getInstance();
 
     this.listenTo(this.router.dispatcher, 'content:element:update', (content) => this.render({ content: content }));
+    this.listenTo(this.router.dispatcher, 'content:element:delete:picture', (id) => this.deleteLocally(id));
 
     Lightbox.option({
       'resizeDuration': 150,
@@ -48,5 +49,10 @@ export default Backbone.View.extend({
 
     navigator.clipboard.writeText(element.cover);
     Toastr.success(`Le nom du fichier a été copié dans le presse-papier : ${element.cover}`);
+  },
+
+  deleteLocally: function (id) {
+    document.getElementById('picture-' + id).remove();
+    document.getElementById('element-' + id).remove();
   },
 });
