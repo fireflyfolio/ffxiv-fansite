@@ -459,9 +459,25 @@ async function removeTagsFromContent (params) {
   }
 }
 
+async function countTag (id) {
+  const pool = new Pool(config.db);
+
+  try {
+    const sql = `SELECT COUNT(*) AS total FROM public.contents_tags WHERE tag_id = $1`;
+    const values = [id];
+    const result = await pool.query(sql, values);
+
+    return result.rows[0];
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await pool.end();
+  }
+}
+
 module.exports = {
   fetchAll, fetch, create, update, remove, countType,
   fetchRelations, createRelations, updateRelations, removeRelations, removeRelationsByContent,
-  fetchTags, createTags, updateTags, removeTags,
+  fetchTags, createTags, updateTags, removeTags, countTag,
   fetchTagById, fetchTagByLabel, fetchTagByContent, createTagByContent, removeTagFromContent, removeTagsFromContent,
 };

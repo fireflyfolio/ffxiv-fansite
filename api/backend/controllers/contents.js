@@ -512,16 +512,15 @@ async function createTags (ctx) {
 
   if (tag) {
     let tagContent = await service.fetchTagByContent(value.id, tag.id);
-
-    if (!tagContent) {
-      await service.createTagByContent(value.id, tag.id);
-      tag.total++;
-      await service.updateTags({ tid: tag.id, label: tag.label, total: tag.total });
-    }
+    if (!tagContent) await service.createTagByContent(value.id, tag.id);
   } else {
     tag = await service.createTags(value);
     tagContent = await service.createTagByContent(value.id, tag.id);
   }
+
+  // Update count tag
+  const resCount = await service.countTag(tag.id);
+  await service.updateTags({ tid: tag.id, label: tag.label, total: resCount.total });
 
   ctx.ok({
     status: RES_STATUS_OK,
@@ -582,17 +581,15 @@ async function removeTags (ctx) {
   if (!res) throw new NotFoundError();
 
   // Check if tag exists
+  await service.removeTagFromContent(value.id, value.tid);
+
   const tag = await service.fetchTagById(value.tid);
 
   if (tag) {
-    tag.total--;
-    await service.updateTags({ tid: tag.id, label: tag.label, total: tag.total });
-
-    if (tag.total <= 0)
-      await service.removeTags(value);
+    const resCount = await service.countTag(tag.id);
+    await service.updateTags({ tid: tag.id, label: tag.label, total: resCount.total });
+    if (resCount.total <= 0) await service.removeTags(value);
   }
-
-  await service.removeTagFromContent(value.id, value.tid);
 
   ctx.status = 204;
 }
