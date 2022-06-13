@@ -20,6 +20,7 @@ Toastr.options.timeOut = 1500;
 Toastr.options.showDuration = 100;
 Toastr.options.hideDuration = 100;
 Toastr.options.progressBar = true;
+Toastr.options.preventDuplicates = true;
 
 // Define your master router on the application namespace and trigger all
 // navigation from this instance.

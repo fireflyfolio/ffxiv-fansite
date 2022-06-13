@@ -12,9 +12,12 @@ export default {
     }
   },
   cookies: {
-    expires: 1
+    expires: 1, // in days
+  },
+  session: {
+    timeout: 28 * 60 * 1000, // in milliseconds
   },
   spotlight: {
-    timeout: 4000,
+    timeout: 4 * 1000, // in milliseconds
   }
 };

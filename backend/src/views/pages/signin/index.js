@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 
 import Config from '../../../config';
 import Router from '../../../router';
+import { refreshTokens } from '../../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
@@ -17,6 +18,7 @@ export default Backbone.View.extend({
   initialize: function () {
     this.username = null;
     this.password = null;
+    this.session = false;
 
     this.router = Router.prototype.getInstance();
   },
@@ -30,7 +32,7 @@ export default Backbone.View.extend({
 
   onInputInput: function (e) {
     const element = e.currentTarget;
-    this[element.name] = element.value;
+    this[element.name] = (element.type === 'checkbox') ? element.checked : element.value;
   },
 
   onSubmitClick: function (e) {
@@ -50,6 +52,9 @@ export default Backbone.View.extend({
           accessToken: json.data.accessToken,
           refreshToken: json.data.refreshToken,
         });
+
+        if (this.session)
+          this.router.session.set({ sessionTimeout: setTimeout(() => refreshTokens(), Config.session.timeout) });
 
         Cookies.set('session.signedIn', this.router.session.get('signedIn'), { expires: Config.cookies.expires });
         Cookies.set('session.accessToken', this.router.session.get('accessToken'), { expires: Config.cookies.expires });

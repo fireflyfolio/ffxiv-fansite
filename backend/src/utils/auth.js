@@ -1,6 +1,8 @@
+import Cookies from 'js-cookie';
+import Toastr from 'toastr';
+
 import Config from '../config';
 import Router from '../router';
-import Cookies from 'js-cookie';
 
 function setAuthorizationHeader () {
   const router = Router.prototype.getInstance();
@@ -8,74 +10,20 @@ function setAuthorizationHeader () {
 }
 
 function handleFetchModel (model, callback) {
-  const router = Router.prototype.getInstance();
-
-  // Run first call
   model.fetch({ beforeSend: setAuthorizationHeader() })
     .then(() => callback())
     .catch(() => {
-      // try to refresh tokens
-      const formData = new FormData();
-      formData.append('refreshToken', router.session.get('refreshToken'));
-
-      fetch(Config.api.server + Config.api.backend.auth + '/refresh', { method: 'POST', body: formData })
-        .then((res) => res.json())
-        .then((json) => {
-          try {
-            router.session.set({
-              signedIn: true,
-              accessToken: json.data.accessToken,
-              refreshToken: json.data.refreshToken,
-            });
-
-            Cookies.set('session.signedIn', router.session.get('signedIn'), { expires: Config.cookies.expires });
-            Cookies.set('session.accessToken', router.session.get('accessToken'), { expires: Config.cookies.expires });
-            Cookies.set('session.refreshToken', router.session.get('refreshToken'), { expires: Config.cookies.expires });
-          } catch (e) {
-            return _signout();
-          }
-
-          // Run second call
-          model.fetch({ beforeSend: setAuthorizationHeader() })
-            .then(() => callback())
-            .catch(() => _signout());
-        });
+      Toastr.error('Session expirée');
+      _signout();
     });
 }
 
 function handleSaveModel (model, callback) {
-  const router = Router.prototype.getInstance();
-
-  // Run first call
   model.save(null, { beforeSend: setAuthorizationHeader() })
     .then(() => callback())
     .catch(() => {
-      // try to refresh tokens
-      const formData = new FormData();
-      formData.append('refreshToken', router.session.get('refreshToken'));
-
-      fetch(Config.api.server + Config.api.backend.auth + '/refresh', { method: 'POST', body: formData })
-        .then((res) => res.json())
-        .then((json) => {
-          try {
-            router.session.set({
-              signedIn: true,
-              accessToken: json.data.accessToken,
-              refreshToken: json.data.refreshToken,
-            });
-
-            Cookies.set('session.signedIn', router.session.get('signedIn'), { expires: Config.cookies.expires });
-            Cookies.set('session.accessToken', router.session.get('accessToken'), { expires: Config.cookies.expires });
-            Cookies.set('session.refreshToken', router.session.get('refreshToken'), { expires: Config.cookies.expires });
-          } catch (e) {
-            return _signout();
-          }
-
-          // Run second call
-          model.save(null, { beforeSend: setAuthorizationHeader() })
-            .then(() => callback())
-            .catch(() => _signout());
-        });
+      Toastr.error('Session expirée');
+      _signout();
     });
 }
 
@@ -92,7 +40,6 @@ function handleFetch (params) {
 
   if (params.body) options.body = params.body;
 
-  // Run first call
   fetch(params.url, options)
     .then((res) => {
       if (res.status === 200) return res.json();
@@ -100,45 +47,51 @@ function handleFetch (params) {
     })
     .then((json) => params.callback(json.data))
     .catch((e) => {
-      // try to refresh tokens
-      const formData = new FormData();
-      formData.append('refreshToken', router.session.get('refreshToken'));
+      Toastr.error('Session expirée');
+      _signout();
+    });
+}
 
-      fetch(Config.api.server + Config.api.backend.auth + '/refresh', { method: 'POST', body: formData })
-        .then((res) => res.json())
-        .then((json) => {
-          try {
-            router.session.set({
-              signedIn: true,
-              accessToken: json.data.accessToken,
-              refreshToken: json.data.refreshToken,
-            });
+function refreshTokens () {
+  const router = Router.prototype.getInstance();
 
-            Cookies.set('session.signedIn', router.session.get('signedIn'), { expires: Config.cookies.expires });
-            Cookies.set('session.accessToken', router.session.get('accessToken'), { expires: Config.cookies.expires });
-            Cookies.set('session.refreshToken', router.session.get('refreshToken'), { expires: Config.cookies.expires });
-          } catch (e) {
-            return _signout();
-          }
+  const formData = new FormData();
+  formData.append('refreshToken', router.session.get('refreshToken'));
 
-          // Run second call
-          fetch(params.url, options)
-            .then((res) => res.json())
-            .then((json) => params.callback(json.data))
-            .catch(() => _signout());
+  fetch(Config.api.server + Config.api.backend.auth + '/refresh', { method: 'POST', body: formData })
+    .then((res) => res.json())
+    .then((json) => {
+      try {
+        router.session.set({
+          signedIn: true,
+          accessToken: json.data.accessToken,
+          refreshToken: json.data.refreshToken,
         });
+
+        Cookies.set('session.signedIn', router.session.get('signedIn'), { expires: Config.cookies.expires });
+        Cookies.set('session.accessToken', router.session.get('accessToken'), { expires: Config.cookies.expires });
+        Cookies.set('session.refreshToken', router.session.get('refreshToken'), { expires: Config.cookies.expires });
+
+        router.session.set({ sessionTimeout: setTimeout(() => refreshTokens(), Config.session.timeout) });
+      } catch (e) {
+        Toastr.error('Session expirée');
+        return _signout();
+      }
     });
 }
 
 function _signout () {
   const router = Router.prototype.getInstance();
-  router.session.set({ ...router.session.defaults() });
+
+  clearTimeout(router.session.get('sessionTimeout'));
 
   Cookies.remove('session.signedIn');
   Cookies.remove('session.accessToken');
   Cookies.remove('session.refreshToken');
 
+  router.session.set({ ...router.session.defaults() });
   router.navigate('/signin', { trigger: true });
+
   return false;
 }
 
@@ -147,4 +100,5 @@ export {
   handleFetchModel,
   handleSaveModel,
   handleFetch,
+  refreshTokens,
 };
