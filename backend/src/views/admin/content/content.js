@@ -12,6 +12,7 @@ export default Backbone.View.extend({
     'change #content-edit select': 'onSelectChange',
     'input #content-edit input, textarea': 'onInputInput',
     'click #content-edit .submit': 'onSubmitClick',
+    'keydown input': 'onKeydown',
   },
 
   initialize: function () {
@@ -44,5 +45,9 @@ export default Backbone.View.extend({
       this.router.dispatcher.trigger('content:element:update', this.content);
     };
     handleSaveModel(this.content, cb);
+  },
+
+  onKeydown: function (e) {
+    if (e.keyCode === 13) this.onSubmitClick(e);
   },
 });
