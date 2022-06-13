@@ -68,6 +68,7 @@ export default Backbone.View.extend({
     let slides = document.getElementsByClassName('slide');
     let dots = document.getElementsByClassName('dot');
 
+    if (!slides.length) return;
     if (n > slides.length) this.slideIndex = 1;
     if (n < 1) this.slideIndex = slides.length;
 
