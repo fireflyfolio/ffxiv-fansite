@@ -57,7 +57,7 @@ async function fetchAll (params) {
   if (params.is_editorial) selectBody = ', c.body';
 
   // Define clauses
-  let sql = `SELECT c.id, c.title, c.status, c.type, c.update_date, c.cover, c.items->'folder' AS folder ${selectBody}
+  let sql = `SELECT c.id, c.title, c.status, c.type, c.is_focus, c.is_pin, c.update_date, c.cover, c.items->'folder' AS folder ${selectBody}
     FROM public.contents c ${joinTag}
     WHERE 1=1 ${whereType} ${whereStatus} ${whereFocus} ${wherePin} ${whereSearch} ${whereTag} ${sqlOrder} ${sqlLimit}`;
 

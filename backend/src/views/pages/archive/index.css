@@ -78,6 +78,24 @@
   background: #e00;
 }
 
+#archive #container .focus {
+  display: inline-block;
+  color: #eee;
+  background: #d6d;
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+#archive #container .pin {
+  display: inline-block;
+  color: #eee;
+  background: #66d;
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
 /* options */
 #archive #options {
   max-width: 100%;

@@ -19,6 +19,12 @@
           {% if content.attributes.status != 1 %}
           <span class="status">{{ getStatus(content.attributes.status) }}</span>
           {% endif %}
+          {% if content.attributes.is_focus %}
+          <span class="focus">Focus</span>
+          {% endif %}
+          {% if content.attributes.is_pin %}
+          <span class="pin">Pin</span>
+          {% endif %}
         </a>
       </li>
       {% endfor %}
@@ -45,6 +51,12 @@
         {% if content.attributes.status != 1 %}
         <div class="status">{{ getStatus(content.attributes.status) }}</div>
         {% endif %}
+        {% if content.attributes.is_focus %}
+        <span class="focus">Focus</span>
+        {% endif %}
+        {% if content.attributes.is_pin %}
+        <span class="pin">Pin</span>
+        {% endif %}
       </div>
     </div>
     {% endfor %}
@@ -69,6 +81,12 @@
         <div class="label">{{ getTypeLabel(content.attributes.type) }}</div>
         {% if content.attributes.status != 1 %}
         <div class="status">{{ getStatus(content.attributes.status) }}</div>
+        {% endif %}
+        {% if content.attributes.is_focus %}
+        <span class="focus">Focus</span>
+        {% endif %}
+        {% if content.attributes.is_pin %}
+        <span class="pin">Pin</span>
         {% endif %}
       </div>
     </div>
