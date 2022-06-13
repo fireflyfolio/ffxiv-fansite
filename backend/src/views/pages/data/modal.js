@@ -20,6 +20,8 @@ import Alignement from 'editorjs-text-alignment-blocktune';
 import Image from 'editorjs-inline-image';
 import Button from 'editorjs-button';
 import Link from 'editorjs-hyperlink';
+import Embed from '@editorjs/embed';
+import YoutubeEmbed from 'editorjs-youtube-embed';
 
 import Config from '../../../config';
 import { handleSaveModel } from '../../../utils/auth';
@@ -53,6 +55,9 @@ export default Backbone.View.extend({
       placeholder: 'Hello world!',
       autofocus: true,
       tools: {
+        alignment: Alignement,
+        footnotes: Footnotes,
+        textvariant: TextVariant,
         header: {
           class: Header,
           config: {
@@ -83,13 +88,12 @@ export default Backbone.View.extend({
         warning: Warning,
         marker: Marker,
         underline: Underline,
-        footnotes: Footnotes,
-        textvariant: TextVariant,
         alert: Alert,
-        alignment: Alignement,
         image: Image,
         button: Button,
         link: Link,
+        youtubeEmbed: YoutubeEmbed,
+        embed: Embed,
       },
       tunes: ['alignment'],
       data: this.element.body
