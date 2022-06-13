@@ -46,7 +46,7 @@ export default Backbone.View.extend({
     this.tagView = new TagView();
     this.modalView = new ModalView();
 
-    this.listenTo(this.router.dispatcher, 'admin:show:toggle', () => this.toggleAdminPanel());
+    this.listenTo(this.router.dispatcher, 'admin:show:toggle', (id) => this.toggleAdminPanel(id));
     this.listenTo(this.router.dispatcher, 'content:element:update', () => this.hideDeleteModal());
     this.listenTo(this.router.dispatcher, 'content:element:delete:modal', (e) => this.showDeleteModal(e));
     this.listenTo(this.router.dispatcher, 'content:metadata:delete', () => this.hideDeleteModal());
@@ -84,6 +84,9 @@ export default Backbone.View.extend({
       this.$(`#tab-extra-3`).hide();
 
       this.toggleAdminPanel();
+      this.toggleAdminPanel(1);
+      this.toggleAdminPanel(2);
+      this.toggleAdminPanel(3);
     };
 
     handleFetchModel(this.content, cb);
@@ -91,13 +94,22 @@ export default Backbone.View.extend({
     return this;
   },
 
-  toggleAdminPanel: function (e) {
-    const show_admin = this.router.state.get('show_admin');
+  toggleAdminPanel: function (id) {
+    let show_admin = this.router.state.get('show_admin');
 
-    if (show_admin)
-      this.$('#wrapper').show();
-    else
-      this.$('#wrapper').hide();
+    if (!id) {
+      if (show_admin)
+        this.$('#wrapper').show();
+      else
+        this.$('#wrapper').hide();
+    } else {
+      show_admin = this.router.state.get('show_admin_panel' + id);
+
+      if (show_admin)
+        this.$('#admin-panel' + id).show();
+      else
+        this.$('#admin-panel' + id).hide();
+    }
   },
 
   onMenuClick: function (e) {

@@ -39,8 +39,15 @@ export default Backbone.View.extend({
 
   onAdminClick: function (e) {
     e.preventDefault();
-    this.router.state.set({ show_admin: !this.router.state.get('show_admin') });
-    this.router.dispatcher.trigger('admin:show:toggle');
+    const id = e.currentTarget.getAttribute('data-id');
+
+    if (!id) {
+      this.router.state.set({ show_admin: !this.router.state.get('show_admin') });
+      this.router.dispatcher.trigger('admin:show:toggle');
+    } else {
+      this.router.state.set(`show_admin_panel${id}`, !this.router.state.get(`show_admin_panel${id}`));
+      this.router.dispatcher.trigger('admin:show:toggle', id);
+    }
   },
 
   onPrivacyClick: function (e) {
