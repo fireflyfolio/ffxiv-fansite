@@ -21,7 +21,6 @@ import Image from 'editorjs-inline-image';
 import Button from 'editorjs-button';
 import Link from 'editorjs-hyperlink';
 import Embed from '@editorjs/embed';
-import YoutubeEmbed from 'editorjs-youtube-embed';
 
 import Config from '../../../config';
 import Router from '../../../router';
@@ -88,7 +87,6 @@ export default Backbone.View.extend({
           image: Image,
           button: Button,
           link: Link,
-          youtubeEmbed: YoutubeEmbed,
           embed: Embed,
         },
         tunes: ['alignment'],
