@@ -30,6 +30,7 @@ export default Backbone.View.extend({
 
   events: {
     'click #modal-data-wrapper .submit': 'onSubmitClick',
+    'keydown #modal-data-wrapper #editorjs': 'onKeydown',
   },
 
   initialize: function () {
@@ -113,5 +114,11 @@ export default Backbone.View.extend({
   _isMetaRefActive: function (metadata, meta) {
     const metaRef = metadata.find((item) => item.key === meta.key);
     return metaRef.is_active;
+  },
+
+  onKeydown: function (e) {
+    if (e.ctrlKey && e.keyCode === 83) {
+      this.onSubmitClick(e);
+    }
   },
 });

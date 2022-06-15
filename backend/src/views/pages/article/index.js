@@ -33,7 +33,9 @@ export default Backbone.View.extend({
 
   events: {
     'click #article .submit': 'onSubmitClick',
+    'keydown #article #editorjs': 'onKeydown',
   },
+
   initialize: function () {
     this.router = Router.prototype.getInstance();
     this.content = new ContentModel();
@@ -116,5 +118,11 @@ export default Backbone.View.extend({
         this.router.dispatcher.trigger('content:editor:update', data);
       })
       .catch((e) => Toastr.error('Erreur de sauvegarde du texte.'));
-  }
+  },
+
+  onKeydown: function (e) {
+    if (e.ctrlKey && e.keyCode === 83) {
+      this.onSubmitClick(e);
+    }
+  },
 });
