@@ -72,6 +72,7 @@ function refreshTokens () {
         Cookies.set('session.accessToken', router.session.get('accessToken'), { expires: Config.cookies.expires });
         Cookies.set('session.refreshToken', router.session.get('refreshToken'), { expires: Config.cookies.expires });
 
+        clearTimeout(router.session.get('sessionTimeout'));
         router.session.set({ sessionTimeout: setTimeout(() => refreshTokens(), Config.session.timeout) });
       } catch (e) {
         Toastr.error('Session expirée');

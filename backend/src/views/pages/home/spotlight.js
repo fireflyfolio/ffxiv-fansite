@@ -27,8 +27,6 @@ export default Backbone.View.extend({
   render: function () {
     this.setElement(`#spotlight`);
 
-    clearTimeout(this.slideTimeout);
-
     this.slideIndex = 1;
     this.contents.url = Config.api.server + Config.api.backend.contents + '?limit=20&is_focus=true';
 
@@ -52,20 +50,17 @@ export default Backbone.View.extend({
 
   onPreviousClick: function (e) {
     e.preventDefault();
-    clearTimeout(this.slideTimeout);
     this._showSlides(this.slideIndex -= 1);
   },
 
   onNextClick: function (e) {
     e.preventDefault();
-    clearTimeout(this.slideTimeout);
     this._showSlides(this.slideIndex += 1);
   },
 
   onDotClick: function (e) {
     e.preventDefault();
     const n = e.currentTarget.attributes['data-slide'].nodeValue;
-    clearTimeout(this.slideTimeout);
     this._showSlides(this.slideIndex = parseInt(n));
   },
 
@@ -88,6 +83,7 @@ export default Backbone.View.extend({
     slides[this.slideIndex - 1].style.display = "block";
     dots[this.slideIndex - 1].className += " active";
 
+    clearTimeout(this.slideTimeout);
     this.slideTimeout = setTimeout(() => this._showSlides(this.slideIndex += 1), Config.spotlight.timeout);
   },
 });

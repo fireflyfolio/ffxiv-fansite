@@ -53,8 +53,10 @@ export default Backbone.View.extend({
           refreshToken: json.data.refreshToken,
         });
 
-        if (this.session)
+        if (this.session) {
+          clearTimeout(this.router.session.get('sessionTimeout'));
           this.router.session.set({ sessionTimeout: setTimeout(() => refreshTokens(), Config.session.timeout) });
+        }
 
         Cookies.set('session.signedIn', this.router.session.get('signedIn'), { expires: Config.cookies.expires });
         Cookies.set('session.accessToken', this.router.session.get('accessToken'), { expires: Config.cookies.expires });
