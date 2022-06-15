@@ -6,6 +6,7 @@ export default Backbone.Model.extend({
       signedIn: false,
       accessToken: null,
       refreshToken: null,
+      maintainSession: false,
       sessionTimeout: null,
     };
   }

@@ -55,12 +55,16 @@ export default Backbone.View.extend({
 
         if (this.session) {
           clearTimeout(this.router.session.get('sessionTimeout'));
-          this.router.session.set({ sessionTimeout: setTimeout(() => refreshTokens(), Config.session.timeout) });
+          this.router.session.set({
+            maintainSession: true,
+            sessionTimeout: setTimeout(() => refreshTokens(), Config.session.timeout),
+          });
         }
 
         Cookies.set('session.signedIn', this.router.session.get('signedIn'), { expires: Config.cookies.expires });
         Cookies.set('session.accessToken', this.router.session.get('accessToken'), { expires: Config.cookies.expires });
         Cookies.set('session.refreshToken', this.router.session.get('refreshToken'), { expires: Config.cookies.expires });
+        Cookies.set('session.maintainSession', this.router.session.get('maintainSession'), { expires: Config.cookies.expires });
 
         this.router.navigate('/', { trigger: true });
       });

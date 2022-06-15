@@ -28,6 +28,9 @@ import MoreView from './views/commons/more';
 import TagView from './views/commons/tag';
 import AdminView from './views/admin/index';
 
+import Config from './config';
+import { refreshTokens } from './utils/auth';
+
 export default Backbone.Router.extend({
   routes: {
     '': 'home',
@@ -55,7 +58,13 @@ export default Backbone.Router.extend({
       signedIn: Cookies.get('session.signedIn') ?? false,
       accessToken: Cookies.get('session.accessToken') ?? null,
       refreshToken: Cookies.get('session.refreshToken') ?? null,
+      maintainSession: Cookies.get('session.maintainSession') ?? false,
     });
+
+    if (this.session.get('maintainSession') === 'true') {
+      clearTimeout(this.session.get('sessionTimeout'));
+      this.session.set({ sessionTimeout: setTimeout(() => refreshTokens(), Config.session.timeout) });
+    }
   },
 
   initialize: function () {

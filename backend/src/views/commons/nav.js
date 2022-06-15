@@ -5,7 +5,7 @@ import Toastr from 'toastr';
 
 import Config from '../../config';
 import Router from '../../router';
-import { handleFetch } from '../../utils/auth';
+import { handleFetch, signout } from '../../utils/auth';
 
 export default Backbone.View.extend({
   template: Nunjucks,
@@ -74,10 +74,6 @@ export default Backbone.View.extend({
   },
 
   onQuitClick: function (e) {
-    Cookies.remove('session.signedIn');
-    Cookies.remove('session.accessToken');
-    Cookies.remove('session.refreshToken');
-
-    window.location.href = '/';
+    signout();
   },
 });

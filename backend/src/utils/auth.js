@@ -14,7 +14,7 @@ function handleFetchModel (model, callback) {
     .then(() => callback())
     .catch(() => {
       Toastr.error('Session expirée');
-      _signout();
+      signout();
     });
 }
 
@@ -23,7 +23,7 @@ function handleSaveModel (model, callback) {
     .then(() => callback())
     .catch(() => {
       Toastr.error('Session expirée');
-      _signout();
+      signout();
     });
 }
 
@@ -48,7 +48,7 @@ function handleFetch (params) {
     .then((json) => params.callback(json.data))
     .catch((e) => {
       Toastr.error('Session expirée');
-      _signout();
+      signout();
     });
 }
 
@@ -76,12 +76,12 @@ function refreshTokens () {
         router.session.set({ sessionTimeout: setTimeout(() => refreshTokens(), Config.session.timeout) });
       } catch (e) {
         Toastr.error('Session expirée');
-        return _signout();
+        return signout();
       }
     });
 }
 
-function _signout () {
+function signout () {
   const router = Router.prototype.getInstance();
 
   clearTimeout(router.session.get('sessionTimeout'));
@@ -89,6 +89,7 @@ function _signout () {
   Cookies.remove('session.signedIn');
   Cookies.remove('session.accessToken');
   Cookies.remove('session.refreshToken');
+  Cookies.remove('session.maintainSession');
 
   router.session.set({ ...router.session.defaults() });
   router.navigate('/signin', { trigger: true });
@@ -102,4 +103,5 @@ export {
   handleSaveModel,
   handleFetch,
   refreshTokens,
+  signout,
 };
