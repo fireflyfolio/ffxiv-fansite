@@ -3,7 +3,7 @@ import Nunjucks from 'nunjucks';
 import Toastr from 'toastr';
 import EditorJS from '@editorjs/editorjs';
 import Header from 'editorjs-header-with-anchor';
-import List from '@editorjs/list';
+import List from '@editorjs/nested-list';
 import Delimiter from '@editorjs/delimiter';
 import Code from '@editorjs/code';
 import Table from '@editorjs/table';
