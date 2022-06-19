@@ -1,6 +1,6 @@
 export default {
   api: {
-    server: 'http://localhost:4000',
+    server: 'http://localhost:5000',
     contents: '/v1/contents',
     contents_relations: '/v1/contents/{id}/relations',
     contents_tags: '/v1/contents/{id}/tags',
@@ -10,4 +10,3 @@ export default {
     timeout: 4000,
   }
 };
-

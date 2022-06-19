@@ -20,6 +20,7 @@ import Image from 'editorjs-inline-image';
 import Button from 'editorjs-button';
 import Link from 'editorjs-hyperlink';
 import Embed from '@editorjs/embed';
+import MathTex from 'editorjs-math';
 
 import Config from '../../../config';
 import Router from '../../../router';
@@ -89,6 +90,7 @@ export default Backbone.View.extend({
           button: Button,
           link: Link,
           embed: Embed,
+          math: MathTex,
         },
         tunes: ['alignment'],
         data: this.content.get('body'),

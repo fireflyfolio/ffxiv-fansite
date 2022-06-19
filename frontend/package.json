@@ -25,6 +25,7 @@
     "editorjs-header-with-anchor": "^2.6.0",
     "editorjs-hyperlink": "^1.0.6",
     "editorjs-inline-image": "^1.1.0",
+    "editorjs-math": "^1.0.2",
     "editorjs-paragraph-with-alignment": "^3.0.0",
     "editorjs-table": "^1.4.10",
     "editorjs-text-alignment-blocktune": "^1.0.3",

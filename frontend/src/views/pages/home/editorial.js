@@ -20,6 +20,7 @@ import Image from 'editorjs-inline-image';
 import Button from 'editorjs-button';
 import Link from 'editorjs-hyperlink';
 import Embed from '@editorjs/embed';
+import MathTex from 'editorjs-math';
 
 import Config from '../../../config';
 import Router from '../../../router';
@@ -49,9 +50,6 @@ export default Backbone.View.extend({
         autofocus: true,
         readOnly: true,
         tools: {
-          alignment: Alignement,
-          footnotes: Footnotes,
-          textvariant: TextVariant,
           header: {
             class: Header,
             config: {
@@ -82,11 +80,15 @@ export default Backbone.View.extend({
           warning: Warning,
           marker: Marker,
           underline: Underline,
+          footnotes: Footnotes,
+          textvariant: TextVariant,
           alert: Alert,
+          alignment: Alignement,
           image: Image,
           button: Button,
           link: Link,
           embed: Embed,
+          math: MathTex,
         },
         tunes: ['alignment'],
         data: this.content.get('body'),
